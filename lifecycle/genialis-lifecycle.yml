@@ -1,0 +1,90 @@
+generated: '2026-08-21'
+method: probed
+source: >-
+  live probes of https://app.genialis.com/about/versions,
+  /about/resdk_minimal_supported_version, /health_check, plus
+  openapi/genialis-base-openapi.yaml and the resolwe/resdk repository changelogs
+api: Genialis Expressions API
+versioning:
+  strategy: unversioned-path
+  path_version: false
+  header_version: false
+  spec_info_version: '0.0.0'
+  spec_info_version_note: >-
+    drf-spectacular default, never configured. The contract does not identify which
+    platform build it describes.
+  component_versions_endpoint:
+    path: /about/versions
+    url: https://app.genialis.com/about/versions
+    status: 200
+    observed_body: '{"resolwe":"45.1.0","resolwe-bio":"65.0.0","genialis-bio":"63.0.0"}'
+    note: >-
+      This IS the version signal for this API. It is anonymous, machine-readable
+      and current, and it names the three components whose semver changelogs are
+      public.
+client_version_floor:
+  endpoint:
+    path: /about/resdk_minimal_supported_version
+    url: https://app.genialis.com/about/resdk_minimal_supported_version
+  operation_id: about_resdk_minimal_supported_version_retrieve
+  description: Return the minimal supported resdk version.
+  finding: >-
+    A machine-readable MINIMUM SUPPORTED CLIENT VERSION served by the platform
+    itself, and it is the closest thing Genialis has to a deprecation mechanism: it
+    lets the server tell a client it is too old, rather than failing opaquely. The
+    resdk client is documented to check it. Probed anonymously on 2026-08-21 the
+    path returned the SPA shell when requested with a browser Accept header, so the
+    value could not be read without the client's own request shape; the endpoint is
+    declared in the contract with security `[cookieAuth, {}]` (anonymous allowed).
+  method: derived
+deprecation_policy:
+  published: false
+  rfc8594_headers: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: 0
+  deprecated_operations_note: >-
+    No operation in the 254-operation contract carries `deprecated: true`.
+  finding: >-
+    No deprecation or sunset policy is published on www.genialis.com or
+    docs.genialis.com. Breaking changes are visible only as major-version bumps in
+    the resolwe/resdk changelogs (45.0.0 2025-06-14, 44.0.0 2025-03-17, 43.0.0
+    2025-02-17, resdk 22.0.0 2025-03-28) — which is a real, dated breaking-change
+    record, but it is a library changelog, not an API deprecation policy, and it is
+    not reachable from any Genialis property.
+status_page:
+  published: false
+  probed:
+  - url: https://status.genialis.com
+    status: 000
+    note: no DNS / no route
+  - url: https://www.genialis.com/status
+    status: 404
+  health_check_endpoint:
+    path: /health_check
+    operation_id: health_check_retrieve
+    description: Perform database and redis health check.
+    note: >-
+      A machine-readable liveness endpoint exists in the contract but there is no
+      human status page and no incident history. Requested at
+      https://app.genialis.com/api/health_check it returned the SPA shell (wrong
+      prefix); the contract places it at the host root.
+sla:
+  published: false
+  note: No SLA, uptime commitment or support-response target is published publicly.
+support:
+  channel: https://genialis.atlassian.net/servicedesk/customer/portal/3
+  status: 200
+  note: Atlassian Jira Service Desk; login required to file, portal reachable anonymously.
+  email: info@genialis.com
+  email_source: https://docs.genialis.com/resdk/
+release_cadence:
+  observed: >-
+    resolwe shipped 9 releases between 2024-12 and 2026-02; resdk shipped 7 between
+    2025-03 and 2026-02. Active, roughly quarterly with patches in between.
+  latest_release: '2026-02-18'
+gaps:
+- No status page.
+- No deprecation or sunset policy, and no Deprecation/Sunset headers.
+- No SLA.
+- The contract's own version is the framework default `0.0.0`.

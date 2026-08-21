@@ -1,0 +1,31 @@
+generated: '2026-08-21'
+method: searched
+source: https://www.genialis.com/ (site navigation, sitemap and direct probes)
+plan_count: 0
+note: >-
+  Genialis publishes no pricing, plans or tiers. Probed https://www.genialis.com/pricing/
+  (404), the Yoast sitemap at https://www.genialis.com/sitemap.xml (200 — no pricing
+  page indexed) and the full site navigation (200) — the only commercial call to
+  action is a contact address (biomarkers@genialis.com) and a Calendly meeting link
+  (https://calendly.com/adi-pai-genialis/30min). This is a biopharma services and
+  partnership business: engagements are negotiated collaborations with drug
+  developers, not self-serve subscriptions.
+plans: []
+metering:
+  note: >-
+    The API itself is metering-aware even though nothing is priced publicly:
+    /api/billingaccount, /api/billingaccount/estimated_usage, /api/billingstatistics
+    and /api/base/data_usage exist in the contract, so per-account usage accounting
+    is a shipped platform capability. No rate card is published for it.
+  endpoints:
+  - /api/billingaccount
+  - /api/billingaccount/estimated_usage
+  - /api/billingstatistics
+  - /api/base/data_usage
+evidence:
+- url: https://www.genialis.com/pricing/
+  status: 404
+- url: https://www.genialis.com/sitemap.xml
+  status: 200
+- url: https://www.genialis.com/
+  status: 200

@@ -1,0 +1,124 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Genialis Expressions API
+  version: 1.0.0
+extends: openapi/genialis-base-openapi.yaml
+x-generated: '2026-08-21'
+x-method: generated
+x-source: >-
+  Derived from live probes of https://app.genialis.com on 2026-08-21 and from the
+  artifacts in this repository. Every value below was observed or read from the
+  provider's own material; nothing is invented. The original spec at
+  openapi/genialis-base-openapi.yaml is never mutated.
+actions:
+- target: $.info
+  description: >-
+    The published spec sets no title beyond "Genialis base", no contact, no licence
+    and leaves info.version at the drf-spectacular default 0.0.0. Supply the
+    identity a consumer needs, and record what the version field actually is.
+  update:
+    contact:
+      name: Genialis Support
+      url: https://genialis.atlassian.net/servicedesk/customer/portal/3
+      email: info@genialis.com
+    termsOfService: https://www.genialis.com/terms-of-service/
+    x-documentation: https://docs.genialis.com/resdk/
+    x-spec-source: https://app.genialis.com/api/schema
+    x-version-caveat: >-
+      info.version is the drf-spectacular default "0.0.0" and does not identify the
+      build. Live component versions are served at GET /about/versions.
+- target: $
+  description: >-
+    The published spec declares no servers[]. Its paths are server-root relative and
+    span /api, /rest-auth, /saml-auth, /about and /health_check, so a client that
+    assumes an /api base silently receives the SPA shell with a 200 on the
+    non-/api operations. Name the real server root.
+  update:
+    servers:
+    - url: https://app.genialis.com
+      description: >-
+        Genialis Expressions production. Verified 2026-08-21: GET /api/data?limit=1
+        -> 200 (count 29123); GET /about/versions -> 200.
+- target: $
+  description: Record the cross-cutting runtime semantics the contract omits.
+  update:
+    x-conventions:
+      pagination:
+        style: limit-offset
+        params: [limit, offset]
+        response_fields: [count, next, previous, results]
+      sorting:
+        param: ordering
+      error_envelope: '{"error": "<message>"} | {"detail": "<message>"}'
+      rfc9457: false
+      idempotency: none
+      dry_run: none
+      rate_limit_headers: none
+      anonymous_read: true
+    x-agent-warning: >-
+      app.genialis.com is an SPA catch-all. Unmatched paths return HTTP 200 with a
+      1377-byte HTML shell rather than 404. Assert content-type application/json
+      before treating any 200 as data.
+- target: $
+  description: >-
+    The contract documents only 2xx responses across all 254 operations — not one
+    4xx or 5xx. Attach the error shapes actually observed, as a reusable component,
+    without touching any operation.
+  update:
+    components:
+      responses:
+        x-ObservedBadRequest:
+          description: >-
+            Observed 400. Bespoke envelope, not RFC 9457. Example captured live from
+            GET /api/data?ordering=zzz.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              example:
+                error: "Ordering by field 'zzz' is not supported."
+        x-ObservedAuthFailure:
+          description: >-
+            Django REST Framework default envelope for 401/403. Not documented by
+            Genialis and not confirmed on a live response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+- target: $.paths['/api/data/bulk_delete']
+  description: >-
+    Flag the highest-consequence operation in the API. It has no idempotency key, no
+    dry-run and no documented reversal — see conventions/genialis-conventions.yml.
+  update:
+    x-consequence: destructive
+    x-reversible: false
+    x-reversal-window: null
+    x-agent-guidance: >-
+      Requires explicit human confirmation. There is no restore endpoint for deleted
+      data objects anywhere in the contract.
+- target: $.paths['/api/collection/bulk_delete']
+  update:
+    x-consequence: destructive
+    x-reversible: false
+    x-reversal-window: null
+- target: $.paths['/api/sample/bulk_delete']
+  update:
+    x-consequence: destructive
+    x-reversible: false
+    x-reversal-window: null
+- target: $.paths['/about/versions']
+  description: This is the platform's real version signal; mark it as such.
+  update:
+    x-version-endpoint: true
+    x-observed-response: '{"resolwe":"45.1.0","resolwe-bio":"65.0.0","genialis-bio":"63.0.0"}'
+    x-observed-on: '2026-08-21'
+- target: $.paths['/api/variant']
+  description: Record the domain-standard signature carried by the variant model.
+  update:
+    x-domain-standard: VCF v4.x call model (CHROM/POS/REF/ALT) with dbSNP and ClinVar identifier schemes

@@ -1,0 +1,16 @@
+generated: '2026-08-21'
+method: searched
+probe: true
+source: https://www.genialis.com/compliance/
+url: https://www.genialis.com/compliance/
+certifications:
+- ISO 27001
+- HIPAA
+- GDPR
+evidence:
+- source: https://www.genialis.com/compliance/
+  keywords:
+  - iso 27001
+  - iso/iec 27001
+  - hipaa
+  - gdpr

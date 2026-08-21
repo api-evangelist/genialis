@@ -1,18 +1,58 @@
 aid: genialis
 name: Genialis
-description: 'Genialis is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: Genialis is a precision oncology company that builds AI models of cancer biology to find
+  and validate biomarkers for drug developers. Its commercial platform, Genialis Expressions, is a multiomics
+  and clinical data infrastructure for RNA-seq and related assays, and its Genialis Supermodel is a foundation
+  model of cancer biology used for response prediction (krasID, adcID, DDR). The Expressions platform
+  exposes a public Django REST Framework API at app.genialis.com covering data objects, samples, collections,
+  processes, annotations, predictions and variants, published as a live OpenAPI 3.0.3 document, and is
+  consumed programmatically through the open-source ReSDK Python client. Genialis also maintains the open-source
+  Resolwe dataflow engine and Resolwe Bioinformatics pipelines that the platform is built on. Founded
+  in Slovenia with offices in Boston, Houston and Ljubljana.
+image: https://www.genialis.com/wp-content/uploads/2023/12/Genialis-large-logo.png
 url: https://raw.githubusercontent.com/api-evangelist/genialis/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-21'
 modified: '2026-08-21'
 tags:
 - Company
-apis: []
+- Bioinformatics
+- Precision Medicine
+- Genomics
+- Life Sciences
+- Healthcare
+- Machine Learning
+- Artificial Intelligence
+- Multiomics
+- Oncology
+- Data Platform
+- Open Source
+apis:
+- name: Genialis Expressions API
+  description: The REST API behind the Genialis Expressions platform, built on the open-source Resolwe
+    dataflow engine and Django REST Framework. Covers data objects, samples, collections, relations, processes,
+    descriptor schemas, annotations, prediction fields and values, variants and variant calls, permissions,
+    users and groups, plus session/SAML authentication and platform version endpoints. The live OpenAPI
+    3.0.3 document is served by drf-spectacular at https://app.genialis.com/api/schema and describes 254
+    operations across 169 paths.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Bioinformatics
+  - Genomics
+  - Multiomics
+  - Data Platform
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-base-openapi.yaml
+  - type: Overlay
+    url: overlays/genialis-base-overlay.yaml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +60,68 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.genialis.com/
+- type: DeveloperPortal
+  url: https://docs.genialis.com/
+- type: Documentation
+  url: https://docs.genialis.com/
+- type: GettingStarted
+  url: https://docs.genialis.com/resdk/start.html
+- type: APIReference
+  url: https://app.genialis.com/api/schema
+- type: GitHubOrganization
+  url: https://github.com/genialis
+- type: SignUp
+  url: https://app.genialis.com/
+- type: Support
+  url: https://genialis.atlassian.net/servicedesk/customer/portal/3
+- type: Blog
+  url: https://www.genialis.com/category/news/
+- type: TermsOfService
+  url: https://www.genialis.com/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.genialis.com/privacy-policy/
+- type: Compliance
+  url: https://www.genialis.com/compliance/
+- type: TrustCenter
+  url: security/genialis-trust-center.yml
+- type: DomainSecurity
+  url: security/genialis-domain-security.yml
+- type: Authentication
+  url: authentication/genialis-authentication.yml
+- type: Packages
+  url: packages/genialis-packages.yml
+- type: SDKs
+  url: packages/genialis-packages.yml
+- type: Conformance
+  url: conformance/genialis-conformance.yml
+- type: Conventions
+  url: conventions/genialis-conventions.yml
+- type: ErrorCatalog
+  url: errors/genialis-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/genialis-lifecycle.yml
+- type: ChangeLog
+  url: changelog/genialis-changelog.yml
+- type: DataModel
+  url: data-model/genialis-data-model.yml
+- type: Plans
+  url: plans/genialis-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/genialis-rate-limits.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/genialis-llms.txt
+x-enrichment:
+  date: '2026-08-21'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1
+x-notes: 'No WellKnown pointer is emitted on purpose: no genialis.com host serves any /.well-known document.
+  app.genialis.com answers 200 with an identical 1377-byte SPA shell for every path including a random
+  control, and www/docs return honest 404s. The one real document found (OIDC discovery, saved to well-known/)
+  is served by the provider''s Auth0 tenant, which is hosted-IdP boilerplate rather than a surface Genialis
+  publishes. Likewise no MCPServer pointer (mcp/ holds a derived candidate, deployment mode none), no
+  AgentCard (probe missed on every host), no Idempotency (the API has no idempotency key), and no StatusPage/Deprecation/Security
+  (none published).'

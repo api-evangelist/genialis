@@ -1,0 +1,183 @@
+generated: '2026-08-21'
+method: derived
+source: >-
+  openapi/genialis-base-openapi.yaml plus live unauthenticated probes of
+  https://app.genialis.com/api/* on 2026-08-21
+api: Genialis Expressions API
+base_url: https://app.genialis.com
+note: >-
+  The API is Django REST Framework served by uvicorn behind CloudFront. Conventions
+  below are what the spec declares and what live anonymous responses actually did;
+  Genialis publishes no prose "API conventions" page, so nothing here is quoted
+  from docs.
+authentication:
+  style: session-cookie
+  scheme: cookieAuth (apiKey in cookie, name `sessionid`)
+  applied_per_operation: true
+  global_security: null
+  anonymous_read: true
+  anonymous_read_evidence: >-
+    GET https://app.genialis.com/api/data?limit=1 returned 200 with count=29123
+    and no credentials; GET /api/collection?limit=1 returned 200 with count=107.
+    Public/community datasets are readable without login; writes and private
+    objects are not.
+  login_endpoints:
+  - POST /rest-auth/login/
+  - POST /rest-auth/logout/
+  - POST /saml-auth/api-login/
+  - GET /saml-auth/remote-login/auth-id/
+  - GET /saml-auth/remote-login/poll/
+  browser_flow: >-
+    resdk `res.login()` opens an interactive browser login against the Auth0
+    tenant genialis.us.auth0.com, then polls /saml-auth/remote-login/poll/.
+  see_also: authentication/genialis-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key parameter appears anywhere in the 254 operations; no
+    idempotency header is described in the spec and none is documented. Writes are
+    plain DRF POST/PUT/PATCH/DELETE.
+  safe_retry_guidance: >-
+    POST /api/data and POST /api/collection are NOT safe to blind-retry: a repeated
+    POST creates a second object. A `duplicate` action exists (POST
+    /api/data/duplicate, /api/collection/duplicate, /api/sample/duplicate) which
+    makes duplication explicit rather than accidental.
+pagination:
+  style: limit-offset
+  params:
+  - limit
+  - offset
+  response_fields:
+  - count
+  - next
+  - previous
+  - results
+  default_behavior: >-
+    Without `limit` the collection endpoints return the full result set; `next` and
+    `previous` are absolute URLs.
+  evidence: >-
+    GET /api/data?limit=1 -> {"count":29123,"next":"https://app.genialis.com/api/data?limit=1&offset=1","previous":null,"results":[...]}
+filtering_and_sorting:
+  ordering_param: ordering
+  ordering_error: >-
+    An unsupported field returns HTTP 400 with {"error":"Ordering by field 'zzz' is
+    not supported."} (observed).
+  field_selection:
+    param: fields
+    note: DRF-style sparse fieldsets are used by the Expressions frontend.
+  text_search: >-
+    Several resources expose a `text` / `q` filter plus dedicated search endpoints
+    under /api/_modules/ (e.g. /api/_modules/differential_expression/geneset_search,
+    /api/_modules/gene_list/list_by_ids).
+versioning:
+  strategy: unversioned-path
+  note: >-
+    No /v1/ prefix and no version header. The platform instead publishes component
+    versions at GET /about/versions (live: resolwe 45.1.0, resolwe-bio 65.0.0,
+    genialis-bio 63.0.0) and a client floor at GET
+    /about/resdk_minimal_supported_version. The spec's own info.version is "0.0.0"
+    — a drf-spectacular default that was never set, so the contract does not
+    identify which build it describes.
+  see_also: lifecycle/genialis-lifecycle.yml
+error_envelope:
+  format: bespoke-json
+  rfc9457: false
+  shapes:
+  - '{"error": "<message>"}'
+  - '{"detail": "<message>"}   # DRF default for auth/permission failures'
+  - '{"<field>": ["<message>", ...]}   # DRF serializer validation'
+  observed:
+  - request: GET /api/data?ordering=zzz
+    status: 400
+    body: '{"error":"Ordering by field ''zzz'' is not supported."}'
+  spec_coverage: >-
+    The published spec documents ONLY 2xx responses — 214x 200, 21x 201, 20x 204
+    across 254 operations. Not one 4xx or 5xx response is described, so an agent
+    cannot learn the failure surface from the contract.
+  see_also: errors/genialis-problem-types.yml
+request_id_tracing:
+  header: null
+  note: >-
+    No X-Request-Id / X-Correlation-Id observed on responses. Responses carry
+    CloudFront correlation headers (x-amz-cf-id, x-amz-cf-pop) which identify the
+    edge request, not the application request.
+rate_limit_signaling:
+  headers_observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header on any observed 200. See
+    rate-limits/genialis-rate-limits.yml.
+transport_security:
+  hsts: 'max-age=63072000; includeSubDomains; preload'
+  x_content_type_options: nosniff
+  referrer_policy: same-origin
+  cross_origin_opener_policy: same-origin
+  csp: present on app.genialis.com
+  note: >-
+    app.genialis.com is the only host in the estate that sets HSTS; www and docs do
+    not.
+realtime:
+  transport: websocket
+  endpoints:
+  - wss://app.genialis.com
+  - wss://ws.app.genialis.com
+  evidence: >-
+    Declared in the connect-src directive of the CSP header returned by
+    https://app.genialis.com/api/data. Backed by the org's own
+    django-rest-framework-reactive library (reactive DRF over websockets). No
+    AsyncAPI document is published for it.
+  see_also: asyncapi — none published
+reversibility:
+  grade: documented
+  applies: true
+  note: >-
+    The API has a substantial write surface and ships explicit undo paths, but
+    Genialis publishes no stated window for any of them. Every reversal below is
+    read from an operationId in the contract; NO retention or grace period is
+    asserted because the provider states none anywhere we could reach. Deletes on
+    this platform should be treated as irreversible.
+  surfaces:
+  - write: create data object
+    operation: POST /api/data (api_data_create)
+    reversal: DELETE /api/data/{id} (api_data_destroy)
+    window: null
+    window_source: null
+  - write: delete data object
+    operation: DELETE /api/data/{id} (api_data_destroy)
+    reversal: null
+    window: null
+    note: >-
+      No restore/undelete/trash endpoint exists for data, samples or collections.
+      Deletion is terminal as far as the contract shows.
+  - write: bulk delete
+    operation: POST /api/data/bulk_delete, POST /api/collection/bulk_delete, POST /api/sample/bulk_delete
+    reversal: null
+    window: null
+    note: Highest-consequence operation in the API and it has no documented undo.
+  - write: run/restart a process
+    operation: POST /api/data/{id}/restart (api_data_restart_create)
+    reversal: null
+    window: null
+    note: >-
+      `restart` re-runs a failed data object; it is a re-do, not an undo. There is
+      no cancel/abort endpoint for a running job in the published contract.
+  - write: duplicate objects
+    operation: POST /api/data/duplicate, /api/collection/duplicate, /api/sample/duplicate
+    reversal: DELETE on the resulting object
+    window: null
+  - write: grant/revoke permissions
+    operation: POST /api/data/{id}/permissions, /api/collection/{id}/permissions
+    reversal: same endpoint with the permission removed
+    window: null
+    note: Symmetric — the grant endpoint is also the revoke endpoint.
+dry_run_mode:
+  supported: false
+  note: >-
+    No `dry_run`, `validate_only`, `preview` or simulate parameter appears in any
+    of the 254 operations. An agent cannot rehearse a write against this API.
+cross_links:
+  errors: errors/genialis-problem-types.yml
+  lifecycle: lifecycle/genialis-lifecycle.yml
+  authentication: authentication/genialis-authentication.yml
+  rate_limits: rate-limits/genialis-rate-limits.yml
+  data_model: data-model/genialis-data-model.yml

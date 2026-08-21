@@ -1,0 +1,130 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/genialis-base-openapi.yaml
+status: candidate
+note: >-
+  Genialis ships NO MCP server. Searched the docs (docs.genialis.com), the site,
+  the github.com/genialis organization (34 repos, none MCP-related) and PyPI/npm;
+  probed https://mcp.genialis.com (no DNS) and https://app.genialis.com/mcp (SPA
+  shell, 200 text/html — the host is a catch-all, so that is a miss, not a server).
+  The tool list below is a CANDIDATE derived from real operationIds in the
+  published contract. It is a proposal for Genialis, not something they operate.
+  Nobody should treat these as callable tools.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+searched:
+- url: https://mcp.genialis.com
+  status: 000
+  note: no DNS record
+- url: https://app.genialis.com/mcp
+  status: 200
+  note: SPA catch-all shell, not an MCP endpoint
+- url: https://github.com/genialis
+  status: 200
+  note: 34 public repos, no MCP server
+candidate_tools:
+- name: search_samples
+  description: Search and filter samples (entities) across accessible collections.
+  rest:
+  - api_sample_list
+  method: GET
+  path: /api/sample
+- name: get_sample
+  description: Retrieve a single sample with its descriptor metadata.
+  rest:
+  - api_sample_retrieve
+  method: GET
+  path: /api/sample/{id}
+- name: list_collections
+  description: List collections the caller can read.
+  rest:
+  - api_collection_list
+  method: GET
+  path: /api/collection
+- name: get_collection
+  description: Retrieve one collection.
+  rest:
+  - api_collection_retrieve
+  method: GET
+  path: /api/collection/{id}
+- name: list_data
+  description: List data objects, filterable by process, status, collection and sample.
+  rest:
+  - api_data_list
+  method: GET
+  path: /api/data
+- name: get_data
+  description: Retrieve one data object including its process status and outputs.
+  rest:
+  - api_data_retrieve
+  method: GET
+  path: /api/data/{id}
+- name: list_processes
+  description: List registered analysis processes and their typed input schemas.
+  rest:
+  - api_process_list
+  method: GET
+  path: /api/process
+- name: get_sample_table
+  description: Return the expression/metadata table for a set of samples.
+  rest:
+  - api__modules_sample_table_create
+  method: POST
+  path: /api/_modules/sample/table
+- name: differential_expression
+  description: List differential expression results, or search them by gene set.
+  rest:
+  - api__modules_differential_expression_list_create
+  - api__modules_differential_expression_geneset_search_create
+  method: POST
+  path: /api/_modules/differential_expression/list
+- name: search_genes
+  description: Look up genes/features in the knowledge base by name or id.
+  rest:
+  - api__modules_gene_list_list_list
+  - api__modules_gene_list_list_by_ids_create
+  method: POST
+  path: /api/_modules/gene_list/list
+- name: list_variants
+  description: List genomic variants (CHROM/POS/REF/ALT plus dbSNP and ClinVar annotation).
+  rest:
+  - api_variant_list
+  method: GET
+  path: /api/variant
+- name: list_variant_calls
+  description: List per-sample variant calls with quality, depth and genotype.
+  rest:
+  - api_variant_calls_list
+  method: GET
+  path: /api/variant_calls
+- name: get_annotations
+  description: Read structured sample annotations by field.
+  rest:
+  - api_annotation_value_list
+  - api_annotation_field_list
+  method: GET
+  path: /api/annotation_value
+- name: platform_versions
+  description: Report the running resolwe / resolwe-bio / genialis-bio versions.
+  rest:
+  - about_versions_retrieve
+  method: GET
+  path: /about/versions
+excluded_from_candidate_set:
+  reason: >-
+    Every write and destructive operation was deliberately left out. This API has no
+    idempotency key, no dry-run parameter and no documented reversal window (see
+    conventions/genialis-conventions.yml), so exposing POST /api/data/bulk_delete or
+    POST /api/data/{id}/restart as an agent tool would be unsafe.
+  operations:
+  - api_data_bulk_delete_create
+  - api_collection_bulk_delete_create
+  - api_sample_bulk_delete_create
+  - api_data_destroy
+  - api_data_restart_create
+  - api_data_duplicate_create

@@ -1,0 +1,94 @@
+generated: '2026-08-21'
+method: searched
+source: >-
+  https://raw.githubusercontent.com/genialis/resolwe/master/docs/CHANGELOG.rst and
+  https://raw.githubusercontent.com/genialis/resolwe-bio-py/master/docs/CHANGELOG.rst
+note: >-
+  Genialis publishes no changelog on www.genialis.com or docs.genialis.com — both
+  return 404 for /changelog, /releases and /status. What it DOES publish is a
+  Keep-a-Changelog-style, dated, semver changelog for the two components the
+  platform is built from, in the open-source repositories that back the API:
+  `resolwe` (the dataflow engine that serves this API) and `resdk` (the Python
+  client). The live platform reports the same versions at GET /about/versions
+  (resolwe 45.1.0, resolwe-bio 65.0.0), so these changelogs describe the deployed
+  API, not a separate product. That is the change record a consumer of this API
+  actually has.
+scheme: semver
+convention: Keep a Changelog (Added / Changed / Fixed / Removed), reStructuredText
+components:
+- component: resolwe
+  role: dataflow engine serving the Genialis Expressions API
+  current_version: 45.1.0
+  live_on_platform: '45.1.0'
+  live_evidence: 'GET https://app.genialis.com/about/versions -> {"resolwe":"45.1.0",...}'
+  changelog: https://github.com/genialis/resolwe/blob/master/docs/CHANGELOG.rst
+  entries:
+  - version: Unreleased
+    date: null
+    breaking: false
+    highlights:
+    - Audit log entries collected per unit of work via an `audit_context` manager; background worker object accesses now reach the auditlog logger instead of being discarded
+    - Kubernetes workload connector listener verifies job state via the Kubernetes API (needs `list` on batch/jobs)
+    - Fixed several unbounded memory leaks in long-running processes (channels manager, background task workers, listener, socket communicator)
+  - version: 45.1.0
+    date: '2026-02-17'
+    breaking: false
+  - version: 45.0.3
+    date: '2025-11-06'
+    breaking: false
+  - version: 45.0.2
+    date: '2025-11-04'
+    breaking: false
+  - version: 45.0.1
+    date: '2025-06-26'
+    breaking: false
+  - version: 45.0.0
+    date: '2025-06-14'
+    breaking: true
+  - version: 44.1.0
+    date: '2025-04-14'
+    breaking: false
+  - version: 44.0.0
+    date: '2025-03-17'
+    breaking: true
+  - version: 43.0.0
+    date: '2025-02-17'
+    breaking: true
+- component: resdk
+  role: first-party Python client for the Genialis Expressions API
+  current_version: 22.2.3
+  changelog: https://github.com/genialis/resolwe-bio-py/blob/master/docs/CHANGELOG.rst
+  entries:
+  - version: Unreleased
+    date: null
+    breaking: false
+    highlights:
+    - Added `estimated_fragment_count_raw` / `estimated_fragment_count_trimmed` columns to QCTables general_fastq output
+    - Error raised when download() is called with a non-existent file or field name
+    - One-to-one metadata table parsing in BaseTables no longer fails when the table index does not reflect collection samples
+  - version: 22.2.3
+    date: '2026-02-18'
+    breaking: false
+    highlights:
+    - Reverted the anonymous-user login fix to restore interactive login behavior
+  - version: 22.2.2
+    date: '2026-02-10'
+    breaking: false
+    highlights:
+    - Python 3.14 support
+    - Fixed directory download/rename on a data object
+  - version: 22.2.1
+    date: '2025-11-19'
+    breaking: false
+  - version: 22.2.0
+    date: '2025-07-02'
+    breaking: false
+  - version: 22.1.0
+    date: '2025-04-14'
+    breaking: false
+  - version: 22.0.0
+    date: '2025-03-28'
+    breaking: true
+gaps:
+- The REST API contract itself is unversioned and its `info.version` is the drf-spectacular default `0.0.0`, so a changelog entry cannot be tied to a contract version.
+- No changelog, release-notes or status page exists on a genialis.com host; a consumer has to know to read GitHub.

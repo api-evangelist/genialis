@@ -1,0 +1,39 @@
+generated: '2026-08-21'
+method: generated
+source: >-
+  Authored by API Evangelist from openapi/genialis-base-openapi.yaml. Every
+  operationId referenced in every skill was verified to exist in the published
+  contract on 2026-08-21. Genialis publishes no AGENTS.md and no skills of its own
+  (probed www.genialis.com, docs.genialis.com and github.com/genialis).
+api: Genialis Expressions API
+base_url: https://app.genialis.com
+skills:
+- name: genialis-authenticate
+  file: genialis-authenticate.md
+  description: Session model, anonymous read scope, resdk browser login, SAML SSO, version/compat checks.
+  operations: 8
+- name: genialis-explore-collections
+  file: genialis-explore-collections.md
+  description: Browse collections, samples, data objects and relations with anonymous reads.
+  operations: 7
+- name: genialis-expression-analysis
+  file: genialis-expression-analysis.md
+  description: Expression tables, differential expression results, gene resolution, sample annotations.
+  operations: 8
+- name: genialis-variant-lookup
+  file: genialis-variant-lookup.md
+  description: VCF-shaped variant lookup with dbSNP/ClinVar annotation and per-sample call quality.
+  operations: 5
+safety_posture:
+  read_only: true
+  rationale: >-
+    All four skills are read-only by design. The API has no idempotency key, no
+    dry-run parameter and no documented reversal window for any destructive
+    operation (bulk_delete, destroy, restart), so no skill exposes a write.
+  see: conventions/genialis-conventions.yml
+shared_rules:
+- Assert `content-type: application/json` on every response — app.genialis.com returns HTTP 200 with a 1377-byte HTML shell for any unmatched path.
+- Paths are server-root relative across five prefixes (/api, /rest-auth, /saml-auth, /about, /health_check); there is no single /api base.
+- Pagination is DRF limit/offset with `{count, next, previous, results}`.
+- Errors are bespoke JSON, not RFC 9457, and no error response is documented in the contract.
+- No rate-limit headers exist; pace requests client-side.

@@ -1,0 +1,135 @@
+generated: '2026-08-21'
+method: probed
+source: live GET of /.well-known/* on every apis.yml host plus the provider's Auth0 tenant
+note: >-
+  app.genialis.com is a single-page-application catch-all: EVERY unmatched path,
+  including a random control path, returns HTTP 200 with the identical 1377-byte
+  React shell (`<!doctype html>` ... `<div id="root">`). None of its /.well-known/*
+  200s are documents, so none are recorded as hits and no WellKnown/SecurityTxt
+  pointer is emitted for that host. www.genialis.com and docs.genialis.com return
+  honest 404s on every path. The only real /.well-known document found anywhere in
+  the estate is the OpenID Connect discovery document on genialis.us.auth0.com,
+  the provider's own Auth0 tenant — the identity provider behind the browser login
+  that resdk's `res.login()` opens and behind the SSO on the restricted
+  docs.genialis.com sections. It is a hosted-IdP surface, not a genialis.com host,
+  and it is recorded as such.
+hit_count: 1
+hosts:
+- host: https://app.genialis.com
+  soft_404_control:
+    path: /.well-known/zzz-nonexistent-probe
+    status: 200
+    bytes: 1377
+    content_type: text/html
+    verdict: catch-all SPA shell — all 200s on this host are non-documents
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    note: SPA shell, not a document
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    note: SPA shell, not a document
+- host: https://www.genialis.com
+  soft_404_control:
+    path: /.well-known/zzz-nonexistent-probe
+    status: 404
+    bytes: 130957
+    verdict: honest 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://docs.genialis.com
+  soft_404_control:
+    path: /.well-known/zzz-nonexistent-probe
+    status: 404
+    bytes: 1860
+    verdict: honest 404
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://genialis.us.auth0.com
+  note: >-
+    The provider's Auth0 tenant (issuer https://genialis.us.auth0.com/). Reached
+    by following the 302 from the restricted docs.genialis.com sections, which
+    redirect to genialis.us.auth0.com/u/login. Hosted IdP, not a genialis.com host.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    bytes: 2534
+    file: genialis-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    bytes: 2534
+    file: genialis-openid-configuration.json
+    note: Auth0 serves the identical document at both paths (RFC 8414 alias)
+  - path: /.well-known/jwks.json
+    status: 200
+    file: null
+    note: reachable, not saved (key material, rotates)
+llms_txt:
+- url: https://www.genialis.com/llms.txt
+  status: 404
+- url: https://docs.genialis.com/llms.txt
+  status: 404
+- url: https://app.genialis.com/llms.txt
+  status: 200
+  note: SPA shell, not an llms.txt
+robots_txt:
+- url: https://www.genialis.com/robots.txt
+  status: 200
+  note: 'Yoast-generated; User-agent * with empty Disallow (nothing disallowed); declares sitemap'

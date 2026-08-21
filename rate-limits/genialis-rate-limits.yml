@@ -1,0 +1,46 @@
+generated: '2026-08-21'
+method: probed
+source: >-
+  live unauthenticated responses from https://app.genialis.com/api/* on 2026-08-21
+  and a grep of openapi/genialis-base-openapi.yaml
+limit_count: 0
+note: >-
+  Genialis documents no rate limits and the API signals none. Full response headers
+  were captured from GET https://app.genialis.com/api/data?limit=1 (HTTP 200) and
+  contain no X-RateLimit-*, no RateLimit-*, no Retry-After and no 429 anywhere. The
+  published contract contains zero occurrences of "throttle", "rate limit" or
+  "Retry-After" across 254 operations, and documents no 4xx response at all, so a
+  429 could not be described even if one were returned. An agent integrating this
+  API has no runtime backpressure signal and must implement its own client-side
+  pacing.
+limits: []
+response_headers:
+  ratelimit_headers: []
+  retry_after: false
+  observed_headers:
+  - content-type
+  - content-length
+  - vary
+  - server
+  - allow
+  - x-content-type-options
+  - referrer-policy
+  - cross-origin-opener-policy
+  - content-security-policy
+  - strict-transport-security
+  - x-cache
+  - via
+  - x-amz-cf-pop
+  - x-amz-cf-id
+  note: >-
+    `server: uvicorn` behind CloudFront (x-cache: Miss from cloudfront). Any edge
+    throttling would be CloudFront's and is not advertised.
+exhaustion_status: unknown
+evidence:
+- url: https://app.genialis.com/api/data?limit=1
+  status: 200
+  note: no rate-limit header of any kind on the response
+- url: https://app.genialis.com/api/collection?limit=1
+  status: 200
+- url: https://app.genialis.com/api/schema
+  status: 200

@@ -42,5 +42,51 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Genialis is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Genialis is a precision oncology company that builds AI models of cancer biology to find and validate biomarkers for drug developers. Its commercial platform, Genialis Expressions, is a multiomics and clinical data infrastructure for RNA-seq and related assays, and its Genialis Supermodel is a foundation model of cancer biology used for response prediction (krasID, adcID, DDR). The Expressions platform exposes a public Django REST Framework API at app.genialis.com covering data objects, samples, collections, processes, annotations, predictions and variants, published as a live OpenAPI 3.0.3 document, and is consumed programmatically through the open-source ReSDK Python client. Genialis also maintains the open-source Resolwe dataflow engine and Resolwe Bioinformatics pipelines that the platform is built on. Founded in Slovenia with offices in Boston, Houston and Ljubljana.
+
+## APIs
+
+### Genialis Expressions API
+
+The REST API behind the Genialis Expressions platform, built on the open-source Resolwe dataflow engine and Django REST Framework. Covers data objects, samples, collections, relations, processes, descriptor schemas, annotations, prediction fields and values, variants and variant calls, permissions, users and groups, plus session/SAML authentication and platform version endpoints. The live OpenAPI 3.0.3 document is served by drf-spectacular at https://app.genialis.com/api/schema and describes 254 operations across 169 paths.
+
+- Documentation: https://docs.genialis.com/resdk/
+- Base URL: https://app.genialis.com
+- OpenAPI: [openapi/genialis-base-openapi.yaml](openapi/genialis-base-openapi.yaml) — harvested verbatim from <https://app.genialis.com/api/schema>
+
+## Links
+
+- Website: https://www.genialis.com/
+- DeveloperPortal: https://docs.genialis.com/
+- Documentation: https://docs.genialis.com/
+- GettingStarted: https://docs.genialis.com/resdk/start.html
+- APIReference: https://app.genialis.com/api/schema
+- GitHubOrganization: https://github.com/genialis
+- SignUp: https://app.genialis.com/
+- Support: https://genialis.atlassian.net/servicedesk/customer/portal/3
+- Blog: https://www.genialis.com/category/news/
+- TermsOfService: https://www.genialis.com/terms-of-service/
+- PrivacyPolicy: https://www.genialis.com/privacy-policy/
+- Compliance: https://www.genialis.com/compliance/
+
+## Artifacts
+
+- TrustCenter: [security/genialis-trust-center.yml](security/genialis-trust-center.yml)
+- DomainSecurity: [security/genialis-domain-security.yml](security/genialis-domain-security.yml)
+- Authentication: [authentication/genialis-authentication.yml](authentication/genialis-authentication.yml)
+- Packages: [packages/genialis-packages.yml](packages/genialis-packages.yml)
+- SDKs: [packages/genialis-packages.yml](packages/genialis-packages.yml)
+- Conformance: [conformance/genialis-conformance.yml](conformance/genialis-conformance.yml)
+- Conventions: [conventions/genialis-conventions.yml](conventions/genialis-conventions.yml)
+- ErrorCatalog: [errors/genialis-problem-types.yml](errors/genialis-problem-types.yml)
+- Lifecycle: [lifecycle/genialis-lifecycle.yml](lifecycle/genialis-lifecycle.yml)
+- ChangeLog: [changelog/genialis-changelog.yml](changelog/genialis-changelog.yml)
+- DataModel: [data-model/genialis-data-model.yml](data-model/genialis-data-model.yml)
+- Plans: [plans/genialis-plans-pricing.yml](plans/genialis-plans-pricing.yml)
+- RateLimits: [rate-limits/genialis-rate-limits.yml](rate-limits/genialis-rate-limits.yml)
+- AgentSkill: [skills/_index.yml](skills/_index.yml)
+- LLMsTxt: [llms/genialis-llms.txt](llms/genialis-llms.txt)
+- AgentSkills: [skills/](skills/)
+- MCP (derived candidate, no server shipped): [mcp/genialis-mcp.yml](mcp/genialis-mcp.yml)
+- Overlay: [overlays/genialis-base-overlay.yaml](overlays/genialis-base-overlay.yaml)
+- Well-known probe: [well-known/genialis-well-known.yml](well-known/genialis-well-known.yml)

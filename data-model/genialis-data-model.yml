@@ -1,0 +1,224 @@
+generated: '2026-08-21'
+method: derived
+source: openapi/genialis-base-openapi.yaml
+api: Genialis Expressions API
+note: >-
+  Derived from the 205 component schemas and the $ref / RelationshipDict links
+  between them, plus the resource roots the live API index at
+  https://app.genialis.com/api/ returns. Genialis publishes no object reference, so
+  no id-prefix scheme could be searched; ids are plain integers (observed: data id
+  1083792, collection id 3).
+id_scheme:
+  type: integer
+  prefixed: false
+  evidence: 'GET /api/data?limit=1 -> results[0].id = 1083792; GET /api/collection?limit=1 -> results[0].id = 3'
+core_concept: >-
+  Resolwe's model: a Collection groups Samples (entities); each Sample owns Data
+  objects; each Data object is the output of a Process run; DescriptorSchema defines
+  the shape of the metadata descriptors attached to Collections, Samples and Data;
+  AnnotationField/AnnotationValue carry structured sample metadata; Variant /
+  VariantCall / VariantAnnotation carry the genomic call layer; Prediction* carry
+  model outputs.
+entities:
+- name: Data
+  path: /api/data
+  description: A single unit of data — the input to or the output of a process run.
+  relationships:
+  - to: Process
+    type: belongs_to
+    via: process
+  - to: Collection
+    type: belongs_to
+    via: collection
+  - to: Entity
+    type: belongs_to
+    via: entity
+    note: Entity is the internal name for Sample.
+  - to: DescriptorSchema
+    type: belongs_to
+    via: descriptor_schema
+  - to: User
+    type: belongs_to
+    via: contributor
+  - to: Data
+    type: has_many
+    via: /api/data/{id}/children
+  - to: Data
+    type: belongs_to
+    via: /api/data/{id}/parents
+  status_enum_schema: DataStatus
+- name: Sample
+  aka: Entity
+  path: /api/sample
+  relationships:
+  - to: Collection
+    type: belongs_to
+    via: collection
+  - to: Data
+    type: has_many
+    via: /api/sample/{id}/data (reverse of Data.entity)
+  - to: AnnotationValue
+    type: has_many
+    via: /api/annotation_value?entity=
+  - to: User
+    type: belongs_to
+    via: contributor
+- name: Collection
+  path: /api/collection
+  relationships:
+  - to: Sample
+    type: has_many
+    via: Entity.collection
+  - to: Data
+    type: has_many
+    via: Data.collection
+  - to: Relation
+    type: has_many
+    via: Relation.collection
+  - to: DescriptorSchema
+    type: belongs_to
+    via: descriptor_schema
+- name: Relation
+  path: /api/relation
+  description: Typed grouping of samples within a collection (series, replicate groups, comparisons).
+  relationships:
+  - to: Collection
+    type: belongs_to
+    via: collection
+  - to: RelationPartition
+    type: has_many
+    via: partitions
+- name: Process
+  path: /api/process
+  description: A registered analysis workflow definition with typed inputs and outputs.
+  relationships:
+  - to: Data
+    type: has_many
+    via: Data.process
+- name: DescriptorSchema
+  path: /api/descriptorschema
+  relationships:
+  - to: Data
+    type: has_many
+  - to: Collection
+    type: has_many
+  - to: Sample
+    type: has_many
+- name: AnnotationField
+  path: /api/annotation_field
+  relationships:
+  - to: AnnotationGroup
+    type: belongs_to
+    via: group
+  - to: AnnotationValue
+    type: has_many
+- name: AnnotationValue
+  path: /api/annotation_value
+  relationships:
+  - to: AnnotationField
+    type: belongs_to
+    via: field
+  - to: Sample
+    type: belongs_to
+    via: entity
+- name: AnnotationPreset
+  path: /api/annotation_preset
+  relationships:
+  - to: AnnotationField
+    type: has_many
+- name: PredictionField
+  path: /api/prediction_field
+  relationships:
+  - to: PredictionGroup
+    type: belongs_to
+    via: group
+- name: PredictionValue
+  path: /api/prediction_value
+  relationships:
+  - to: PredictionField
+    type: belongs_to
+  - to: Sample
+    type: belongs_to
+- name: Variant
+  path: /api/variant
+  fields: [id, species, genome_assembly, chromosome, position, reference, alternative]
+  relationships:
+  - to: VariantAnnotation
+    type: has_one
+    via: annotation
+  - to: VariantCall
+    type: has_many
+- name: VariantAnnotation
+  path: /api/variant_annotations
+  fields: [variant_id, type, clinical_diagnosis, clinical_significance, dbsnp_id, clinvar_id, transcripts]
+  relationships:
+  - to: Variant
+    type: belongs_to
+    via: variant_id
+- name: VariantCall
+  path: /api/variant_calls
+  fields: [quality, genotype_quality, depth, alternative_allele_depth, filter, genotype]
+  relationships:
+  - to: Sample
+    type: belongs_to
+    via: sample
+  - to: Variant
+    type: belongs_to
+    via: variant
+  - to: VariantExperiment
+    type: belongs_to
+    via: experiment
+  - to: Data
+    type: belongs_to
+    via: data
+- name: VariantExperiment
+  path: /api/variant_experiment
+  relationships:
+  - to: VariantCall
+    type: has_many
+  - to: User
+    type: belongs_to
+    via: contributor
+- name: User
+  path: /api/user
+  relationships:
+  - to: Group
+    type: has_many
+  - to: UserTag
+    type: has_many
+- name: Group
+  path: /api/group
+- name: BillingAccount
+  path: /api/billingaccount
+  relationships:
+  - to: BillingStatistics
+    type: has_many
+  note: 'Usage estimation at /api/billingaccount/estimated_usage and /api/base/data_usage.'
+- name: Basket
+  path: /api/basket
+  description: Ephemeral working set of samples/data used by the Expressions UI.
+- name: Task
+  path: /api/task
+  description: Background task status.
+- name: AccessToken
+  path: /api/accesstoken/data
+  description: Scoped access tokens for data objects.
+- name: Storage
+  path: /api/storage
+- name: KnowledgeBase
+  path: /api/kb
+  description: Gene/feature knowledge base (features, mappings) used by search and gene lists.
+permissions_model:
+  style: per-object ACL
+  endpoints:
+  - /api/data/{id}/permissions
+  - /api/collection/{id}/permissions
+  - /api/sample/{id}/permissions
+  - /api/process/{id}/permissions
+  - /api/descriptorschema/{id}/permissions
+  principals: [user, group, public]
+counts:
+  entities_documented: 24
+  component_schemas: 205
+  paths: 169
+  operations: 254

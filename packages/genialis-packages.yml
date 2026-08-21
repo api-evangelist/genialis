@@ -1,0 +1,111 @@
+generated: '2026-08-21'
+method: searched
+source: >-
+  pypi.org registry metadata endpoints (pypi.org/pypi/<name>/json), the ReSDK docs
+  at https://docs.genialis.com/resdk/, and the github.com/genialis organization
+note: >-
+  Genialis ships Python only. Probed npm (registry.npmjs.org) for `resolwe-js`,
+  `@genialis/resolwe-js` and `genialis` — all 404. No Maven, NuGet, Go module,
+  RubyGems, Packagist or crates.io package was found. `resdk` is the client library
+  a consumer of the Genialis Expressions API actually uses; `resolwe`,
+  `resolwe-bio` and `resolwe-runtime-utils` are the server-side engine the platform
+  runs on, published as open source by the same org. The live platform reports
+  resolwe 45.1.0 and resolwe-bio 65.0.0 at https://app.genialis.com/about/versions,
+  matching the current PyPI releases — the published SDK and the running server are
+  in step, which is the opposite of the abandonment signal.
+packages:
+- language: python
+  registry: pypi
+  name: resdk
+  url: https://pypi.org/project/resdk/
+  install: pip install resdk
+  official: true
+  version: 22.2.3
+  published: '2026-02-18'
+  role: client-sdk
+  repo: https://github.com/genialis/resolwe-bio-py
+  docs: https://docs.genialis.com/resdk/
+  note: >-
+    Resolwe SDK for Python — the first-party client for the Genialis Expressions
+    API. `resdk.Resolwe(url='https://app.genialis.com')` then `res.login()`.
+- language: python
+  registry: pypi
+  name: resolwe
+  url: https://pypi.org/project/resolwe/
+  install: pip install resolwe
+  official: true
+  version: 45.1.0
+  published: '2026-02-17'
+  role: server-engine
+  repo: https://github.com/genialis/resolwe
+  docs: https://resolwe.readthedocs.io/en/latest/
+  note: >-
+    Open-source dataflow engine in Django that serves the API this profile
+    describes. Live platform reports resolwe 45.1.0 at /about/versions.
+- language: python
+  registry: pypi
+  name: resolwe-bio
+  url: https://pypi.org/project/resolwe-bio/
+  install: pip install resolwe-bio
+  official: true
+  version: 65.0.0
+  published: '2026-02-17'
+  role: server-pipelines
+  repo: https://github.com/genialis/resolwe-bio
+  docs: https://resolwe-bio.readthedocs.io/en/latest/
+  note: Bioinformatics pipelines plugin. Live platform reports resolwe-bio 65.0.0.
+- language: python
+  registry: pypi
+  name: resolwe-runtime-utils
+  url: https://pypi.org/project/resolwe-runtime-utils/
+  install: pip install resolwe-runtime-utils
+  official: true
+  version: 3.4.0
+  published: '2024-11-06'
+  role: runtime-utility
+  repo: https://github.com/genialis/resolwe-runtime-utils
+- language: python
+  registry: pypi
+  name: rnanorm
+  url: https://pypi.org/project/rnanorm/
+  install: pip install rnanorm
+  official: true
+  version: 2.2.0
+  published: '2025-01-29'
+  role: analysis-library
+  repo: https://github.com/genialis/RNAnorm
+  note: >-
+    RNA-seq normalization methods (CPM/FPKM/TPM/UQ/CUF/TMM). Referenced from the
+    Genialis Expressions documentation; not an API client.
+- language: python
+  registry: pypi
+  name: django-priority-batch
+  url: https://pypi.org/project/django-priority-batch/
+  install: pip install django-priority-batch
+  official: true
+  version: 4.0.0
+  published: '2022-02-18'
+  role: infrastructure
+  repo: https://github.com/genialis/django-priority-batch
+absent:
+- registry: npm
+  probed:
+  - resolwe-js
+  - '@genialis/resolwe-js'
+  - genialis
+  status: 404
+  note: >-
+    github.com/genialis/resolwe-js (TypeScript frontend library) exists but was
+    never published to npm; last push 2023-07-18.
+- registry: maven-central
+  status: not-found
+- registry: nuget
+  status: not-found
+- registry: rubygems
+  status: not-found
+- registry: crates.io
+  status: not-found
+- registry: pkg.go.dev
+  status: not-found
+- registry: packagist
+  status: not-found

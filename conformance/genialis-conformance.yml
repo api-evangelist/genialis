@@ -1,0 +1,162 @@
+generated: '2026-08-21'
+method: searched
+source: >-
+  https://www.genialis.com/compliance/ (certifications), plus derivation from
+  openapi/genialis-base-openapi.yaml and the Auth0 OIDC discovery document at
+  well-known/genialis-openid-configuration.json
+api: Genialis Expressions API
+cross_cutting:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    The API itself declares exactly one security scheme — `cookieAuth` (apiKey in
+    cookie, `sessionid`). No oauth2 securityScheme, no bearer token, no scopes. The
+    only OAuth in the contract is OUTBOUND: /api/basespace/oauth_browse_url and
+    /api/basespace/oauth_read_projects_url return URLs for requesting Illumina
+    BaseSpace OAuth permissions, i.e. Genialis acting as an OAuth client against a
+    third party, not as an authorization server.
+- id: oidc
+  conforms: partial
+  evidence: >-
+    Human sign-in is federated through the provider's own Auth0 tenant, which
+    serves a complete OIDC discovery document at
+    https://genialis.us.auth0.com/.well-known/openid-configuration (HTTP 200,
+    issuer https://genialis.us.auth0.com/, PKCE S256 supported, RS256 id_tokens).
+    The REST API does NOT accept OIDC tokens — it consumes the resulting Django
+    session cookie. So OIDC is real for login and absent from the API contract.
+- id: saml
+  conforms: true
+  evidence: >-
+    Three first-class SAML endpoints in the contract: POST /saml-auth/api-login/,
+    GET /saml-auth/remote-login/auth-id/ (cryptographically secure auth_id token),
+    GET /saml-auth/remote-login/poll/. Enterprise SSO is a shipped capability, not
+    a sales promise.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere. Errors are bespoke ({"error": "..."} /
+    {"detail": "..."}) and no error response is documented in the spec at all.
+- id: pagination
+  conforms: true
+  evidence: >-
+    RFC-free but consistent DRF limit/offset with count/next/previous/results.
+    Verified live: GET /api/data?limit=1 -> count 29123 with absolute `next` URL.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key parameter in any of the 254 operations.
+- id: json_api
+  conforms: false
+  evidence: Plain JSON, not JSON:API media type or envelope.
+- id: odata
+  conforms: false
+- id: scim
+  conforms: false
+  evidence: >-
+    User and group resources exist (/api/user, /api/group, /api/usertag) but they
+    are DRF-native, not SCIM — no urn:ietf:params:scim:schemas:* URN and no /scim
+    surface.
+- id: fhir
+  conforms: false
+  evidence: >-
+    No FHIR resource types, no fhir+json media type. The clinical data model is
+    bespoke (annotation fields/presets/values).
+- id: hipaa
+  conforms: claimed
+  evidence: >-
+    https://www.genialis.com/compliance/ — "committed to protecting the privacy and
+    security of protected health information (PHI) as required by the Health
+    Insurance Portability and Accountability Act (HIPAA)". A stated program, not a
+    certification.
+- id: gdpr
+  conforms: claimed
+  evidence: >-
+    https://www.genialis.com/compliance/ — "Alignment with GDPR, HIPAA, and other
+    relevant frameworks". Genialis d.o.o. operates in Slovenia (EU).
+certifications:
+- id: iso-27001
+  standard: ISO/IEC 27001:2022
+  conforms: true
+  evidence: >-
+    https://www.genialis.com/compliance/ — "ISO 27001-certified company, Genialis
+    proactively safeguards the confidentiality, integrity, and availability of
+    sensitive information". Security policy stated to follow ISO/IEC 27002:2022.
+- id: iso-9001
+  standard: ISO 9001:2015
+  conforms: true
+  evidence: >-
+    https://www.genialis.com/compliance/ — "ISO 9001 certification reflects our
+    systematic approach to quality management".
+- id: soc2
+  conforms: false
+  evidence: Not claimed anywhere on the compliance page or the site.
+domain_standard:
+  market: genomics / bioinformatics / precision oncology
+  finding: >-
+    The contract carries a genuine domain-standard signature in its data model, not
+    just in prose. The variant surface is a faithful projection of the VCF v4.x
+    call model plus the two canonical variant identifier schemes, and there is a
+    JBrowse genome-adapter endpoint. This is what lets a bioinformatics consumer
+    integrate without a bespoke connector.
+  signatures:
+  - standard: VCF (Variant Call Format) v4.x call model
+    conforms: true
+    confidence: high
+    evidence:
+      schema: components.schemas.Variant
+      fields: [genome_assembly, chromosome, position, reference, alternative, species]
+      schema_2: components.schemas.VariantCall
+      fields_2: [quality, genotype_quality, depth, alternative_allele_depth, filter, genotype]
+      note: >-
+        CHROM/POS/REF/ALT/QUAL/FILTER and the GT/GQ/DP/AD FORMAT keys of VCF,
+        surfaced one-for-one as REST fields on /api/variant, /api/variant_calls and
+        /api/variant_experiment.
+  - standard: NCBI dbSNP identifier scheme
+    conforms: true
+    confidence: high
+    evidence:
+      schema: components.schemas.VariantAnnotation
+      field: dbsnp_id
+  - standard: NCBI ClinVar identifier scheme + clinical significance vocabulary
+    conforms: true
+    confidence: high
+    evidence:
+      schema: components.schemas.VariantAnnotation
+      fields: [clinvar_id, clinical_significance, clinical_diagnosis]
+  - standard: JBrowse reference-sequence adapter
+    conforms: true
+    confidence: medium
+    evidence:
+      path: /api/_modules/jbrowse/genome
+      operation_id: api__modules_jbrowse_genome_list
+      description: Return JBrowse reference sequence.
+  - standard: Illumina BaseSpace (de-facto sequencing-platform integration)
+    conforms: true
+    confidence: high
+    evidence:
+      paths: [/api/basespace/oauth_browse_url, /api/basespace/oauth_read_projects_url]
+  probed_and_absent:
+  - standard: GA4GH htsget
+    conforms: false
+    note: No /reads or /variants htsget surface.
+  - standard: GA4GH DRS (Data Repository Service)
+    conforms: false
+    note: >-
+      A data-object API exists (/api/data) but it is Resolwe-native, not the
+      GA4GH /ga4gh/drs/v1 shape.
+  - standard: GA4GH WES (Workflow Execution Service)
+    conforms: false
+    note: >-
+      Closest analogue in the catalog. Genialis runs workflows through /api/process
+      and /api/data with its own Resolwe process descriptors rather than the WES
+      /runs contract — the single clearest bilateral-connector cost in this API for
+      a consumer who already speaks GA4GH.
+  - standard: GA4GH refget
+    conforms: false
+  - standard: GA4GH Beacon v2
+    conforms: false
+  - standard: Phenopackets (GA4GH)
+    conforms: false
+  - standard: HL7 FHIR Genomics Reporting IG
+    conforms: false
+  - standard: OMOP CDM
+    conforms: false

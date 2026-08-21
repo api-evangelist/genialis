@@ -1,0 +1,92 @@
+generated: '2026-08-21'
+method: probed
+source: >-
+  live unauthenticated requests to https://app.genialis.com/api/* on 2026-08-21,
+  cross-checked against openapi/genialis-base-openapi.yaml
+api: Genialis Expressions API
+format: bespoke-json
+rfc9457: false
+content_type: application/json
+spec_coverage:
+  documented_response_codes:
+    '200': 214
+    '201': 21
+    '204': 20
+  documented_4xx: 0
+  documented_5xx: 0
+  finding: >-
+    The published OpenAPI describes 254 operations and NOT ONE error response.
+    Every operation lists only its success code. An agent reading this contract has
+    no way to learn what a failure looks like, which status codes it must handle,
+    or what shape the body will be. This is the single largest gap in the contract.
+    The entries below are therefore PROBED from live responses and inferred from
+    the Django REST Framework the API is built on — they are not published by
+    Genialis, and are recorded as observations, not as a provider error reference.
+envelopes:
+- shape: '{"error": "<human message>"}'
+  used_for: application-level request validation (filtering, ordering, module endpoints)
+  observed: true
+- shape: '{"detail": "<human message>"}'
+  used_for: DRF authentication and permission failures
+  observed: false
+  basis: Django REST Framework default exception handler; not confirmed on a live response
+- shape: '{"<field>": ["<message>", ...]}'
+  used_for: DRF serializer field validation on POST/PUT/PATCH
+  observed: false
+  basis: Django REST Framework default serializer errors; not confirmed on a live response
+problem_types:
+- status: 400
+  title: Unsupported ordering field
+  envelope: '{"error": "Ordering by field ''zzz'' is not supported."}'
+  method: probed
+  evidence:
+    request: GET https://app.genialis.com/api/data?ordering=zzz
+    status: 400
+    content_type: application/json
+    body: '{"error":"Ordering by field ''zzz'' is not supported."}'
+  remediation: Use a field listed by the resource's `ordering` filter; the message names the rejected field.
+- status: 401
+  title: Not authenticated
+  envelope: '{"detail": "Authentication credentials were not provided."}'
+  method: derived
+  source: 'Django REST Framework default; endpoints declare `security: [cookieAuth]`'
+  remediation: Establish a session via POST /rest-auth/login/ or the browser flow resdk `res.login()` uses.
+- status: 403
+  title: Permission denied
+  envelope: '{"detail": "You do not have permission to perform this action."}'
+  method: derived
+  source: Django REST Framework default; the API has per-object permissions (/api/{resource}/{id}/permissions)
+  remediation: Request the required permission on the object or its parent collection.
+- status: 404
+  title: Not found
+  envelope: '{"detail": "Not found."}'
+  method: derived
+  source: Django REST Framework default
+  caveat: >-
+    NOT independently confirmable from outside. app.genialis.com is an SPA
+    catch-all: an unmatched /api/* path (e.g. GET /api/data/999999999) returns HTTP
+    200 with the React shell rather than a JSON 404. An agent that does not check
+    content-type will read a 404 as a success.
+  remediation: 'Always assert `content-type: application/json` on responses from this host.'
+- status: 500
+  title: Server error
+  envelope: unknown
+  method: none
+  note: Not observed and not documented.
+notable:
+- id: spa-catchall-masks-errors
+  severity: high
+  detail: >-
+    Unmatched paths under https://app.genialis.com return 200 text/html (1377-byte
+    React shell) instead of a 4xx. Confirmed on /api/zzznope, /api/data/999999999,
+    /api/about/versions and /api/health_check. The `about` and `health_check`
+    endpoints in the spec are served at the HOST ROOT (/about/versions,
+    /health_check), not under /api — requesting them under /api silently returns
+    HTML with a 200.
+- id: path-prefix-split
+  severity: medium
+  detail: >-
+    The spec's paths are server-root relative and use five different prefixes —
+    /api/* (156 paths), /rest-auth/* (6), /about/* (3), /saml-auth/* (3) and
+    /health_check (1). Because the spec declares no `servers[]`, a tool that
+    assumes a single /api base will 200-with-HTML on the non-/api operations.
