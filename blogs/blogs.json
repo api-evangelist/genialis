@@ -1,0 +1,14 @@
+{
+  "repo": "genialis",
+  "feeds": [
+    {
+      "source": "https://genialis.atlassian.net/servicedesk/customer/portal/3",
+      "feed_url": "https://genialis.atlassian.net/servicedesk/customer/portal/3",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-22T20:20:02Z"
+}
