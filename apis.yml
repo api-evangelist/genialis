@@ -30,25 +30,72 @@ tags:
 - Data Platform
 - Open Source
 apis:
-- name: Genialis Expressions API
-  description: The REST API behind the Genialis Expressions platform, built on the open-source Resolwe
-    dataflow engine and Django REST Framework. Covers data objects, samples, collections, relations, processes,
-    descriptor schemas, annotations, prediction fields and values, variants and variant calls, permissions,
-    users and groups, plus session/SAML authentication and platform version endpoints. The live OpenAPI
-    3.0.3 document is served by drf-spectacular at https://app.genialis.com/api/schema and describes 254
-    operations across 169 paths.
+- aid: genialis:genialis-about-api
+  name: Genialis About API
+  description: The about API from Genialis — 3 operation(s) for about.
   humanURL: https://docs.genialis.com/resdk/
   baseURL: https://app.genialis.com
   tags:
-  - Bioinformatics
-  - Genomics
-  - Multiomics
-  - Data Platform
+  - about
   properties:
   - type: OpenAPI
-    url: openapi/genialis-base-openapi.yaml
-  - type: Overlay
-    url: overlays/genialis-base-overlay.yaml
+    url: openapi/genialis-about-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-api-api
+  name: Genialis API
+  description: The api API from Genialis — 156 operation(s) for api.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - api
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-api-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-health-check-api
+  name: Genialis Health Check API
+  description: The health_check API from Genialis — 1 operation(s) for health_check.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - health_check
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-health-check-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-rest-auth-api
+  name: Genialis Rest Auth API
+  description: The rest-auth API from Genialis — 6 operation(s) for rest-auth.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - rest-auth
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-rest-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-saml-auth-api
+  name: Genialis Saml Auth API
+  description: The saml-auth API from Genialis — 3 operation(s) for saml-auth.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - saml-auth
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-saml-auth-api-openapi.yml
   - type: Documentation
     url: https://docs.genialis.com/resdk/
   - type: APIReference
@@ -59,6 +106,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/genialis-base-overlay.yaml
 - type: Website
   url: https://www.genialis.com/
 - type: DeveloperPortal
