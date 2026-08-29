@@ -9,6 +9,18 @@ description: Genialis is a precision oncology company that builds AI models of c
   consumed programmatically through the open-source ReSDK Python client. Genialis also maintains the open-source
   Resolwe dataflow engine and Resolwe Bioinformatics pipelines that the platform is built on. Founded
   in Slovenia with offices in Boston, Houston and Ljubljana.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.genialis.com/wp-content/uploads/2023/12/Genialis-large-logo.png
 url: https://raw.githubusercontent.com/api-evangelist/genialis/refs/heads/main/apis.yml
 x-type: company
