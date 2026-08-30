@@ -35,6 +35,19 @@ tags:
 - Genomics
 - Life Sciences
 - Healthcare
+- Machine-Learning
+- Artificial Intelligence
+- Multiomics
+- Oncology
+- Data Platform
+- Open-Source
+tags_raw:
+- Company
+- Bioinformatics
+- Precision Medicine
+- Genomics
+- Life Sciences
+- Healthcare
 - Machine Learning
 - Artificial Intelligence
 - Multiomics
@@ -48,6 +61,8 @@ apis:
   humanURL: https://docs.genialis.com/resdk/
   baseURL: https://app.genialis.com
   tags:
+  - About
+  tags_raw:
   - about
   properties:
   - type: OpenAPI
@@ -61,7 +76,8 @@ apis:
   description: The api API from Genialis — 156 operation(s) for api.
   humanURL: https://docs.genialis.com/resdk/
   baseURL: https://app.genialis.com
-  tags:
+  tags: []
+  tags_raw:
   - api
   properties:
   - type: OpenAPI
@@ -76,6 +92,8 @@ apis:
   humanURL: https://docs.genialis.com/resdk/
   baseURL: https://app.genialis.com
   tags:
+  - Health Check
+  tags_raw:
   - health_check
   properties:
   - type: OpenAPI
