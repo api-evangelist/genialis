@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  title: Genialis base About API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: about
+paths:
+  /about/process_resources:
+    get:
+      operationId: about_process_resources_retrieve
+      description: Return the resources of the installed platform.
+      tags:
+      - about
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+          description: ''
+  /about/resdk_minimal_supported_version:
+    get:
+      operationId: about_resdk_minimal_supported_version_retrieve
+      description: Return the minimal supported resdk version.
+      tags:
+      - about
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReSDKMinimalSupportedVersion'
+          description: ''
+  /about/versions:
+    get:
+      operationId: about_versions_retrieve
+      description: Return the versions of the installed Genialis packages.
+      tags:
+      - about
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Versions'
+          description: ''
+components:
+  schemas:
+    Resources:
+      type: object
+      description: Serialize the platform resource information.
+      properties:
+        max_memory:
+          type: integer
+        max_cores:
+          type: integer
+        max_storage:
+          type: integer
+        min_memory:
+          type: integer
+        min_cores:
+          type: integer
+        min_storage:
+          type: integer
+    ReSDKMinimalSupportedVersion:
+      type: object
+      description: Serialize minimal supporter resdk version.
+      properties:
+        minimal_supported_version:
+          type: string
+          readOnly: true
+      required:
+      - minimal_supported_version
+    Versions:
+      type: object
+      properties:
+        resolwe:
+          type: string
+          readOnly: true
+        resolwe-bio:
+          type: string
+          readOnly: true
+        genialis-bio:
+          type: string
+          readOnly: true
+      required:
+      - genialis-bio
+      - resolwe
+      - resolwe-bio
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

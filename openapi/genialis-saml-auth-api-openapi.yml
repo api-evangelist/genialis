@@ -1,0 +1,114 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Saml Auth API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: saml-auth
+paths:
+  /saml-auth/api-login/:
+    post:
+      operationId: saml_auth_api_login_create
+      description: Attempt to perform automatic login.
+      tags:
+      - saml-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiLogin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ApiLogin'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ApiLogin'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /saml-auth/remote-login/auth-id/:
+    get:
+      operationId: saml_auth_remote_login_auth_id_retrieve
+      description: Generate a cryptographically secure auth_id token.
+      tags:
+      - saml-auth
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdGenerator'
+          description: ''
+  /saml-auth/remote-login/poll/:
+    get:
+      operationId: saml_auth_remote_login_poll_retrieve
+      description: Poll the redis server for authentication data.
+      parameters:
+      - in: cookie
+        name: auth_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - saml-auth
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialsPoll'
+          description: ''
+        '204':
+          description: No response body
+components:
+  schemas:
+    CredentialsPoll:
+      type: object
+      description: Serializer for CredentialsPollView.
+      properties:
+        sessionid:
+          type: string
+        csrftoken:
+          type: string
+      required:
+      - csrftoken
+      - sessionid
+    ApiLogin:
+      type: object
+      description: Deserializer for login credentials.
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - email
+      - password
+    IdGenerator:
+      type: object
+      description: Serializer for IdGeneratorView.
+      properties:
+        auth_id:
+          type: string
+          readOnly: true
+      required:
+      - auth_id
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
