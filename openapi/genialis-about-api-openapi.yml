@@ -7,14 +7,14 @@ servers:
 - url: https://app.genialis.com
   description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: about
+- name: About
 paths:
   /about/process_resources:
     get:
       operationId: about_process_resources_retrieve
       description: Return the resources of the installed platform.
       tags:
-      - about
+      - About
       security:
       - cookieAuth: []
       responses:
@@ -24,12 +24,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Resources'
           description: ''
+      summary: About process resources retrieve
+      x-summary-source: derived
   /about/resdk_minimal_supported_version:
     get:
       operationId: about_resdk_minimal_supported_version_retrieve
       description: Return the minimal supported resdk version.
       tags:
-      - about
+      - About
       security:
       - cookieAuth: []
       - {}
@@ -40,12 +42,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReSDKMinimalSupportedVersion'
           description: ''
+      summary: About resdk minimal supported version retrieve
+      x-summary-source: derived
   /about/versions:
     get:
       operationId: about_versions_retrieve
       description: Return the versions of the installed Genialis packages.
       tags:
-      - about
+      - About
       security:
       - cookieAuth: []
       - {}
@@ -56,8 +60,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Versions'
           description: ''
+      summary: About versions retrieve
+      x-summary-source: derived
 components:
   schemas:
+    ReSDKMinimalSupportedVersion:
+      type: object
+      description: Serialize minimal supporter resdk version.
+      properties:
+        minimal_supported_version:
+          type: string
+          readOnly: true
+      required:
+      - minimal_supported_version
     Resources:
       type: object
       description: Serialize the platform resource information.
@@ -74,15 +89,6 @@ components:
           type: integer
         min_storage:
           type: integer
-    ReSDKMinimalSupportedVersion:
-      type: object
-      description: Serialize minimal supporter resdk version.
-      properties:
-        minimal_supported_version:
-          type: string
-          readOnly: true
-      required:
-      - minimal_supported_version
     Versions:
       type: object
       properties:

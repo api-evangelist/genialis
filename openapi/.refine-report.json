@@ -1,0 +1,33 @@
+{
+  "provider": "genialis",
+  "sources": [
+    "_original/genialis-base-openapi.yaml"
+  ],
+  "outputs": [
+    "genialis-about-api-openapi.yml",
+    "genialis-api-api-openapi.yml",
+    "genialis-health-check-api-openapi.yml",
+    "genialis-rest-auth-api-openapi.yml",
+    "genialis-saml-auth-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "genialis-base-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "genialis-base-openapi.yaml: declared missing tag: about",
+    "genialis-base-openapi.yaml: declared missing tag: api",
+    "genialis-base-openapi.yaml: declared missing tag: health_check",
+    "genialis-base-openapi.yaml: declared missing tag: rest-auth",
+    "genialis-base-openapi.yaml: declared missing tag: saml-auth",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "genialis-about-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genialis-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genialis-health-check-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genialis-rest-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "genialis-saml-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

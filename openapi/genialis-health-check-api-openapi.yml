@@ -7,20 +7,22 @@ servers:
 - url: https://app.genialis.com
   description: Base URL declared by the provider in apis.yml (roadmap#122).
 tags:
-- name: health_check
+- name: Health Check
 paths:
   /health_check:
     get:
       operationId: health_check_retrieve
       description: Perform database and redis health check.
       tags:
-      - health_check
+      - Health Check
       security:
       - cookieAuth: []
       - {}
       responses:
         '200':
           description: No response body
+      summary: Health check retrieve
+      x-summary-source: derived
 components:
   securitySchemes:
     cookieAuth:

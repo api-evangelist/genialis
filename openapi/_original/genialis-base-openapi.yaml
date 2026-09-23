@@ -3,6 +3,9 @@ info:
   title: Genialis base
   version: 0.0.0
   description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
 paths:
   /about/process_resources:
     get:

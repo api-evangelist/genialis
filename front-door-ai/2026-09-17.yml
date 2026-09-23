@@ -1,0 +1,27 @@
+# Front Door AI Index — genialis — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: genialis
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.genialis.com
+  final_host: www.genialis.com
+  ownership: own
+  owner: genialis
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 16
+  host_score: 16
+  density: 13.96
+  words: 1146
+  tiers:
+    agentic: 0
+    core: 16
+    model: 0
+  ambiguous: 3
+  top_terms:
+    AI: 13
+    foundation model: 3
+    intelligence: 3
