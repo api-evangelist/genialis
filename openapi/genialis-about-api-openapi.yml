@@ -64,15 +64,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ReSDKMinimalSupportedVersion:
-      type: object
-      description: Serialize minimal supporter resdk version.
-      properties:
-        minimal_supported_version:
-          type: string
-          readOnly: true
-      required:
-      - minimal_supported_version
     Resources:
       type: object
       description: Serialize the platform resource information.
@@ -105,6 +96,15 @@ components:
       - genialis-bio
       - resolwe
       - resolwe-bio
+    ReSDKMinimalSupportedVersion:
+      type: object
+      description: Serialize minimal supporter resdk version.
+      properties:
+        minimal_supported_version:
+          type: string
+          readOnly: true
+      required:
+      - minimal_supported_version
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -1,0 +1,106 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Search Table File Columns API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Search Table File Columns
+paths:
+  /api/search-table-file-columns:
+    get:
+      operationId: api_search_table_file_columns_list
+      description: API view for :class:`SearchTableFileColumn` objects.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - Search Table File Columns
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSearchTableFileColumnList'
+          description: ''
+      summary: Api search table file columns list
+      x-summary-source: derived
+components:
+  schemas:
+    SearchTableFileColumn:
+      type: object
+      description: Serializer for :class:`SearchTableFileColumn` objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        type:
+          type: string
+        label:
+          type: string
+        file_path:
+          type: string
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+        column_name:
+          type: string
+        exclude_builds:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - label
+    PaginatedSearchTableFileColumnList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchTableFileColumn'
+    ActionEnum:
+      enum:
+      - download
+      - tab
+      type: string
+      description: '* `download` - Download
+
+        * `tab` - Tab'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

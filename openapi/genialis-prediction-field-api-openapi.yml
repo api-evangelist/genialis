@@ -1,0 +1,935 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Prediction Field API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Prediction Field
+paths:
+  /api/prediction_field:
+    get:
+      operationId: api_prediction_field_list
+      description: Prediction fields viewset.
+      parameters:
+      - in: query
+        name: collections
+        schema:
+          type: array
+          items:
+            type: integer
+        explode: true
+        style: form
+      - in: query
+        name: collections__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collections__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: description__contains
+        schema:
+          type: string
+      - in: query
+        name: description__icontains
+        schema:
+          type: string
+      - in: query
+        name: description__iexact
+        schema:
+          type: string
+      - in: query
+        name: description__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: description__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: description__istartswith
+        schema:
+          type: string
+      - in: query
+        name: description__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity
+        schema:
+          type: integer
+      - in: query
+        name: entity__annotations
+        schema:
+          type: string
+      - in: query
+        name: entity__basket
+        schema:
+          type: string
+      - in: query
+        name: entity__collection
+        schema:
+          type: integer
+      - in: query
+        name: entity__collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__collection__name
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__contributor
+        schema:
+          type: integer
+      - in: query
+        name: entity__contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__contributor_name
+        schema:
+          type: string
+      - in: query
+        name: entity__created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: entity__created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity__description
+        schema:
+          type: string
+      - in: query
+        name: entity__description__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__description__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__description__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__description__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__description__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__description__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__description__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__group
+        schema:
+          type: string
+      - in: query
+        name: entity__gt
+        schema:
+          type: integer
+      - in: query
+        name: entity__gte
+        schema:
+          type: integer
+      - in: query
+        name: entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__lt
+        schema:
+          type: integer
+      - in: query
+        name: entity__lte
+        schema:
+          type: integer
+      - in: query
+        name: entity__modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: entity__modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity__name
+        schema:
+          type: string
+      - in: query
+        name: entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__owners
+        schema:
+          type: integer
+      - in: query
+        name: entity__owners_name
+        schema:
+          type: string
+      - in: query
+        name: entity__permission
+        schema:
+          type: string
+      - in: query
+        name: entity__relation_id
+        schema:
+          type: integer
+      - in: query
+        name: entity__shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: entity__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__status
+        schema:
+          type: string
+      - in: query
+        name: entity__status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__type
+        schema:
+          type: string
+      - in: query
+        name: entity__version
+        schema:
+          type: string
+      - in: query
+        name: entity__version__gt
+        schema:
+          type: string
+      - in: query
+        name: entity__version__gte
+        schema:
+          type: string
+      - in: query
+        name: entity__version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__version__lt
+        schema:
+          type: string
+      - in: query
+        name: entity__version__lte
+        schema:
+          type: string
+      - in: query
+        name: group__name
+        schema:
+          type: string
+      - in: query
+        name: group__name__contains
+        schema:
+          type: string
+      - in: query
+        name: group__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: group__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: group__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: group__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: group__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: group__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: has_dependencies
+        schema:
+          type: boolean
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - in: query
+        name: label
+        schema:
+          type: string
+      - in: query
+        name: label__contains
+        schema:
+          type: string
+      - in: query
+        name: label__icontains
+        schema:
+          type: string
+      - in: query
+        name: label__iexact
+        schema:
+          type: string
+      - in: query
+        name: label__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: label__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: label__istartswith
+        schema:
+          type: string
+      - in: query
+        name: label__startswith
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: required
+        schema:
+          type: boolean
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - CLASS
+          - SCORE
+        description: '* `SCORE` - SCORE
+
+          * `CLASS` - CLASS'
+      - in: query
+        name: type__contains
+        schema:
+          type: string
+      - in: query
+        name: type__icontains
+        schema:
+          type: string
+      - in: query
+        name: type__iexact
+        schema:
+          type: string
+      - in: query
+        name: type__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: type__istartswith
+        schema:
+          type: string
+      - in: query
+        name: type__startswith
+        schema:
+          type: string
+      tags:
+      - Prediction Field
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPredictionFieldList'
+          description: ''
+      summary: Api prediction field list
+      x-summary-source: derived
+    post:
+      operationId: api_prediction_field_create
+      description: Create a resource.
+      tags:
+      - Prediction Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionField'
+          description: ''
+      summary: Api prediction field create
+      x-summary-source: derived
+  /api/prediction_field/{id}:
+    get:
+      operationId: api_prediction_field_retrieve
+      description: Prediction fields viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction field.
+        required: true
+      tags:
+      - Prediction Field
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionField'
+          description: ''
+      summary: Api prediction field retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_prediction_field_update
+      description: Prediction fields viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction field.
+        required: true
+      tags:
+      - Prediction Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PredictionField'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionField'
+          description: ''
+      summary: Api prediction field update
+      x-summary-source: derived
+    patch:
+      operationId: api_prediction_field_partial_update
+      description: Prediction fields viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction field.
+        required: true
+      tags:
+      - Prediction Field
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionField'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionField'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionField'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionField'
+          description: ''
+      summary: Api prediction field partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_prediction_field_destroy
+      description: Prediction fields viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction field.
+        required: true
+      tags:
+      - Prediction Field
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api prediction field destroy
+      x-summary-source: derived
+components:
+  schemas:
+    PredictionField:
+      type: object
+      description: Serializer for PredictionField objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PredictionFieldTypeEnum'
+        version:
+          type: string
+          default: 0.0.0
+        description:
+          type: string
+          maxLength: 256
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipDict'
+        label:
+          type: string
+          maxLength: 128
+        required:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+      required:
+      - description
+      - group
+      - id
+      - inputs
+      - label
+      - sort_order
+      - type
+    PaginatedPredictionFieldList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionField'
+    PatchedPredictionField:
+      type: object
+      description: Serializer for PredictionField objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PredictionFieldTypeEnum'
+        version:
+          type: string
+          default: 0.0.0
+        description:
+          type: string
+          maxLength: 256
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipDict'
+        label:
+          type: string
+          maxLength: 128
+        required:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+    PredictionFieldTypeEnum:
+      enum:
+      - SCORE
+      - CLASS
+      type: string
+      description: '* `SCORE` - SCORE
+
+        * `CLASS` - CLASS'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

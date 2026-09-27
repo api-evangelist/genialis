@@ -1,0 +1,483 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Prediction Preset API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Prediction Preset
+paths:
+  /api/prediction_preset:
+    get:
+      operationId: api_prediction_preset_list
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Prediction Preset
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPredictionPresetSerializerWithPermissionsList'
+          description: ''
+      summary: Api prediction preset list
+      x-summary-source: derived
+    post:
+      operationId: api_prediction_preset_create
+      description: Create a resource.
+      tags:
+      - Prediction Preset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          description: ''
+      summary: Api prediction preset create
+      x-summary-source: derived
+  /api/prediction_preset/{id}:
+    get:
+      operationId: api_prediction_preset_retrieve
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          description: ''
+      summary: Api prediction preset retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_prediction_preset_update
+      description: Update a resource.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          description: ''
+      summary: Api prediction preset update
+      x-summary-source: derived
+    patch:
+      operationId: api_prediction_preset_partial_update
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionPresetSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionPresetSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPredictionPresetSerializerWithPermissions'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+          description: ''
+      summary: Api prediction preset partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_prediction_preset_destroy
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api prediction preset destroy
+      x-summary-source: derived
+  /api/prediction_preset/{id}/permissions:
+    get:
+      operationId: api_prediction_preset_permissions_retrieve
+      description: Get or set permissions API endpoint.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserPermissions'
+          description: ''
+      summary: Api prediction preset permissions retrieve
+      x-summary-source: derived
+    post:
+      operationId: api_prediction_preset_permissions_create
+      description: Get or set permissions API endpoint.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this prediction preset.
+        required: true
+      tags:
+      - Prediction Preset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserPermissions'
+          description: ''
+      summary: Api prediction preset permissions create
+      x-summary-source: derived
+components:
+  schemas:
+    PatchedPredictionPresetSerializerWithPermissions:
+      type: object
+      description: Serializer for PredictionPreset objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: integer
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+    PaginatedPredictionPresetSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    Permission:
+      type: object
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      properties:
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
+    PredictionPresetSerializerWithPermissions:
+      type: object
+      description: Serializer for PredictionPreset objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: integer
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - contributor
+      - current_user_permissions
+      - id
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

@@ -288,37 +288,37 @@ components:
       required:
       - new_password1
       - new_password2
-    ApiLogin:
+    PatchedUserDetails:
       type: object
-      description: Deserializer for login credentials.
+      description: User model w/o password
       properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: ID
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
         email:
           type: string
           format: email
-        password:
+          readOnly: true
+        first_name:
           type: string
-      required:
-      - email
-      - password
-    PasswordResetConfirm:
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+    RestAuthDetail:
       type: object
-      description: Serializer for confirming a password reset attempt.
       properties:
-        new_password1:
+        detail:
           type: string
-          maxLength: 128
-        new_password2:
-          type: string
-          maxLength: 128
-        uid:
-          type: string
-        token:
-          type: string
+          readOnly: true
       required:
-      - new_password1
-      - new_password2
-      - token
-      - uid
+      - detail
     PasswordReset:
       type: object
       description: Serializer for requesting a password reset e-mail.
@@ -355,37 +355,37 @@ components:
       - email
       - pk
       - username
-    RestAuthDetail:
+    PasswordResetConfirm:
       type: object
+      description: Serializer for confirming a password reset attempt.
       properties:
-        detail:
+        new_password1:
           type: string
-          readOnly: true
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
       required:
-      - detail
-    PatchedUserDetails:
+      - new_password1
+      - new_password2
+      - token
+      - uid
+    ApiLogin:
       type: object
-      description: User model w/o password
+      description: Deserializer for login credentials.
       properties:
-        pk:
-          type: integer
-          readOnly: true
-          title: ID
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
         email:
           type: string
           format: email
-          readOnly: true
-        first_name:
+        password:
           type: string
-          maxLength: 150
-        last_name:
-          type: string
-          maxLength: 150
+      required:
+      - email
+      - password
   securitySchemes:
     cookieAuth:
       type: apiKey

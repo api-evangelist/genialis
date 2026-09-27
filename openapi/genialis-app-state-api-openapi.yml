@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: Genialis base App State API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: App State
+paths:
+  /api/app-state:
+    post:
+      operationId: api_app_state_create
+      description: API view for :class:`AppState` objects.
+      tags:
+      - App State
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppState'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AppState'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AppState'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppState'
+          description: ''
+      summary: Api app state create
+      x-summary-source: derived
+  /api/app-state/{uuid}:
+    get:
+      operationId: api_app_state_retrieve
+      description: API view for :class:`AppState` objects.
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this app state.
+        required: true
+      tags:
+      - App State
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppState'
+          description: ''
+      summary: Api app state retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    AppState:
+      type: object
+      description: Serializer for :class:`AppState` objects.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        state: {}
+        contributor:
+          type: integer
+      required:
+      - contributor
+      - state
+      - uuid
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

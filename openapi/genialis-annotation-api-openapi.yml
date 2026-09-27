@@ -1,0 +1,108 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Annotation API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Annotation
+paths:
+  /api/annotation:
+    get:
+      operationId: api_annotation_retrieve
+      description: 'Download annotation template.
+
+
+        If ``dry_run`` parameter is present, then empty response will be returned.'
+      parameters:
+      - in: query
+        name: annotation_type
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: collection_ids
+        schema:
+          type: array
+          items:
+            type: integer
+      - in: query
+        name: dry_run
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: sample_ids
+        schema:
+          type: array
+          items:
+            type: integer
+      tags:
+      - Annotation
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+      summary: Api annotation retrieve
+      x-summary-source: derived
+    post:
+      operationId: api_annotation_create
+      description: Annotate using uploaded annotation file.
+      tags:
+      - Annotation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationUploadDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnnotationUploadDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnnotationUploadDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationUpload'
+          description: ''
+      summary: Api annotation create
+      x-summary-source: derived
+components:
+  schemas:
+    AnnotationUpload:
+      type: object
+      description: Serializer for the response when uploading an annotation file.
+      properties:
+        annotated_samples:
+          type: array
+          items:
+            type: integer
+      required:
+      - annotated_samples
+    AnnotationUploadDeserializer:
+      type: object
+      description: Deserializer for request data when uploading an annotation file.
+      properties:
+        annotation_type:
+          type: string
+        annotation_file:
+          type: string
+          format: uri
+      required:
+      - annotation_file
+      - annotation_type
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

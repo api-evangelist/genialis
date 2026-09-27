@@ -1,0 +1,1503 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Variant Calls API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Variant Calls
+paths:
+  /api/variant_calls:
+    get:
+      operationId: api_variant_calls_list
+      description: 'VariantCall endpoint.
+
+
+        The default filter backends are used so permissions are respected.'
+      parameters:
+      - in: query
+        name: alternative_allele_depth
+        schema:
+          type: integer
+      - in: query
+        name: alternative_allele_depth__gt
+        schema:
+          type: integer
+      - in: query
+        name: alternative_allele_depth__gte
+        schema:
+          type: integer
+      - in: query
+        name: alternative_allele_depth__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: alternative_allele_depth__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: alternative_allele_depth__lt
+        schema:
+          type: integer
+      - in: query
+        name: alternative_allele_depth__lte
+        schema:
+          type: integer
+      - in: query
+        name: data
+        schema:
+          type: integer
+      - in: query
+        name: data__build
+        schema:
+          type: string
+      - in: query
+        name: data__collection
+        schema:
+          type: integer
+      - in: query
+        name: data__collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__collection__name
+        schema:
+          type: string
+      - in: query
+        name: data__collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: data__collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: data__collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: data__collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: data__collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: data__collection__slug
+        schema:
+          type: string
+      - in: query
+        name: data__collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__contributor
+        schema:
+          type: integer
+      - in: query
+        name: data__contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__contributor_name
+        schema:
+          type: string
+      - in: query
+        name: data__created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data__created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: data__entity
+        schema:
+          type: integer
+      - in: query
+        name: data__entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__entity__name
+        schema:
+          type: string
+      - in: query
+        name: data__entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: data__entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: data__entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: data__entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: data__entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: data__entity__slug
+        schema:
+          type: string
+      - in: query
+        name: data__entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__feature_type
+        schema:
+          type: string
+      - in: query
+        name: data__finished
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__finished__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data__finished__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__finished__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__finished__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__finished__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__finished__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__finished__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: data__group
+        schema:
+          type: string
+      - in: query
+        name: data__gt
+        schema:
+          type: integer
+      - in: query
+        name: data__gte
+        schema:
+          type: integer
+      - in: query
+        name: data__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__lt
+        schema:
+          type: integer
+      - in: query
+        name: data__lte
+        schema:
+          type: integer
+      - in: query
+        name: data__modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data__modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: data__name
+        schema:
+          type: string
+      - in: query
+        name: data__name__contains
+        schema:
+          type: string
+      - in: query
+        name: data__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: data__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: data__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: data__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: data__owners
+        schema:
+          type: integer
+      - in: query
+        name: data__owners_name
+        schema:
+          type: string
+      - in: query
+        name: data__permission
+        schema:
+          type: string
+      - in: query
+        name: data__process
+        schema:
+          type: integer
+      - in: query
+        name: data__process__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__process__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__process__name
+        schema:
+          type: string
+      - in: query
+        name: data__process__name__contains
+        schema:
+          type: string
+      - in: query
+        name: data__process__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: data__process__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: data__process__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__process__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__process__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: data__process__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: data__process__slug
+        schema:
+          type: string
+      - in: query
+        name: data__process__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__relation_id
+        schema:
+          type: number
+      - in: query
+        name: data__shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: data__slug
+        schema:
+          type: string
+      - in: query
+        name: data__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__source
+        schema:
+          type: string
+      - in: query
+        name: data__species
+        schema:
+          type: string
+      - in: query
+        name: data__started
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__started__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data__started__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__started__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__started__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__started__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__started__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__started__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: data__status
+        schema:
+          type: string
+          enum:
+          - DR
+          - ER
+          - OK
+          - PP
+          - PR
+          - RE
+          - UP
+          - WT
+        description: '* `UP` - Uploading
+
+          * `RE` - Resolving
+
+          * `WT` - Waiting
+
+          * `PP` - Preparing
+
+          * `PR` - Processing
+
+          * `OK` - Done
+
+          * `ER` - Error
+
+          * `DR` - Dirty'
+      - in: query
+        name: data__status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__type
+        schema:
+          type: string
+      - in: query
+        name: data__type__exact
+        schema:
+          type: string
+      - in: query
+        name: data__version
+        schema:
+          type: string
+      - in: query
+        name: data__version__gt
+        schema:
+          type: string
+      - in: query
+        name: data__version__gte
+        schema:
+          type: string
+      - in: query
+        name: data__version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: data__version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: data__version__lt
+        schema:
+          type: string
+      - in: query
+        name: data__version__lte
+        schema:
+          type: string
+      - in: query
+        name: depth
+        schema:
+          type: integer
+      - in: query
+        name: depth__gt
+        schema:
+          type: integer
+      - in: query
+        name: depth__gte
+        schema:
+          type: integer
+      - in: query
+        name: depth__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: depth__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: depth__lt
+        schema:
+          type: integer
+      - in: query
+        name: depth__lte
+        schema:
+          type: integer
+      - in: query
+        name: depth_norm_quality
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: depth_norm_quality__gt
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: depth_norm_quality__gte
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: depth_norm_quality__in
+        schema:
+          type: array
+          items:
+            type: number
+            format: float
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: depth_norm_quality__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: depth_norm_quality__lt
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: depth_norm_quality__lte
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: experiment
+        schema:
+          type: integer
+      - in: query
+        name: experiment__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: experiment__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: filter
+        schema:
+          type: string
+      - in: query
+        name: filter__contains
+        schema:
+          type: string
+      - in: query
+        name: filter__icontains
+        schema:
+          type: string
+      - in: query
+        name: filter__iexact
+        schema:
+          type: string
+      - in: query
+        name: filter__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: filter__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: filter__istartswith
+        schema:
+          type: string
+      - in: query
+        name: filter__startswith
+        schema:
+          type: string
+      - in: query
+        name: genotype
+        schema:
+          type: string
+      - in: query
+        name: genotype__contains
+        schema:
+          type: string
+      - in: query
+        name: genotype__icontains
+        schema:
+          type: string
+      - in: query
+        name: genotype__iexact
+        schema:
+          type: string
+      - in: query
+        name: genotype__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: genotype__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: genotype__istartswith
+        schema:
+          type: string
+      - in: query
+        name: genotype__startswith
+        schema:
+          type: string
+      - in: query
+        name: genotype_quality
+        schema:
+          type: integer
+      - in: query
+        name: genotype_quality__gt
+        schema:
+          type: integer
+      - in: query
+        name: genotype_quality__gte
+        schema:
+          type: integer
+      - in: query
+        name: genotype_quality__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: genotype_quality__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: genotype_quality__lt
+        schema:
+          type: integer
+      - in: query
+        name: genotype_quality__lte
+        schema:
+          type: integer
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: quality
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: quality__gt
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: quality__gte
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: quality__in
+        schema:
+          type: array
+          items:
+            type: number
+            format: float
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: quality__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: quality__lt
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: quality__lte
+        schema:
+          type: number
+          format: float
+      - in: query
+        name: sample
+        schema:
+          type: integer
+      - in: query
+        name: sample__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: sample__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: sample__slug
+        schema:
+          type: string
+      - in: query
+        name: sample__slug__contains
+        schema:
+          type: string
+      - in: query
+        name: sample__slug__icontains
+        schema:
+          type: string
+      - in: query
+        name: sample__slug__iexact
+        schema:
+          type: string
+      - in: query
+        name: sample__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: sample__slug__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: sample__slug__istartswith
+        schema:
+          type: string
+      - in: query
+        name: sample__slug__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant
+        schema:
+          type: integer
+      - in: query
+        name: variant__alternative
+        schema:
+          type: string
+      - in: query
+        name: variant__alternative__contains
+        schema:
+          type: string
+      - in: query
+        name: variant__alternative__icontains
+        schema:
+          type: string
+      - in: query
+        name: variant__alternative__iexact
+        schema:
+          type: string
+      - in: query
+        name: variant__alternative__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__alternative__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__alternative__istartswith
+        schema:
+          type: string
+      - in: query
+        name: variant__alternative__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome__contains
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome__icontains
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome__iexact
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__chromosome__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__chromosome__istartswith
+        schema:
+          type: string
+      - in: query
+        name: variant__chromosome__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly__contains
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly__icontains
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly__iexact
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__genome_assembly__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__genome_assembly__istartswith
+        schema:
+          type: string
+      - in: query
+        name: variant__genome_assembly__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__position
+        schema:
+          type: integer
+      - in: query
+        name: variant__position__gt
+        schema:
+          type: integer
+      - in: query
+        name: variant__position__gte
+        schema:
+          type: integer
+      - in: query
+        name: variant__position__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__position__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__position__lt
+        schema:
+          type: integer
+      - in: query
+        name: variant__position__lte
+        schema:
+          type: integer
+      - in: query
+        name: variant__reference
+        schema:
+          type: string
+      - in: query
+        name: variant__reference__contains
+        schema:
+          type: string
+      - in: query
+        name: variant__reference__icontains
+        schema:
+          type: string
+      - in: query
+        name: variant__reference__iexact
+        schema:
+          type: string
+      - in: query
+        name: variant__reference__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__reference__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__reference__istartswith
+        schema:
+          type: string
+      - in: query
+        name: variant__reference__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant__species
+        schema:
+          type: string
+      - in: query
+        name: variant__species__contains
+        schema:
+          type: string
+      - in: query
+        name: variant__species__icontains
+        schema:
+          type: string
+      - in: query
+        name: variant__species__iexact
+        schema:
+          type: string
+      - in: query
+        name: variant__species__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__species__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: variant__species__istartswith
+        schema:
+          type: string
+      - in: query
+        name: variant__species__startswith
+        schema:
+          type: string
+      tags:
+      - Variant Calls
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVariantCallList'
+          description: ''
+      summary: Api variant calls list
+      x-summary-source: derived
+    post:
+      operationId: api_variant_calls_create
+      description: Create a resource.
+      tags:
+      - Variant Calls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariantCall'
+          description: ''
+      summary: Api variant calls create
+      x-summary-source: derived
+  /api/variant_calls/{id}:
+    put:
+      operationId: api_variant_calls_update
+      description: 'VariantCall endpoint.
+
+
+        The default filter backends are used so permissions are respected.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this variant call.
+        required: true
+      tags:
+      - Variant Calls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VariantCall'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariantCall'
+          description: ''
+      summary: Api variant calls update
+      x-summary-source: derived
+    patch:
+      operationId: api_variant_calls_partial_update
+      description: 'VariantCall endpoint.
+
+
+        The default filter backends are used so permissions are respected.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this variant call.
+        required: true
+      tags:
+      - Variant Calls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVariantCall'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVariantCall'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVariantCall'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariantCall'
+          description: ''
+      summary: Api variant calls partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_variant_calls_destroy
+      description: 'VariantCall endpoint.
+
+
+        The default filter backends are used so permissions are respected.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this variant call.
+        required: true
+      tags:
+      - Variant Calls
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api variant calls destroy
+      x-summary-source: derived
+components:
+  schemas:
+    PaginatedVariantCallList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantCall'
+    PatchedVariantCall:
+      type: object
+      description: Serializer for VariantCall objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        sample:
+          type: integer
+        variant:
+          type:
+          - integer
+          - 'null'
+        experiment:
+          type:
+          - integer
+          - 'null'
+        data:
+          type:
+          - integer
+          - 'null'
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        genotype_quality:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth_norm_quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        alternative_allele_depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        filter:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        genotype:
+          type:
+          - string
+          - 'null'
+          maxLength: 3
+    VariantCall:
+      type: object
+      description: Serializer for VariantCall objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        sample:
+          type: integer
+        variant:
+          type:
+          - integer
+          - 'null'
+        experiment:
+          type:
+          - integer
+          - 'null'
+        data:
+          type:
+          - integer
+          - 'null'
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        genotype_quality:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth_norm_quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        alternative_allele_depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        filter:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        genotype:
+          type:
+          - string
+          - 'null'
+          maxLength: 3
+      required:
+      - id
+      - sample
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

@@ -1,0 +1,1012 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Basket API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Basket
+paths:
+  /api/basket:
+    post:
+      operationId: api_basket_create
+      description: API view for all basket operations.
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Basket'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+      summary: Api basket create
+      x-summary-source: derived
+  /api/basket/{id}:
+    get:
+      operationId: api_basket_retrieve
+      description: API view for all basket operations.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+      summary: Api basket retrieve
+      x-summary-source: derived
+  /api/basket/{id}/add_samples:
+    post:
+      operationId: api_basket_add_samples_create
+      description: Add samples to basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketAddSamplesDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketAddSamplesDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketAddSamplesDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketAddSamples'
+          description: ''
+      summary: Api basket add samples create
+      x-summary-source: derived
+  /api/basket/{id}/breadcrumbs:
+    get:
+      operationId: api_basket_breadcrumbs_list
+      description: Provide an observable list of breadcrumbs in a basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBasketBreadcrumbList'
+          description: ''
+      summary: Api basket breadcrumbs list
+      x-summary-source: derived
+  /api/basket/{id}/clone:
+    post:
+      operationId: api_basket_clone_create
+      description: Clone the basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketClone'
+          description: ''
+      summary: Api basket clone create
+      x-summary-source: derived
+  /api/basket/{id}/data_types:
+    get:
+      operationId: api_basket_data_types_retrieve
+      description: Provide a list of unique data types in a basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketDataTypes'
+          description: ''
+      summary: Api basket data types retrieve
+      x-summary-source: derived
+  /api/basket/{id}/deselect_samples:
+    post:
+      operationId: api_basket_deselect_samples_create
+      description: Deselect samples.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket deselect samples create
+      x-summary-source: derived
+  /api/basket/{id}/empty_basket:
+    post:
+      operationId: api_basket_empty_basket_create
+      description: Remove samples from the basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket empty basket create
+      x-summary-source: derived
+  /api/basket/{id}/make_read_only:
+    post:
+      operationId: api_basket_make_read_only_create
+      description: Make the basket read-only.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket make read only create
+      x-summary-source: derived
+  /api/basket/{id}/organisms:
+    get:
+      operationId: api_basket_organisms_list
+      description: Provide an observable list of organisms in a basket.
+      parameters:
+      - in: query
+        name: annotation_version
+        schema:
+          enum:
+          - v2
+          type: string
+          default: v2
+          minLength: 1
+        description: '* `v2` - v2'
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBasketOrganismList'
+          description: ''
+      summary: Api basket organisms list
+      x-summary-source: derived
+  /api/basket/{id}/remove_samples:
+    post:
+      operationId: api_basket_remove_samples_create
+      description: Remove samples.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket remove samples create
+      x-summary-source: derived
+  /api/basket/{id}/remove_selected_samples:
+    post:
+      operationId: api_basket_remove_selected_samples_create
+      description: Remove selected samples.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket remove selected samples create
+      x-summary-source: derived
+  /api/basket/{id}/sample_count:
+    get:
+      operationId: api_basket_sample_count_retrieve
+      description: Provide an observable number of samples in a basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketSampleCount'
+          description: ''
+      summary: Api basket sample count retrieve
+      x-summary-source: derived
+  /api/basket/{id}/samples:
+    get:
+      operationId: api_basket_samples_list
+      description: Provide an observable list of samples in a basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSampleInBasketList'
+          description: ''
+      summary: Api basket samples list
+      x-summary-source: derived
+  /api/basket/{id}/select_all_samples:
+    post:
+      operationId: api_basket_select_all_samples_create
+      description: Select all samples.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket select all samples create
+      x-summary-source: derived
+  /api/basket/{id}/select_samples:
+    post:
+      operationId: api_basket_select_samples_create
+      description: Select samples.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      tags:
+      - Basket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketSubset'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketMutation'
+          description: ''
+      summary: Api basket select samples create
+      x-summary-source: derived
+  /api/basket/{id}/sources:
+    get:
+      operationId: api_basket_sources_list
+      description: Provide an observable list of sources in a basket.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this sample basket.
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Basket
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBasketSourceList'
+          description: ''
+      summary: Api basket sources list
+      x-summary-source: derived
+components:
+  schemas:
+    BasketMutation:
+      type: object
+      description: Basket update serializer.
+      properties:
+        id:
+          type: string
+        modified:
+          type: string
+          format: date-time
+      required:
+      - id
+      - modified
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    Entity:
+      type: object
+      description: Serializer for Entity with added collection field.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        data_count:
+          type: integer
+          description: Return number of data objects on the collection.
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        description:
+          type: string
+        name:
+          type: string
+        settings: {}
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        collection:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        type:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+      required:
+      - contributor
+      - created
+      - data_count
+      - duplicated
+      - id
+      - modified
+      - status
+    PaginatedSampleInBasketList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleInBasket'
+    BasketSource:
+      type: object
+      description: Basket source list serializer.
+      properties:
+        source:
+          type: string
+      required:
+      - source
+    BasketSubset:
+      type: object
+      description: Basket serializer where a subset of samples is selected.
+      properties:
+        samples:
+          type: array
+          items:
+            type: integer
+          default: []
+    BasketDataTypes:
+      type: object
+      description: Basket data types serializer.
+      properties:
+        data_types:
+          type: array
+          items:
+            type: string
+      required:
+      - data_types
+    SampleInBasket:
+      type: object
+      description: SampleInBasket serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        selected:
+          type: boolean
+        sample:
+          $ref: '#/components/schemas/Entity'
+        breadcrumb:
+          $ref: '#/components/schemas/BasketBreadcrumb'
+      required:
+      - breadcrumb
+      - id
+      - sample
+    PaginatedBasketOrganismList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketOrganism'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+    PaginatedBasketSourceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketSource'
+    PaginatedBasketBreadcrumbList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketBreadcrumb'
+    Basket:
+      type: object
+      description: Serializer for :class:`SampleInBasket` objects.
+      properties:
+        name:
+          type: string
+        read_only:
+          type: boolean
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - contributor
+      - created
+      - id
+      - modified
+    BasketAddSamples:
+      type: object
+      description: Basket add samples serializer.
+      properties:
+        id:
+          type: string
+        modified:
+          type: string
+          format: date-time
+        ignored:
+          type: array
+          items:
+            type: integer
+        duplicated:
+          type: array
+          items:
+            type: integer
+        permitted_organisms:
+          type: array
+          items:
+            type: string
+        permitted_sources:
+          type: array
+          items:
+            type: string
+        conflict_organisms:
+          type: array
+          items:
+            type: string
+        conflict_sources:
+          type: array
+          items:
+            type: string
+      required:
+      - conflict_organisms
+      - conflict_sources
+      - duplicated
+      - id
+      - ignored
+      - modified
+      - permitted_organisms
+      - permitted_sources
+    AnnotationVersionEnum:
+      enum:
+      - v2
+      type: string
+      description: '* `v2` - v2'
+    BasketOrganism:
+      type: object
+      description: Basket organism list serializer.
+      properties:
+        organism:
+          type: string
+      required:
+      - organism
+    BasketClone:
+      type: object
+      description: Basket clone serializer.
+      properties:
+        id:
+          type: string
+        modified:
+          type: string
+          format: date-time
+        removed_samples:
+          type: boolean
+      required:
+      - id
+      - modified
+      - removed_samples
+    BasketSampleCount:
+      type: object
+      description: Basket sample count serializer.
+      properties:
+        sampleCount:
+          type: integer
+      required:
+      - sampleCount
+    BasketAddSamplesDeserializer:
+      type: object
+      description: Basket add samples deserializer.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        only_existing_organism:
+          type: boolean
+          default: false
+        breadcrumb: {}
+        samples:
+          type: array
+          items:
+            type: integer
+      required:
+      - samples
+    BasketBreadcrumb:
+      type: object
+      description: SampleBasketBreadcrumb serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        data: {}
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

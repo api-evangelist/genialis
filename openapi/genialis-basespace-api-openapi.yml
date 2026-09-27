@@ -1,0 +1,524 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Basespace API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Basespace
+paths:
+  /api/basespace/callback:
+    get:
+      operationId: api_basespace_callback_retrieve
+      description: Get request handler.
+      parameters:
+      - in: query
+        name: code
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: error
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: error_description
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: state
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: ''
+      summary: Api basespace callback retrieve
+      x-summary-source: derived
+  /api/basespace/current_user:
+    get:
+      operationId: api_basespace_current_user_retrieve
+      description: Return currently logged in BaseSpace user.
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseSpaceUser'
+          description: ''
+      summary: Api basespace current user retrieve
+      x-summary-source: derived
+  /api/basespace/files:
+    get:
+      operationId: api_basespace_files_retrieve
+      description: 'Return samples''s files.
+
+
+        Request parameters:
+
+        - limit (optional): the maximum number of items to return. Range: 0-1000. Default is 10.
+
+        - offset (optional): The starting point of the collection to read. Default is 0.
+
+        - sort_by (optional): The field to use for sorting. Can be ''id'', or ''datecreated''. Default is ''id''.
+
+        - sort_dir (optional): The way to sort the collection. Can be ''asc'' or ''desc''. Default is ''asc''.'
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 10
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      - in: query
+        name: sample_id
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: sort_by
+        schema:
+          type: string
+          default: id
+          minLength: 1
+      - in: query
+        name: sort_dir
+        schema:
+          type: string
+          default: asc
+          minLength: 1
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Files'
+          description: ''
+      summary: Api basespace files retrieve
+      x-summary-source: derived
+  /api/basespace/logout_url:
+    get:
+      operationId: api_basespace_logout_url_retrieve
+      description: Return URL to be used to logout BaseSpace user.
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+          description: ''
+      summary: Api basespace logout url retrieve
+      x-summary-source: derived
+  /api/basespace/oauth_browse_url:
+    get:
+      operationId: api_basespace_oauth_browse_url_retrieve
+      description: Return URL to be used when requesting BaseSpace OAuth browse permissions.
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+          description: ''
+      summary: Api basespace oauth browse url retrieve
+      x-summary-source: derived
+  /api/basespace/oauth_read_projects_url:
+    get:
+      operationId: api_basespace_oauth_read_projects_url_retrieve
+      description: 'Return URL to be used when requesting BaseSpace OAuth read projects permissions.
+
+
+        Request parameters:
+
+        - project_ids: list of project ids'
+      parameters:
+      - in: query
+        name: project_ids
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+          description: ''
+      summary: Api basespace oauth read projects url retrieve
+      x-summary-source: derived
+  /api/basespace/projects:
+    get:
+      operationId: api_basespace_projects_retrieve
+      description: 'Return user''s projects.
+
+
+        Request parameters:
+
+        - limit (optional): the maximum number of items to return. Range: 0-1024. Default is 10.
+
+        - offset (optional): The starting point of the collection to read. Default is 0.
+
+        - sort_by (optional): The field to use for sotring. Can be ''id'', ''name'', or ''datecreated''. Default is ''id''.
+
+        - sort_dir (optional): The way to sort the collection. Can be ''asc'' or ''desc''. Default is ''asc''.'
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 10
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      - in: query
+        name: sort_by
+        schema:
+          type: string
+          default: id
+          minLength: 1
+      - in: query
+        name: sort_dir
+        schema:
+          type: string
+          default: asc
+          minLength: 1
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Projects'
+          description: ''
+      summary: Api basespace projects retrieve
+      x-summary-source: derived
+  /api/basespace/read_projects_handle:
+    get:
+      operationId: api_basespace_read_projects_handle_retrieve
+      description: 'Return access token secret handle to read BaseSpace projects.
+
+
+        Request parameters:
+
+        - project_ids: list of project ids'
+      parameters:
+      - in: query
+        name: project_ids
+        schema:
+          type: array
+          items:
+            type: string
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Handle'
+          description: ''
+      summary: Api basespace read projects handle retrieve
+      x-summary-source: derived
+  /api/basespace/revoke_browse_access:
+    post:
+      operationId: api_basespace_revoke_browse_access_create
+      description: Delete user's BaseSpace browse token.
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+      summary: Api basespace revoke browse access create
+      x-summary-source: derived
+  /api/basespace/samples:
+    get:
+      operationId: api_basespace_samples_retrieve
+      description: 'Return projects''s samples.
+
+
+        Request parameters:
+
+        - limit (optional): the maximum number of items to return. Range: 0-1024. Default is 10.
+
+        - offset (optional): The starting point of the collection to read. Default is 0.
+
+        - sort_by (optional): The field to use for sorting. Can be ''Id'', ''name'', or ''datecreated''. Default is ''id''.
+
+        - sort_dir (optional): The way to sort the collection. Can be ''asc'' or ''desc''. Default is ''asc''.'
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 10
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+      - in: query
+        name: project_id
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: sort_by
+        schema:
+          type: string
+          default: id
+          minLength: 1
+      - in: query
+        name: sort_dir
+        schema:
+          type: string
+          default: asc
+          minLength: 1
+      tags:
+      - Basespace
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseSpaceSamples'
+          description: ''
+      summary: Api basespace samples retrieve
+      x-summary-source: derived
+  /api/basespace/subscribe:
+    post:
+      operationId: api_basespace_subscribe_create
+      description: Register an Observer for a resource.
+      tags:
+      - Basespace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObserverSubscription'
+          description: ''
+      summary: Api basespace subscribe create
+      x-summary-source: derived
+  /api/basespace/unsubscribe:
+    post:
+      operationId: api_basespace_unsubscribe_create
+      description: Unregister a subscription.
+      tags:
+      - Basespace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+      summary: Api basespace unsubscribe create
+      x-summary-source: derived
+components:
+  schemas:
+    Handle:
+      type: object
+      description: Handle serializer.
+      properties:
+        handle:
+          type: string
+          format: uuid
+    Url:
+      type: object
+      description: BaseSpace url serializer.
+      properties:
+        url:
+          type: string
+          format: uri
+      required:
+      - url
+    BaseSpaceSamples:
+      type: object
+      description: BaseSpace samples serializer.
+      properties:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseSpaceSample'
+    ObserverSubscription:
+      type: object
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
+    Project:
+      type: object
+      description: BaseSpace project entity serializer.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+    Files:
+      type: object
+      description: BaseSpace files serializer.
+      properties:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    BaseSpaceSample:
+      type: object
+      description: BaseSpace sample entity serializer.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        is_paired_end:
+          type: boolean
+      required:
+      - id
+      - is_paired_end
+      - name
+    Projects:
+      type: object
+      description: BaseSpace projects serializer.
+      properties:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    File:
+      type: object
+      description: BaseSpace file entity serializer.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+    BaseSpaceUser:
+      type: object
+      description: BaseSpace user serializer.
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

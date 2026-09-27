@@ -1,0 +1,865 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Kb API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Kb
+paths:
+  /api/kb/feature:
+    get:
+      operationId: api_kb_feature_list
+      description: 'Endpoint used for feature search.
+
+
+        Request:
+
+        - query
+
+        - source
+
+        - species
+
+        - type
+
+        - feature_id
+
+
+        Response:
+
+        - a list of matching features'
+      parameters:
+      - in: query
+        name: feature_id
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: feature_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: species
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - exon
+          - gene
+          - probe
+          - transcript
+        description: '* `gene` - Gene
+
+          * `transcript` - Transcript
+
+          * `exon` - Exon
+
+          * `probe` - Probe'
+      tags:
+      - Kb
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFeatureList'
+          description: ''
+      summary: Api kb feature list
+      x-summary-source: derived
+    post:
+      operationId: api_kb_feature_create
+      description: Endpoint handler.
+      tags:
+      - Kb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Feature'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+          description: ''
+      summary: Api kb feature create
+      x-summary-source: derived
+  /api/kb/feature/paste:
+    post:
+      operationId: api_kb_feature_paste_create
+      description: Endpoint used for exactly matching pasted genes.
+      tags:
+      - Kb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Feature'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+          description: ''
+      summary: Api kb feature paste create
+      x-summary-source: derived
+  /api/kb/feature/search:
+    get:
+      operationId: api_kb_feature_search_list
+      description: 'Endpoint used for feature search.
+
+
+        Request:
+
+        - query
+
+        - source
+
+        - species
+
+        - type
+
+        - feature_id
+
+
+        Response:
+
+        - a list of matching features'
+      parameters:
+      - in: query
+        name: feature_id
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: feature_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: query
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: species
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - exon
+          - gene
+          - probe
+          - transcript
+        description: '* `gene` - Gene
+
+          * `transcript` - Transcript
+
+          * `exon` - Exon
+
+          * `probe` - Probe'
+      tags:
+      - Kb
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFeatureList'
+          description: ''
+      summary: Api kb feature search list
+      x-summary-source: derived
+    post:
+      operationId: api_kb_feature_search_create
+      description: Endpoint handler.
+      tags:
+      - Kb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Feature'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+          description: ''
+      summary: Api kb feature search create
+      x-summary-source: derived
+  /api/kb/feature/search/paste:
+    post:
+      operationId: api_kb_feature_search_paste_create
+      description: Endpoint used for exactly matching pasted genes.
+      tags:
+      - Kb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Feature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Feature'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+          description: ''
+      summary: Api kb feature search paste create
+      x-summary-source: derived
+  /api/kb/mapping/search:
+    get:
+      operationId: api_kb_mapping_search_list
+      description: 'Endpoint used for mapping search.
+
+
+        Request:
+
+        - source_id
+
+        - source_db
+
+        - source_species
+
+        - target_id
+
+        - target_db
+
+        - target_species
+
+        - relation_type
+
+
+        Response:
+
+        - a list of matching mappings'
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: source_db
+        schema:
+          type: string
+      - in: query
+        name: source_db__contains
+        schema:
+          type: string
+      - in: query
+        name: source_db__icontains
+        schema:
+          type: string
+      - in: query
+        name: source_db__iexact
+        schema:
+          type: string
+      - in: query
+        name: source_db__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source_db__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: source_db__istartswith
+        schema:
+          type: string
+      - in: query
+        name: source_db__startswith
+        schema:
+          type: string
+      - in: query
+        name: source_id
+        schema:
+          type: string
+      - in: query
+        name: source_id__contains
+        schema:
+          type: string
+      - in: query
+        name: source_id__icontains
+        schema:
+          type: string
+      - in: query
+        name: source_id__iexact
+        schema:
+          type: string
+      - in: query
+        name: source_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source_id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: source_id__istartswith
+        schema:
+          type: string
+      - in: query
+        name: source_id__startswith
+        schema:
+          type: string
+      - in: query
+        name: source_species
+        schema:
+          type: string
+      - in: query
+        name: source_species__contains
+        schema:
+          type: string
+      - in: query
+        name: source_species__icontains
+        schema:
+          type: string
+      - in: query
+        name: source_species__iexact
+        schema:
+          type: string
+      - in: query
+        name: source_species__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source_species__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: source_species__istartswith
+        schema:
+          type: string
+      - in: query
+        name: source_species__startswith
+        schema:
+          type: string
+      - in: query
+        name: target_db
+        schema:
+          type: string
+      - in: query
+        name: target_db__contains
+        schema:
+          type: string
+      - in: query
+        name: target_db__icontains
+        schema:
+          type: string
+      - in: query
+        name: target_db__iexact
+        schema:
+          type: string
+      - in: query
+        name: target_db__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: target_db__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: target_db__istartswith
+        schema:
+          type: string
+      - in: query
+        name: target_db__startswith
+        schema:
+          type: string
+      - in: query
+        name: target_id
+        schema:
+          type: string
+      - in: query
+        name: target_id__contains
+        schema:
+          type: string
+      - in: query
+        name: target_id__icontains
+        schema:
+          type: string
+      - in: query
+        name: target_id__iexact
+        schema:
+          type: string
+      - in: query
+        name: target_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: target_id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: target_id__istartswith
+        schema:
+          type: string
+      - in: query
+        name: target_id__startswith
+        schema:
+          type: string
+      - in: query
+        name: target_species
+        schema:
+          type: string
+      - in: query
+        name: target_species__contains
+        schema:
+          type: string
+      - in: query
+        name: target_species__icontains
+        schema:
+          type: string
+      - in: query
+        name: target_species__iexact
+        schema:
+          type: string
+      - in: query
+        name: target_species__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: target_species__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: target_species__istartswith
+        schema:
+          type: string
+      - in: query
+        name: target_species__startswith
+        schema:
+          type: string
+      tags:
+      - Kb
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMappingList'
+          description: ''
+      summary: Api kb mapping search list
+      x-summary-source: derived
+    post:
+      operationId: api_kb_mapping_search_create
+      description: Endpoint handler.
+      tags:
+      - Kb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mapping'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Mapping'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Mapping'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mapping'
+          description: ''
+      summary: Api kb mapping search create
+      x-summary-source: derived
+components:
+  schemas:
+    RelationTypeEnum:
+      enum:
+      - crossdb
+      - ortholog
+      - transcript
+      - exon
+      type: string
+      description: '* `crossdb` - Crossdb
+
+        * `ortholog` - Ortholog
+
+        * `transcript` - Transcript
+
+        * `exon` - Exon'
+    Mapping:
+      type: object
+      description: Serializer for mapping.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        relation_type:
+          $ref: '#/components/schemas/RelationTypeEnum'
+        source_db:
+          type: string
+          maxLength: 20
+        source_id:
+          type: string
+          maxLength: 50
+        source_species:
+          type: string
+          maxLength: 50
+        target_db:
+          type: string
+          maxLength: 20
+        target_id:
+          type: string
+          maxLength: 50
+        target_species:
+          type: string
+          maxLength: 50
+      required:
+      - id
+      - relation_type
+      - source_db
+      - source_id
+      - source_species
+      - target_db
+      - target_id
+      - target_species
+    PaginatedMappingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mapping'
+    FeatureTypeEnum:
+      enum:
+      - gene
+      - transcript
+      - exon
+      - probe
+      type: string
+      description: '* `gene` - Gene
+
+        * `transcript` - Transcript
+
+        * `exon` - Exon
+
+        * `probe` - Probe'
+    Feature:
+      type: object
+      description: Serializer for feature.
+      properties:
+        aliases:
+          type: array
+          items:
+            type: string
+            maxLength: 256
+        description:
+          type: string
+        feature_id:
+          type: string
+          maxLength: 50
+        full_name:
+          type: string
+          maxLength: 350
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 1024
+        source:
+          type: string
+          maxLength: 20
+        species:
+          type: string
+          maxLength: 50
+        sub_type:
+          $ref: '#/components/schemas/SubTypeEnum'
+        type:
+          $ref: '#/components/schemas/FeatureTypeEnum'
+      required:
+      - feature_id
+      - id
+      - name
+      - source
+      - species
+      - sub_type
+      - type
+    PaginatedFeatureList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+    SubTypeEnum:
+      enum:
+      - protein-coding
+      - pseudo
+      - rRNA
+      - ncRNA
+      - snRNA
+      - snoRNA
+      - tRNA
+      - asRNA
+      - other
+      - unknown
+      type: string
+      description: '* `protein-coding` - Protein-coding
+
+        * `pseudo` - Pseudo
+
+        * `rRNA` - rRNA
+
+        * `ncRNA` - ncRNA
+
+        * `snRNA` - snRNA
+
+        * `snoRNA` - snoRNA
+
+        * `tRNA` - tRNA
+
+        * `asRNA` - asRNA
+
+        * `other` - Other
+
+        * `unknown` - Unknown'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

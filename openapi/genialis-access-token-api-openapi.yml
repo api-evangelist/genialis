@@ -1,0 +1,516 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Accesstoken API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Access Token
+paths:
+  /api/accesstoken/data:
+    get:
+      operationId: api_accesstoken_data_list
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: description__contains
+        schema:
+          type: string
+      - in: query
+        name: description__icontains
+        schema:
+          type: string
+      - in: query
+        name: description__iexact
+        schema:
+          type: string
+      - in: query
+        name: description__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: description__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: description__istartswith
+        schema:
+          type: string
+      - in: query
+        name: description__startswith
+        schema:
+          type: string
+      - in: query
+        name: expires
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expires__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: expires__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expires__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expires__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: expires__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expires__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: expires__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: revoked
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: revoked__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: revoked__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: revoked__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: revoked__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: revoked__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: revoked__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: revoked__time
+        schema:
+          type: string
+          format: time
+      tags:
+      - Access Token
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDataAccessTokenList'
+          description: ''
+      summary: Api accesstoken data list
+      x-summary-source: derived
+    post:
+      operationId: api_accesstoken_data_create
+      description: Set current user, translate permissions and create token.
+      tags:
+      - Access Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataAccessTokenCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DataAccessTokenCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DataAccessTokenCreate'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAccessTokenCreate'
+          description: ''
+      summary: Api accesstoken data create
+      x-summary-source: derived
+  /api/accesstoken/data/{id}:
+    get:
+      operationId: api_accesstoken_data_retrieve
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this data access token.
+        required: true
+      tags:
+      - Access Token
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAccessToken'
+          description: ''
+      summary: Api accesstoken data retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_accesstoken_data_update
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this data access token.
+        required: true
+      tags:
+      - Access Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataAccessToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DataAccessToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DataAccessToken'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAccessToken'
+          description: ''
+      summary: Api accesstoken data update
+      x-summary-source: derived
+    patch:
+      operationId: api_accesstoken_data_partial_update
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this data access token.
+        required: true
+      tags:
+      - Access Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDataAccessToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDataAccessToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDataAccessToken'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAccessToken'
+          description: ''
+      summary: Api accesstoken data partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_accesstoken_data_destroy
+      description: API view for :class:`DescriptorSchema` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this data access token.
+        required: true
+      tags:
+      - Access Token
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api accesstoken data destroy
+      x-summary-source: derived
+components:
+  schemas:
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    DataAccessTokenCreate:
+      type: object
+      description: Serializer for creating ``DataAccessToken``.
+      properties:
+        description:
+          type: string
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        permissions:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        revoked:
+          type: string
+          format: date-time
+          readOnly: true
+        token:
+          type: string
+      required:
+      - created
+      - data
+      - permissions
+      - revoked
+      - user
+    DataAccessToken:
+      type: object
+      description: Serializer for ``DataAccessToken``.
+      properties:
+        description:
+          type: string
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        permissions:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        revoked:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - created
+      - data
+      - permissions
+      - revoked
+      - user
+    PatchedDataAccessToken:
+      type: object
+      description: Serializer for ``DataAccessToken``.
+      properties:
+        description:
+          type: string
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        permissions:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        revoked:
+          type: string
+          format: date-time
+          readOnly: true
+    PaginatedDataAccessTokenList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataAccessToken'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

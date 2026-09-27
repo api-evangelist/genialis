@@ -1,0 +1,67 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Upload Config API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Upload Config
+paths:
+  /api/upload_config:
+    get:
+      operationId: api_upload_config_retrieve_2
+      description: 'Return the JSON representing the upload configuration.
+
+
+        The returning object is JSON representation of the dictionary with the
+
+        following fields:
+
+
+        - type: the type of upload connector. Currently we
+
+        support ''LOCAL'', and ''S3'' connector types. Upload through server is
+
+        always supported.
+
+
+        - credentials: the dictionary representing the set of credentials that
+
+        are used to upload data. This dictionary is specific to connector
+
+        type and may be empty.'
+      tags:
+      - Upload Config
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadConfig'
+          description: ''
+      summary: Api upload config retrieve 2
+      x-summary-source: derived
+components:
+  schemas:
+    UploadConfig:
+      type: object
+      description: Serializer for upload configuration.
+      properties:
+        type:
+          type: string
+        config:
+          type: object
+          additionalProperties: {}
+      required:
+      - config
+      - type
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

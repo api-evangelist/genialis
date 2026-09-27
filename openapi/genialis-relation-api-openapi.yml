@@ -1,0 +1,642 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Relation API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Relation
+paths:
+  /api/relation:
+    get:
+      operationId: api_relation_list
+      description: API view for :class:`Relation` objects.
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+      - in: query
+        name: collection
+        schema:
+          type: integer
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: descriptor_schema
+        schema:
+          type: integer
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - Relation
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRelationList'
+          description: ''
+      summary: Api relation list
+      x-summary-source: derived
+    post:
+      operationId: api_relation_create
+      description: Create a resource.
+      tags:
+      - Relation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Relation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Relation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Relation'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relation'
+          description: ''
+      summary: Api relation create
+      x-summary-source: derived
+  /api/relation/{id}:
+    get:
+      operationId: api_relation_retrieve
+      description: API view for :class:`Relation` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this relation.
+        required: true
+      tags:
+      - Relation
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relation'
+          description: ''
+      summary: Api relation retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_relation_update
+      description: 'Update the ``Relation`` object.
+
+
+        Reject the update if user doesn''t have ``EDIT`` permission on
+
+        the collection referenced in the ``Relation``.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this relation.
+        required: true
+      tags:
+      - Relation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Relation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Relation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Relation'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relation'
+          description: ''
+      summary: Api relation update
+      x-summary-source: derived
+    patch:
+      operationId: api_relation_partial_update
+      description: API view for :class:`Relation` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this relation.
+        required: true
+      tags:
+      - Relation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRelation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRelation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRelation'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Relation'
+          description: ''
+      summary: Api relation partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_relation_destroy
+      description: 'Delete the ``Relation`` object.
+
+
+        Reject the delete if user doesn''t have ``EDIT`` permission on
+
+        the collection referenced in the ``Relation``.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this relation.
+        required: true
+      tags:
+      - Relation
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+      summary: Api relation destroy
+      x-summary-source: derived
+components:
+  schemas:
+    Relation:
+      type: object
+      description: Serializer for Relation objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        type:
+          type: string
+        collection:
+          $ref: '#/components/schemas/RelationshipDict'
+        category:
+          type: string
+          maxLength: 100
+        partitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationPartition'
+        slug:
+          type:
+          - string
+          - 'null'
+        unit:
+          oneOf:
+          - $ref: '#/components/schemas/UnitEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+      required:
+      - category
+      - collection
+      - contributor
+      - created
+      - descriptor_dirty
+      - id
+      - modified
+      - partitions
+      - type
+    UnitEnum:
+      enum:
+      - s
+      - min
+      - hr
+      - d
+      - wk
+      type: string
+      description: '* `s` - Second
+
+        * `min` - Minute
+
+        * `hr` - Hour
+
+        * `d` - Day
+
+        * `wk` - Week'
+    NullEnum:
+      enum:
+      - null
+    RelationPartition:
+      type: object
+      description: Serializer for RelationPartition objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        position:
+          type:
+          - integer
+          - 'null'
+          maximum: 32767
+          minimum: 0
+        label:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+      required:
+      - entity
+      - id
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    BlankEnum:
+      enum:
+      - ''
+    PaginatedRelationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+    PatchedRelation:
+      type: object
+      description: Serializer for Relation objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        type:
+          type: string
+        collection:
+          $ref: '#/components/schemas/RelationshipDict'
+        category:
+          type: string
+          maxLength: 100
+        partitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationPartition'
+        slug:
+          type:
+          - string
+          - 'null'
+        unit:
+          oneOf:
+          - $ref: '#/components/schemas/UnitEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

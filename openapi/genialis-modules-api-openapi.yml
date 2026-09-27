@@ -1,0 +1,4541 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Modules API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Modules
+paths:
+  /api/_modules/differential_expression/geneset_search:
+    get:
+      operationId: api__modules_differential_expression_geneset_search_list
+      description: 'View for geneset search endpoint.
+
+
+        This endpoint returns combined list of Data objects of type
+
+        ``data:differentialexpression:`` and ``data:geneset:``.
+
+
+        Endpoint supports:
+
+        * :drf:`Limit/Offset Pagination `
+
+        * filtering by list of genes (significant genes for differential
+
+        expression objects and list of included genes fot geneset objects)
+
+        * filtering differential expressions by basket ids provided in
+
+        ``filter_de_by_basket`` parameter
+
+        * same filtering as Data endpoint (~`resolwe.flow.views.DataViewSet`)
+
+        * ordering by ``-number_of_genes`` which is the default
+
+        * same ordering as Data endpoint (~`resolwe.flow.views.DataViewSet`)'
+      parameters:
+      - in: query
+        name: basket
+        schema:
+          type: integer
+      - in: query
+        name: build
+        schema:
+          type: string
+      - in: query
+        name: collection
+        schema:
+          type: integer
+      - in: query
+        name: collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name
+        schema:
+          type: string
+      - in: query
+        name: collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: collection__slug
+        schema:
+          type: string
+      - in: query
+        name: collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor_name
+        schema:
+          type: string
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity
+        schema:
+          type: integer
+      - in: query
+        name: entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name
+        schema:
+          type: string
+      - in: query
+        name: entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: feature_type
+        schema:
+          type: string
+      - in: query
+        name: filter_de_by_basket
+        schema:
+          type: integer
+      - in: query
+        name: finished
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: finished__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: finished__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: gene_ids
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: group
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: owners
+        schema:
+          type: integer
+      - in: query
+        name: owners_name
+        schema:
+          type: string
+      - in: query
+        name: permission
+        schema:
+          type: string
+      - in: query
+        name: process
+        schema:
+          type: integer
+      - in: query
+        name: process__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name
+        schema:
+          type: string
+      - in: query
+        name: process__name__contains
+        schema:
+          type: string
+      - in: query
+        name: process__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: process__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: process__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: process__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: process__slug
+        schema:
+          type: string
+      - in: query
+        name: process__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: relation_id
+        schema:
+          type: number
+      - in: query
+        name: shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: started
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: started__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: started__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - DR
+          - ER
+          - OK
+          - PP
+          - PR
+          - RE
+          - UP
+          - WT
+        description: '* `UP` - Uploading
+
+          * `RE` - Resolving
+
+          * `WT` - Waiting
+
+          * `PP` - Preparing
+
+          * `PR` - Processing
+
+          * `OK` - Done
+
+          * `ER` - Error
+
+          * `DR` - Dirty'
+      - in: query
+        name: status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+      - in: query
+        name: type__exact
+        schema:
+          type: string
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGenesetSearchSerializerWithPermissionsList'
+          description: ''
+      summary: Api modules differential expression geneset search list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_differential_expression_geneset_search_create
+      description: Get list by POST request.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenesetSearchSerializerWithPermissions'
+          description: ''
+      summary: Api modules differential expression geneset search create
+      x-summary-source: derived
+  /api/_modules/differential_expression/list:
+    get:
+      operationId: api__modules_differential_expression_list_list
+      description: 'Endpoint used for differential expression data.
+
+
+        Endpoint used for retrieving differential expression data objects
+
+        that derive from samples in the basket. Data objects contain some
+
+        additional fields that are being calculated on the database side.
+
+        Those additional fields are:
+
+        - logfc_threshold
+
+        - prob_field
+
+        - prob_threshold
+
+        - up_regulated
+
+        - down_regulated
+
+
+        Request accepts any standard filter for Data objects, plus:
+
+        - basket (optional)
+
+        - source (optional)
+
+        - species (optional)
+
+        - filter_de_by_basket (optional)
+
+
+        Response:
+
+        - a list of data objects with additional calculated fields'
+      parameters:
+      - in: query
+        name: basket
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: build
+        schema:
+          type: string
+      - in: query
+        name: collection
+        schema:
+          type: integer
+      - in: query
+        name: collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name
+        schema:
+          type: string
+      - in: query
+        name: collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: collection__slug
+        schema:
+          type: string
+      - in: query
+        name: collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor_name
+        schema:
+          type: string
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity
+        schema:
+          type: integer
+      - in: query
+        name: entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name
+        schema:
+          type: string
+      - in: query
+        name: entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: feature_type
+        schema:
+          type: string
+      - in: query
+        name: filter_de_by_basket
+        schema:
+          type: boolean
+      - in: query
+        name: finished
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: finished__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: finished__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: group
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: owners
+        schema:
+          type: integer
+      - in: query
+        name: owners_name
+        schema:
+          type: string
+      - in: query
+        name: permission
+        schema:
+          type: string
+      - in: query
+        name: process
+        schema:
+          type: integer
+      - in: query
+        name: process__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name
+        schema:
+          type: string
+      - in: query
+        name: process__name__contains
+        schema:
+          type: string
+      - in: query
+        name: process__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: process__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: process__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: process__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: process__slug
+        schema:
+          type: string
+      - in: query
+        name: process__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: relation_id
+        schema:
+          type: number
+      - in: query
+        name: shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type: string
+          minLength: 1
+      - in: query
+        name: started
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: started__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: started__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - DR
+          - ER
+          - OK
+          - PP
+          - PR
+          - RE
+          - UP
+          - WT
+        description: '* `UP` - Uploading
+
+          * `RE` - Resolving
+
+          * `WT` - Waiting
+
+          * `PP` - Preparing
+
+          * `PR` - Processing
+
+          * `OK` - Done
+
+          * `ER` - Error
+
+          * `DR` - Dirty'
+      - in: query
+        name: status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+      - in: query
+        name: type__exact
+        schema:
+          type: string
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDifferentialExpressionsSerializerWithPermissionsList'
+          description: ''
+      summary: Api modules differential expression list list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_differential_expression_list_create
+      description: Get list by POST request.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DifferentialExpressionsDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DifferentialExpressionsDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DifferentialExpressionsDeserializer'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DifferentialExpressionsSerializerWithPermissions'
+          description: ''
+      summary: Api modules differential expression list create
+      x-summary-source: derived
+  /api/_modules/gene_list/list:
+    get:
+      operationId: api__modules_gene_list_list_list
+      description: Return a response.
+      parameters:
+      - in: query
+        name: data
+        schema:
+          type: integer
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGeneListList'
+          description: ''
+      summary: Api modules gene list list list
+      x-summary-source: derived
+  /api/_modules/gene_list/list_by_ids:
+    get:
+      operationId: api__modules_gene_list_list_by_ids_list
+      description: 'View for gene list by ids endpoint.
+
+
+        This endpoint expects gene source and a list of gene ids and returns a list of features with
+
+        additional metadata from the knowledge base.
+
+
+        Endpoint supports LimitOffset pagination. When ''limit'' query parameter is provided, paginated
+
+        response is returned.'
+      parameters:
+      - in: query
+        name: gene_ids
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: source
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedGeneListList'
+          description: ''
+      summary: Api modules gene list list by ids list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_gene_list_list_by_ids_create
+      description: Return a response.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/GeneIds'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneList'
+          description: ''
+      summary: Api modules gene list list by ids create
+      x-summary-source: derived
+  /api/_modules/jbrowse/genome:
+    get:
+      operationId: api__modules_jbrowse_genome_list
+      description: Return JBrowse reference sequence.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: sample_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDataList'
+          description: ''
+      summary: Api modules jbrowse genome list
+      x-summary-source: derived
+  /api/_modules/process/list:
+    get:
+      operationId: api__modules_process_list_list
+      description: Process viewset which returns reduced number of process fields for faster response time.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProcessList'
+          description: ''
+      summary: Api modules process list list
+      x-summary-source: derived
+  /api/_modules/sample/table:
+    post:
+      operationId: api__modules_sample_table_create
+      description: Return samples with column values.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SampleTableDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SampleTableDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SampleTableDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      summary: Api modules sample table create
+      x-summary-source: derived
+  /api/_modules/species/collection:
+    get:
+      operationId: api__modules_species_collection_list
+      description: Return collections' species.
+      parameters:
+      - in: query
+        name: annotation_version
+        schema:
+          enum:
+          - v2
+          type: string
+          default: v2
+          minLength: 1
+        description: '* `v2` - v2'
+      - in: query
+        name: collection_ids
+        schema:
+          type: array
+          items:
+            type: integer
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCollectionSpeciesList'
+          description: ''
+      summary: Api modules species collection list
+      x-summary-source: derived
+  /api/_modules/visualizations/aggregated_expression_box_plot/get_last:
+    get:
+      operationId: api__modules_visualizations_aggregated_expression_box_plot_get_last_list
+      description: 'Return aggregations appropriate for box plot.
+
+
+        Aggregations are retrieved from last `data:aggregator:expression:`
+
+        data object. If `diff_expr_id` parameter is provided, the first two elements of
+
+        the response are aggregations from differential expression''s case and control
+
+        data objects.
+
+
+        Log transformation operation is log2(x + 1).
+
+
+        Request:
+
+        - feature symbol
+
+        - source
+
+        - species
+
+        - group by
+
+        - exp type
+
+        - optional: differential expression
+
+        - optional: log transform
+
+
+        Response:
+
+        - a list of aggregated expressions for box plot'
+      parameters:
+      - in: query
+        name: diff_expr_id
+        schema:
+          type:
+          - integer
+          - 'null'
+      - in: query
+        name: exp_type
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: gene_id
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: group_by
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: log_transform
+        schema:
+          type: boolean
+          default: false
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: source
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      - in: query
+        name: species
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAggregatedExpressionBoxPlotList'
+          description: ''
+      summary: Api modules visualizations aggregated expression box plot get last list
+      x-summary-source: derived
+  /api/_modules/visualizations/attributes:
+    post:
+      operationId: api__modules_visualizations_attributes_create
+      description: Attributes endpoint.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributesDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AttributesDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AttributesDeserializer'
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeList'
+          description: ''
+      summary: Api modules visualizations attributes create
+      x-summary-source: derived
+  /api/_modules/visualizations/attributify:
+    get:
+      operationId: api__modules_visualizations_attributify_list
+      description: 'Attributify endpoint.
+
+
+        Returns a minimal set of sample fields and an resolved attribute field specified
+
+        in the request. This can be used for visualizations to group samples
+
+        by an attribute.
+
+
+        The endpoint takes ``sample_ids`` or ``basket`` as a parameter where ``sample_ids``
+
+        takes precedence.'
+      parameters:
+      - in: query
+        name: annotation_version
+        schema:
+          enum:
+          - v2
+          type: string
+          default: v2
+          minLength: 1
+        description: '* `v2` - v2'
+      - in: query
+        name: attribute
+        schema: {}
+        required: true
+      - in: query
+        name: basket
+        schema:
+          type: string
+          format: uuid
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: sample_ids
+        schema:
+          type: array
+          items:
+            type: integer
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSampleList'
+          description: ''
+      summary: Api modules visualizations attributify list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_visualizations_attributify_create
+      description: Attributify endpoint.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttributifyDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AttributifyDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AttributifyDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sample'
+          description: ''
+      summary: Api modules visualizations attributify create
+      x-summary-source: derived
+  /api/_modules/visualizations/basket_expressions:
+    get:
+      operationId: api__modules_visualizations_basket_expressions_list
+      description: 'Endpoint for retrieving basket expressions.
+
+
+        Request:
+
+        - basket id
+
+        - tags (optional)
+
+
+        Response:
+
+        - a list of expressions'
+      parameters:
+      - in: query
+        name: basket
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBasketExpressionsList'
+          description: ''
+      summary: Api modules visualizations basket expressions list
+      x-summary-source: derived
+  /api/_modules/visualizations/case_control_expressions:
+    post:
+      operationId: api__modules_visualizations_case_control_expressions_create
+      description: Endpoint handler.
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseControlExpressionsDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CaseControlExpressionsDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CaseControlExpressionsDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseControlExpressions'
+          description: ''
+      summary: Api modules visualizations case control expressions create
+      x-summary-source: derived
+  /api/_modules/visualizations/expression_box_plot:
+    get:
+      operationId: api__modules_visualizations_expression_box_plot_list
+      description: 'Endpoint for box plot.
+
+
+        Statistics can be grouped by provided attribute or for each
+
+        given gene if no attribute provided.
+
+
+        Log transformation operation is log2(x + 1).
+
+
+        Request:
+
+        - basket id
+
+        - a list of gene ids
+
+        - source
+
+        - species
+
+        - optional: attribute the response is grouped by
+
+
+        Response:
+
+        - a list of aggregated statistics suitable for box plot'
+      parameters:
+      - in: query
+        name: annotation_version
+        schema:
+          enum:
+          - v2
+          type: string
+          default: v2
+          minLength: 1
+        description: '* `v2` - v2'
+      - in: query
+        name: attribute
+        schema:
+          type: object
+          additionalProperties: {}
+      - in: query
+        name: basket
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: query
+        name: gene_ids
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: source
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpressionBoxPlotList'
+          description: ''
+      summary: Api modules visualizations expression box plot list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_visualizations_expression_box_plot_create
+      description: Endpoint handler.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpressionBoxPlotDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExpressionBoxPlotDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExpressionBoxPlotDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpressionBoxPlotList'
+          description: ''
+      summary: Api modules visualizations expression box plot create
+      x-summary-source: derived
+  /api/_modules/visualizations/expressions:
+    get:
+      operationId: api__modules_visualizations_expressions_list
+      description: 'Endpoint for retrieving expressions for provided genes.
+
+
+        Request takes optional parameters: group_by and color_by which
+
+        are descriptor or relation attributes.
+
+
+        Request:
+
+        - basket id
+
+        - a list for gene ids
+
+        - source
+
+        - species
+
+        - optional: group_by (serialized ```DescriptorAttribute``` or ```RelationAttribute```)
+
+        - optional: color_by (same as group_by)
+
+
+        Response:
+
+        - a list of gene/expression/sample values'
+      parameters:
+      - in: query
+        name: annotation_version
+        schema:
+          enum:
+          - v2
+          type: string
+          default: v2
+          minLength: 1
+        description: '* `v2` - v2'
+      - in: query
+        name: basket
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: query
+        name: color_by
+        schema:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+      - in: query
+        name: gene_ids
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: group_by
+        schema:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: source
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpressionsList'
+          description: ''
+      summary: Api modules visualizations expressions list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_visualizations_expressions_create
+      description: Endpoint handler.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpressionsDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExpressionsDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExpressionsDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedExpressionsList'
+          description: ''
+      summary: Api modules visualizations expressions create
+      x-summary-source: derived
+  /api/_modules/visualizations/heatmap:
+    get:
+      operationId: api__modules_visualizations_heatmap_list
+      description: 'Endpoint used for heatmap visualization.
+
+
+        Request:
+
+        - gene_ids
+
+        - source
+
+        - species
+
+        - sample_ids
+
+
+        Response:
+
+        - a list of objects containing heatmap related data:
+
+        - sample name
+
+        - gene
+
+        - expression
+
+        - expression type'
+      parameters:
+      - in: query
+        name: gene_ids
+        schema:
+          type: array
+          items:
+            type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: sample_ids
+        schema:
+          type: array
+          items:
+            type: integer
+        required: true
+      - in: query
+        name: source
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      - in: query
+        name: species
+        schema:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedHeatmapList'
+          description: ''
+      summary: Api modules visualizations heatmap list
+      x-summary-source: derived
+    post:
+      operationId: api__modules_visualizations_heatmap_create
+      description: Return a response.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Modules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HeatmapDeserializer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HeatmapDeserializer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HeatmapDeserializer'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedHeatmapList'
+          description: ''
+      summary: Api modules visualizations heatmap create
+      x-summary-source: derived
+  /api/_modules/visualizations/rose2:
+    get:
+      operationId: api__modules_visualizations_rose2_list
+      description: 'Endpoint returns Rose2 Data objects filtered by basket.
+
+
+        Endpoint supports:
+
+        * :drf:`Limit/Offset Pagination `
+
+        * filtering
+
+        * ordering by `name` and `created`'
+      parameters:
+      - in: query
+        name: basket
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: query
+        name: build
+        schema:
+          type: string
+      - in: query
+        name: collection
+        schema:
+          type: integer
+      - in: query
+        name: collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name
+        schema:
+          type: string
+      - in: query
+        name: collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: collection__slug
+        schema:
+          type: string
+      - in: query
+        name: collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor_name
+        schema:
+          type: string
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity
+        schema:
+          type: integer
+      - in: query
+        name: entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name
+        schema:
+          type: string
+      - in: query
+        name: entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: feature_type
+        schema:
+          type: string
+      - in: query
+        name: finished
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: finished__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: finished__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: finished__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: group
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: owners
+        schema:
+          type: integer
+      - in: query
+        name: owners_name
+        schema:
+          type: string
+      - in: query
+        name: permission
+        schema:
+          type: string
+      - in: query
+        name: process
+        schema:
+          type: integer
+      - in: query
+        name: process__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name
+        schema:
+          type: string
+      - in: query
+        name: process__name__contains
+        schema:
+          type: string
+      - in: query
+        name: process__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: process__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: process__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: process__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: process__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: process__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: process__slug
+        schema:
+          type: string
+      - in: query
+        name: process__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: relation_id
+        schema:
+          type: number
+      - in: query
+        name: shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: source
+        schema:
+          type: string
+      - in: query
+        name: species
+        schema:
+          type: string
+      - in: query
+        name: started
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: started__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: started__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: started__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - DR
+          - ER
+          - OK
+          - PP
+          - PR
+          - RE
+          - UP
+          - WT
+        description: '* `UP` - Uploading
+
+          * `RE` - Resolving
+
+          * `WT` - Waiting
+
+          * `PP` - Preparing
+
+          * `PR` - Processing
+
+          * `OK` - Done
+
+          * `ER` - Error
+
+          * `DR` - Dirty'
+      - in: query
+        name: status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type
+        schema:
+          type: string
+      - in: query
+        name: type__exact
+        schema:
+          type: string
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - Modules
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedRose2List'
+          description: ''
+      summary: Api modules visualizations rose2 list
+      x-summary-source: derived
+components:
+  schemas:
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    AggregatedExpressionBoxPlot:
+      type: object
+      description: Aggregated expression box plot serializer.
+      properties:
+        attribute:
+          type: string
+        gene:
+          type: string
+        exp_types:
+          type: array
+          items: {}
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
+        q1:
+          type: number
+          format: double
+        q3:
+          type: number
+          format: double
+        lowerwhisker:
+          type: number
+          format: double
+        upperwhisker:
+          type: number
+          format: double
+        data_count:
+          type: integer
+      required:
+      - attribute
+      - data_count
+      - exp_types
+      - gene
+      - lowerwhisker
+      - max
+      - median
+      - min
+      - q1
+      - q3
+      - upperwhisker
+    PaginatedExpressionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expressions'
+    PaginatedAggregatedExpressionBoxPlotList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedExpressionBoxPlot'
+    PaginatedExpressionBoxPlotList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExpressionBoxPlot'
+    CollectionSpecies:
+      type: object
+      description: Species serializer.
+      properties:
+        collection_id:
+          type: integer
+        species:
+          type: array
+          items:
+            type: string
+          description: Return a list of species.
+          readOnly: true
+      required:
+      - collection_id
+      - species
+    GenesetSearchSerializerWithPermissions:
+      type: object
+      description: Serialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
+      properties:
+        checksum:
+          type: string
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        process_cores:
+          type: integer
+          readOnly: true
+        process_error:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_info:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_memory:
+          type: integer
+          readOnly: true
+        process_progress:
+          type: integer
+          readOnly: true
+        process_rc:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        process_warning:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        output: {}
+        scheduled:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataStatus'
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        input: {}
+        process:
+          $ref: '#/components/schemas/RelationshipDict'
+        collection:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        entity:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        process_resources: {}
+        logfc_threshold:
+          type: number
+          format: double
+          default: 0.0
+        prob_field:
+          type: string
+          default: '0'
+        prob_threshold:
+          type: number
+          format: double
+          default: 0.0
+        up_regulated:
+          type: integer
+          default: 0
+        down_regulated:
+          type: integer
+          default: 0
+        number_of_genes:
+          type: integer
+          default: 0
+        source:
+          type: string
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - checksum
+      - contributor
+      - created
+      - current_user_permissions
+      - descriptor_dirty
+      - duplicated
+      - finished
+      - id
+      - modified
+      - process
+      - process_cores
+      - process_error
+      - process_info
+      - process_memory
+      - process_progress
+      - process_rc
+      - process_warning
+      - scheduled
+      - size
+      - source
+      - started
+      - status
+    DifferentialExpressionsDeserializer:
+      type: object
+      description: Deserialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
+      properties:
+        basket:
+          type: string
+          format: uuid
+        source:
+          type: string
+        species:
+          type: string
+        filter_de_by_basket:
+          type: boolean
+    PaginatedGenesetSearchSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenesetSearchSerializerWithPermissions'
+    Heatmap:
+      type: object
+      description: Heatmap serializer.
+      properties:
+        sample_id:
+          type: integer
+          description: Return sample id.
+          readOnly: true
+        sample_name:
+          type: string
+          description: Return sample name.
+          readOnly: true
+        gene:
+          type: string
+        expression:
+          type: number
+          format: double
+        expression_type:
+          type:
+          - string
+          - 'null'
+          description: Return expression type.
+          readOnly: true
+      required:
+      - expression
+      - expression_type
+      - gene
+      - sample_id
+      - sample_name
+    Expressions:
+      type: object
+      description: Expressions serializer.
+      properties:
+        gene:
+          type: string
+        expression:
+          type: number
+          format: double
+        exp_type:
+          type: string
+        sample:
+          type: string
+        group_by:
+          type: string
+        color_by:
+          type: string
+      required:
+      - exp_type
+      - expression
+      - gene
+      - sample
+    PaginatedHeatmapList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Heatmap'
+    RelationAttribute:
+      type: object
+      description: Relation attribute serializer.
+      properties:
+        attribute_type:
+          type: string
+        label:
+          type: string
+        relation_type:
+          type: string
+        relation_category:
+          type: string
+      required:
+      - attribute_type
+      - label
+      - relation_category
+      - relation_type
+    PaginatedSampleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sample'
+    BasketExpressions:
+      type: object
+      description: Basket expressions serializer.
+      properties:
+        id:
+          type: integer
+        exp_type:
+          type: string
+          description: Return expression type.
+          readOnly: true
+      required:
+      - exp_type
+      - id
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+    Statistics:
+      type: object
+      description: Statistics serializer.
+      properties:
+        name:
+          type: string
+        expression:
+          type: number
+          format: double
+        sterr:
+          type: number
+          format: double
+        type:
+          type: string
+      required:
+      - expression
+      - name
+      - sterr
+      - type
+    PaginatedProcessList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Process'
+    ExpressionBoxPlotDeserializer:
+      type: object
+      description: ExpressionBoxPlot deserializer.
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        attribute:
+          type: object
+          additionalProperties: {}
+        basket:
+          type: string
+          format: uuid
+      required:
+      - basket
+    PaginatedGeneListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneList'
+    DifferentialExpressionsSerializerWithPermissions:
+      type: object
+      description: Serialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
+      properties:
+        checksum:
+          type: string
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        process_cores:
+          type: integer
+          readOnly: true
+        process_error:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_info:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_memory:
+          type: integer
+          readOnly: true
+        process_progress:
+          type: integer
+          readOnly: true
+        process_rc:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        process_warning:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        output: {}
+        scheduled:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataStatus'
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        input: {}
+        process:
+          $ref: '#/components/schemas/RelationshipDict'
+        collection:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        entity:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        process_resources: {}
+        logfc_threshold:
+          type: number
+          format: double
+          default: 0.0
+        prob_field:
+          type: string
+          default: '0'
+        prob_threshold:
+          type: number
+          format: double
+          default: 0.0
+        up_regulated:
+          type: integer
+          default: 0
+        down_regulated:
+          type: integer
+          default: 0
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - checksum
+      - contributor
+      - created
+      - current_user_permissions
+      - descriptor_dirty
+      - duplicated
+      - finished
+      - id
+      - modified
+      - process
+      - process_cores
+      - process_error
+      - process_info
+      - process_memory
+      - process_progress
+      - process_rc
+      - process_warning
+      - scheduled
+      - size
+      - started
+      - status
+    AnnotationVersionEnum:
+      enum:
+      - v2
+      type: string
+      description: '* `v2` - v2'
+    PaginatedDataList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Data'
+    AttributesDeserializer:
+      type: object
+      description: Serializer for parsing attributes endpoint input.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        sample_ids:
+          type: array
+          items:
+            type: integer
+        basket:
+          type: string
+          format: uuid
+    Data:
+      type: object
+      description: Serializer for Data objects.
+      properties:
+        checksum:
+          type: string
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        process_cores:
+          type: integer
+          readOnly: true
+        process_error:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_info:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        process_memory:
+          type: integer
+          readOnly: true
+        process_progress:
+          type: integer
+          readOnly: true
+        process_rc:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        process_warning:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+          readOnly: true
+        output: {}
+        scheduled:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataStatus'
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        input: {}
+        process:
+          $ref: '#/components/schemas/RelationshipDict'
+        collection:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        entity:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        process_resources: {}
+      required:
+      - checksum
+      - contributor
+      - created
+      - descriptor_dirty
+      - duplicated
+      - finished
+      - id
+      - modified
+      - process
+      - process_cores
+      - process_error
+      - process_info
+      - process_memory
+      - process_progress
+      - process_rc
+      - process_warning
+      - scheduled
+      - size
+      - started
+      - status
+    ExpressionBoxPlot:
+      type: object
+      description: ExpressionBoxPlot serializer.
+      properties:
+        attribute:
+          type: string
+        gene:
+          type: string
+        exp_types:
+          type: array
+          items: {}
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
+        q1:
+          type: number
+          format: double
+        q3:
+          type: number
+          format: double
+        lowerwhisker:
+          type: number
+          format: double
+        upperwhisker:
+          type: number
+          format: double
+      required:
+      - attribute
+      - exp_types
+      - gene
+      - lowerwhisker
+      - max
+      - median
+      - min
+      - q1
+      - q3
+      - upperwhisker
+    AttributifyDeserializer:
+      type: object
+      description: Serializer for parsing attributify endpoint input.
+      properties:
+        attribute: {}
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        sample_ids:
+          type: array
+          items:
+            type: integer
+        basket:
+          type: string
+          format: uuid
+      required:
+      - attribute
+    Sample:
+      type: object
+      description: Sample serializer.
+      properties:
+        sample_id:
+          type: integer
+        sample_name:
+          type: string
+        attribute:
+          type: string
+      required:
+      - attribute
+      - sample_id
+      - sample_name
+    CaseControlExpressionsDeserializer:
+      type: object
+      description: Serializer for parsing case and control expressions endpoint input.
+      properties:
+        diff_expr_id:
+          type: integer
+        selected_genes:
+          type: array
+          items:
+            type: string
+        highlighted_genes:
+          type: array
+          items:
+            type: string
+        log2:
+          type: boolean
+          default: false
+      required:
+      - diff_expr_id
+      - selected_genes
+    SampleTableDeserializer:
+      type: object
+      description: Serializer for parsing sample table endpoint input.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        sample_ids:
+          type: array
+          items:
+            type: integer
+        table_column_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - sample_ids
+      - table_column_ids
+    PaginatedBasketExpressionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketExpressions'
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
+    Expression:
+      type: object
+      description: Expression serializer.
+      properties:
+        sample:
+          type: string
+        expression:
+          type: number
+          format: double
+        gene:
+          type: string
+        type:
+          type: string
+        exp_type:
+          type: string
+      required:
+      - exp_type
+      - expression
+      - gene
+      - sample
+      - type
+    ExpressionsDeserializer:
+      type: object
+      description: Expressions deserializer.
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        basket:
+          type: string
+          format: uuid
+        group_by:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+        color_by:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+      required:
+      - basket
+    GeneList:
+      type: object
+      description: Gene list serializer.
+      properties:
+        feature_id:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+      required:
+      - feature_id
+      - full_name
+      - name
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+    PaginatedRose2List:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rose2'
+    DescriptorAttribute:
+      type: object
+      description: Descriptor attribute serializer.
+      properties:
+        attribute_type:
+          type: string
+        label:
+          type: string
+        field_path:
+          type: string
+        group_label:
+          type: string
+          default: ''
+        field_type:
+          type: string
+          default: ''
+      required:
+      - attribute_type
+      - field_path
+      - label
+    DataStatus:
+      enum:
+      - UP
+      - RE
+      - WT
+      - PP
+      - PR
+      - OK
+      - ER
+      - DR
+      type: string
+      description: '* `UP` - Uploading
+
+        * `RE` - Resolving
+
+        * `WT` - Waiting
+
+        * `PP` - Preparing
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error
+
+        * `DR` - Dirty'
+    AttributeList:
+      type: object
+      description: Attribute serializer.
+      properties:
+        descriptor_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptorAttribute'
+        relation_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationAttribute'
+      required:
+      - descriptor_attributes
+      - relation_attributes
+    PaginatedCollectionSpeciesList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionSpecies'
+    Rose2:
+      type: object
+      description: Rose2 serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 100
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          maxLength: 100
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        output: {}
+      required:
+      - created
+      - id
+      - name
+      - slug
+    CaseControlExpressions:
+      type: object
+      description: CaseControlExpressions serializer.
+      properties:
+        expressions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expression'
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Statistics'
+        exceptions:
+          type: array
+          items: {}
+      required:
+      - exceptions
+      - expressions
+      - stats
+    Process:
+      type: object
+      description: Process serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 100
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        category:
+          type: string
+          pattern: ^([a-zA-Z0-9]+[:\-])*[a-zA-Z0-9]+:$
+          maxLength: 200
+      required:
+      - id
+      - name
+      - slug
+    GeneIds:
+      type: object
+      description: 'Serializer for gene_ids query parameter.
+
+
+        Enforce that if gene_ids are specified, source and species are also.'
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+    PaginatedDifferentialExpressionsSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DifferentialExpressionsSerializerWithPermissions'
+    HeatmapDeserializer:
+      type: object
+      description: Heatmap deserializer.
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+        sample_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - sample_ids
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

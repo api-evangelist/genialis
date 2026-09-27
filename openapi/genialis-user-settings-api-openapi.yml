@@ -1,0 +1,487 @@
+openapi: 3.2.0
+info:
+  title: Genialis base User Settings API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: User Settings
+paths:
+  /api/user-settings/parameter-preset:
+    get:
+      operationId: api_user_settings_parameter_preset_list
+      description: API view for :class:`ParameterPreset` objects.
+      parameters:
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: process
+        schema:
+          type: integer
+      - in: query
+        name: process__slug
+        schema:
+          type: string
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - User Settings
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedParameterPresetList'
+          description: ''
+      summary: Api user settings parameter preset list
+      x-summary-source: derived
+    post:
+      operationId: api_user_settings_parameter_preset_create
+      description: Create a resource.
+      tags:
+      - User Settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPreset'
+          description: ''
+      summary: Api user settings parameter preset create
+      x-summary-source: derived
+  /api/user-settings/parameter-preset/{id}:
+    get:
+      operationId: api_user_settings_parameter_preset_retrieve
+      description: API view for :class:`ParameterPreset` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this parameter preset.
+        required: true
+      tags:
+      - User Settings
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPreset'
+          description: ''
+      summary: Api user settings parameter preset retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_user_settings_parameter_preset_update
+      description: API view for :class:`ParameterPreset` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this parameter preset.
+        required: true
+      tags:
+      - User Settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ParameterPreset'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPreset'
+          description: ''
+      summary: Api user settings parameter preset update
+      x-summary-source: derived
+    patch:
+      operationId: api_user_settings_parameter_preset_partial_update
+      description: API view for :class:`ParameterPreset` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this parameter preset.
+        required: true
+      tags:
+      - User Settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedParameterPreset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedParameterPreset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedParameterPreset'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterPreset'
+          description: ''
+      summary: Api user settings parameter preset partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_user_settings_parameter_preset_destroy
+      description: API view for :class:`ParameterPreset` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this parameter preset.
+        required: true
+      tags:
+      - User Settings
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api user settings parameter preset destroy
+      x-summary-source: derived
+components:
+  schemas:
+    PatchedParameterPreset:
+      type: object
+      description: Serializer for :class:`ParameterPreset` model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          type: integer
+        process:
+          type: integer
+        input_preset: {}
+    PaginatedParameterPresetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterPreset'
+    ParameterPreset:
+      type: object
+      description: Serializer for :class:`ParameterPreset` model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          type: integer
+        process:
+          type: integer
+        input_preset: {}
+      required:
+      - contributor
+      - created
+      - id
+      - modified
+      - name
+      - process
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

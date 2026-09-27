@@ -1,0 +1,578 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Variant Annotations API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Variant Annotations
+paths:
+  /api/variant_annotations:
+    get:
+      operationId: api_variant_annotations_list
+      description: VariantAnnotation endpoint.
+      parameters:
+      - in: query
+        name: clinical_diagnosis
+        schema:
+          type: string
+      - in: query
+        name: clinical_diagnosis__contains
+        schema:
+          type: string
+      - in: query
+        name: clinical_diagnosis__icontains
+        schema:
+          type: string
+      - in: query
+        name: clinical_diagnosis__iexact
+        schema:
+          type: string
+      - in: query
+        name: clinical_diagnosis__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: clinical_diagnosis__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: clinical_diagnosis__istartswith
+        schema:
+          type: string
+      - in: query
+        name: clinical_diagnosis__startswith
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance__contains
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance__icontains
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance__iexact
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: clinical_significance__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: clinical_significance__istartswith
+        schema:
+          type: string
+      - in: query
+        name: clinical_significance__startswith
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id__contains
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id__icontains
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id__iexact
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: clinvar_id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: clinvar_id__istartswith
+        schema:
+          type: string
+      - in: query
+        name: clinvar_id__startswith
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id__contains
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id__icontains
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id__iexact
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: dbsnp_id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: dbsnp_id__istartswith
+        schema:
+          type: string
+      - in: query
+        name: dbsnp_id__startswith
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation__contains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation__icontains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation__iexact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: transcripts__annotation__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: transcripts__annotation__istartswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation__startswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact__contains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact__icontains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact__iexact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: transcripts__annotation_impact__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: transcripts__annotation_impact__istartswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__annotation_impact__startswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene__contains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene__icontains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene__iexact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: transcripts__gene__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: transcripts__gene__istartswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__gene__startswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact__contains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact__icontains
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact__iexact
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: transcripts__protein_impact__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: transcripts__protein_impact__istartswith
+        schema:
+          type: string
+      - in: query
+        name: transcripts__protein_impact__startswith
+        schema:
+          type: string
+      - in: query
+        name: type
+        schema:
+          type:
+          - string
+          - 'null'
+          enum:
+          - INDEL
+          - MIXED
+          - MNP
+          - SNP
+          - SYMBOLIC
+        description: '* `SNP` - SNP
+
+          * `INDEL` - INDEL
+
+          * `MIXED` - MIXED
+
+          * `MNP` - MNP
+
+          * `SYMBOLIC` - SYMBOLIC'
+      - in: query
+        name: type__contains
+        schema:
+          type: string
+      - in: query
+        name: type__icontains
+        schema:
+          type: string
+      - in: query
+        name: type__iexact
+        schema:
+          type: string
+      - in: query
+        name: type__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: type__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: type__istartswith
+        schema:
+          type: string
+      - in: query
+        name: type__startswith
+        schema:
+          type: string
+      - in: query
+        name: variant
+        schema:
+          type: integer
+      - in: query
+        name: variant__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: variant__isnull
+        schema:
+          type: boolean
+      tags:
+      - Variant Annotations
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVariantAnnotationList'
+          description: ''
+      summary: Api variant annotations list
+      x-summary-source: derived
+components:
+  schemas:
+    NullEnum:
+      enum:
+      - null
+    VariantAnnotation:
+      type: object
+      description: Serializer for VariantAnnotation objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        variant_id:
+          type: integer
+          readOnly: true
+        type:
+          oneOf:
+          - $ref: '#/components/schemas/VariantAnnotationTypeEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        clinical_diagnosis:
+          type:
+          - string
+          - 'null'
+        clinical_significance:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        dbsnp_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 150
+        clinvar_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 150
+        transcripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantTranscript'
+      required:
+      - id
+      - variant_id
+    VariantTranscript:
+      type: object
+      description: Serializer for VariantAnnotationTranscript objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        variant_annotation_id:
+          type: integer
+          readOnly: true
+        annotation:
+          type: string
+        annotation_impact:
+          type: string
+          maxLength: 20
+        gene:
+          type: string
+          maxLength: 100
+        protein_impact:
+          type: string
+          maxLength: 100
+        transcript_id:
+          type: string
+          maxLength: 200
+        canonical:
+          type: boolean
+      required:
+      - annotation
+      - annotation_impact
+      - gene
+      - id
+      - protein_impact
+      - transcript_id
+      - variant_annotation_id
+    BlankEnum:
+      enum:
+      - ''
+    VariantAnnotationTypeEnum:
+      enum:
+      - SNP
+      - INDEL
+      - MIXED
+      - MNP
+      - SYMBOLIC
+      type: string
+      description: '* `SNP` - SNP
+
+        * `INDEL` - INDEL
+
+        * `MIXED` - MIXED
+
+        * `MNP` - MNP
+
+        * `SYMBOLIC` - SYMBOLIC'
+    PaginatedVariantAnnotationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantAnnotation'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

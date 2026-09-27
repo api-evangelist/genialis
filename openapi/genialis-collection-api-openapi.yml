@@ -1,0 +1,1226 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Collection API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Collection
+paths:
+  /api/collection:
+    get:
+      operationId: api_collection_list
+      description: 'The extended resolwe Collection viewset.
+
+
+        It contains method to set prediction fields.'
+      parameters:
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: contributor_name
+        schema:
+          type: string
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: description
+        schema:
+          type: string
+      - in: query
+        name: description__contains
+        schema:
+          type: string
+      - in: query
+        name: description__icontains
+        schema:
+          type: string
+      - in: query
+        name: description__iexact
+        schema:
+          type: string
+      - in: query
+        name: description__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: description__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: description__istartswith
+        schema:
+          type: string
+      - in: query
+        name: description__startswith
+        schema:
+          type: string
+      - in: query
+        name: descriptor_schema
+        schema:
+          type: integer
+      - in: query
+        name: entity_count
+        schema:
+          type: number
+      - in: query
+        name: entity_count__gt
+        schema:
+          type: number
+      - in: query
+        name: entity_count__gte
+        schema:
+          type: number
+      - in: query
+        name: entity_count__lt
+        schema:
+          type: number
+      - in: query
+        name: entity_count__lte
+        schema:
+          type: number
+      - in: query
+        name: group
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: name
+        schema:
+          type: string
+      - in: query
+        name: name__contains
+        schema:
+          type: string
+      - in: query
+        name: name__icontains
+        schema:
+          type: string
+      - in: query
+        name: name__iexact
+        schema:
+          type: string
+      - in: query
+        name: name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: name__startswith
+        schema:
+          type: string
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: owners
+        schema:
+          type: integer
+      - in: query
+        name: owners_name
+        schema:
+          type: string
+      - in: query
+        name: permission
+        schema:
+          type: string
+      - in: query
+        name: sample
+        schema:
+          type: integer
+      - in: query
+        name: shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: slug
+        schema:
+          type: string
+      - in: query
+        name: slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: status
+        schema:
+          type: string
+      - in: query
+        name: status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version
+        schema:
+          type: string
+      - in: query
+        name: version__gt
+        schema:
+          type: string
+      - in: query
+        name: version__gte
+        schema:
+          type: string
+      - in: query
+        name: version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: version__lt
+        schema:
+          type: string
+      - in: query
+        name: version__lte
+        schema:
+          type: string
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCollectionSerializerWithPermissionsList'
+          description: ''
+      summary: Api collection list
+      x-summary-source: derived
+    post:
+      operationId: api_collection_create
+      description: Only authenticated users can create new collections.
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          description: ''
+      summary: Api collection create
+      x-summary-source: derived
+  /api/collection/{id}:
+    get:
+      operationId: api_collection_retrieve
+      description: 'The extended resolwe Collection viewset.
+
+
+        It contains method to set prediction fields.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          description: ''
+      summary: Api collection retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_collection_update
+      description: Update a resource.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          description: ''
+      summary: Api collection update
+      x-summary-source: derived
+    patch:
+      operationId: api_collection_partial_update
+      description: 'The extended resolwe Collection viewset.
+
+
+        It contains method to set prediction fields.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCollectionSerializerWithPermissions'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCollectionSerializerWithPermissions'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCollectionSerializerWithPermissions'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+          description: ''
+      summary: Api collection partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_collection_destroy
+      description: Delete a resource.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api collection destroy
+      x-summary-source: derived
+  /api/collection/{id}/permissions:
+    get:
+      operationId: api_collection_permissions_retrieve
+      description: Get or set permissions API endpoint.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserPermissions'
+          description: ''
+      summary: Api collection permissions retrieve
+      x-summary-source: derived
+    post:
+      operationId: api_collection_permissions_create
+      description: Get or set permissions API endpoint.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUserPermissions'
+          description: ''
+      summary: Api collection permissions create
+      x-summary-source: derived
+  /api/collection/{id}/set_annotation_fields:
+    post:
+      operationId: api_collection_set_annotation_fields_create
+      description: Set AnnotationFields on collection.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationFieldDict'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnnotationFieldDict'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnnotationFieldDict'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api collection set annotation fields create
+      x-summary-source: derived
+  /api/collection/{id}/set_prediction_fields:
+    post:
+      operationId: api_collection_set_prediction_fields_create
+      description: Set PredictionFields on a collection.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this collection.
+        required: true
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionFieldDict'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PredictionFieldDict'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PredictionFieldDict'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api collection set prediction fields create
+      x-summary-source: derived
+  /api/collection/billing_account/{id}:
+    get:
+      operationId: api_collection_billing_account_retrieve
+      description: Get the Billing account id of the given collection.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this billing account.
+        required: true
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAccount'
+          description: ''
+      summary: Api collection billing account retrieve
+      x-summary-source: derived
+  /api/collection/bulk_delete:
+    post:
+      operationId: api_collection_bulk_delete_create
+      description: 'Bulk delete objects in the background.
+
+
+        The background task is returned.'
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Delete'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Delete'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Delete'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackgroundTask'
+          description: ''
+      summary: Api collection bulk delete create
+      x-summary-source: derived
+  /api/collection/duplicate:
+    post:
+      operationId: api_collection_duplicate_create
+      description: 'Bulk duplicate objects in the background.
+
+
+        The background task is returned.'
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Duplicate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Duplicate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Duplicate'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackgroundTask'
+          description: ''
+      summary: Api collection duplicate create
+      x-summary-source: derived
+  /api/collection/slug_exists:
+    get:
+      operationId: api_collection_slug_exists_retrieve
+      description: 'Check if given url slug exists.
+
+
+        Check if slug given in query parameter ``name`` exists. Return
+
+        ``True`` if slug already exists and ``False`` otherwise.'
+      parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+          minLength: 1
+        required: true
+      tags:
+      - Collection
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: ''
+      summary: Api collection slug exists retrieve
+      x-summary-source: derived
+  /api/collection/subscribe:
+    post:
+      operationId: api_collection_subscribe_create
+      description: Register an Observer for a resource.
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscribeRequest'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObserverSubscription'
+          description: ''
+      summary: Api collection subscribe create
+      x-summary-source: derived
+  /api/collection/unsubscribe:
+    post:
+      operationId: api_collection_unsubscribe_create
+      description: Unregister a subscription.
+      tags:
+      - Collection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ObserverSubscription'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+      summary: Api collection unsubscribe create
+      x-summary-source: derived
+components:
+  schemas:
+    Delete:
+      type: object
+      description: Bulk delete given objects.
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - ids
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    PatchedCollectionSerializerWithPermissions:
+      type: object
+      description: Serializer for Collection objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        data_count:
+          type: integer
+          description: Return number of data objects on the collection.
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        description:
+          type: string
+        name:
+          type: string
+        settings: {}
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        entity_count:
+          type: integer
+          description: Return number of entities on the collection.
+          readOnly: true
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        descriptor_dirty:
+          type: boolean
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+    BillingAccount:
+      type: object
+      description: Billing account serializer.
+      properties:
+        active:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - active
+      - id
+      - name
+    Duplicate:
+      type: object
+      description: Deserializer for duplicate endpoint.
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - ids
+    AnnotationFieldDict:
+      type: object
+      description: Serializer for actions that deal with annotation fields.
+      properties:
+        annotation_fields:
+          type: array
+          items:
+            type: integer
+      required:
+      - annotation_fields
+    PredictionFieldDict:
+      type: object
+      description: Serializer for actions that deal with prediction fields.
+      properties:
+        prediction_fields:
+          type: array
+          items:
+            type: integer
+        confirm_action:
+          type: boolean
+          default: false
+      required:
+      - prediction_fields
+    ObserverSubscription:
+      type: object
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+    Permission:
+      type: object
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      properties:
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
+    PaginatedCollectionSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+    CollectionSerializerWithPermissions:
+      type: object
+      description: Serializer for Collection objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        duplicated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        data_count:
+          type: integer
+          description: Return number of data objects on the collection.
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        description:
+          type: string
+        name:
+          type: string
+        settings: {}
+        slug:
+          type:
+          - string
+          - 'null'
+        tags:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        entity_count:
+          type: integer
+          description: Return number of entities on the collection.
+          readOnly: true
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+        descriptor_dirty:
+          type: boolean
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - contributor
+      - created
+      - current_user_permissions
+      - data_count
+      - duplicated
+      - entity_count
+      - id
+      - modified
+      - status
+    BackgroundTaskStatusEnum:
+      enum:
+      - WT
+      - PR
+      - OK
+      - ER
+      type: string
+      description: '* `WT` - Waiting
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error'
+    BackgroundTask:
+      type: object
+      description: Serialize the BackgroundTask model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/BackgroundTaskStatusEnum'
+        description:
+          type: string
+          maxLength: 256
+        output: {}
+      required:
+      - description
+      - id
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

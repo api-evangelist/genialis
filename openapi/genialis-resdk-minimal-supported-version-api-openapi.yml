@@ -1,0 +1,45 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Resdk Minimal Supported Version API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Resdk Minimal Supported Version
+paths:
+  /api/resdk_minimal_supported_version:
+    get:
+      operationId: api_resdk_minimal_supported_version_retrieve
+      description: Return the minimal supported resdk version.
+      tags:
+      - Resdk Minimal Supported Version
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReSDKMinimalSupportedVersion'
+          description: ''
+      summary: Api resdk minimal supported version retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    ReSDKMinimalSupportedVersion:
+      type: object
+      description: Serialize minimal supporter resdk version.
+      properties:
+        minimal_supported_version:
+          type: string
+          readOnly: true
+      required:
+      - minimal_supported_version
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

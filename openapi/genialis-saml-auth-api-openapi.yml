@@ -81,6 +81,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    IdGenerator:
+      type: object
+      description: Serializer for IdGeneratorView.
+      properties:
+        auth_id:
+          type: string
+          readOnly: true
+      required:
+      - auth_id
     CredentialsPoll:
       type: object
       description: Serializer for CredentialsPollView.
@@ -104,15 +113,6 @@ components:
       required:
       - email
       - password
-    IdGenerator:
-      type: object
-      description: Serializer for IdGeneratorView.
-      properties:
-        auth_id:
-          type: string
-          readOnly: true
-      required:
-      - auth_id
   securitySchemes:
     cookieAuth:
       type: apiKey

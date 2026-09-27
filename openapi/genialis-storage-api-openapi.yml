@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Storage API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Storage
+paths:
+  /api/storage/{id}:
+    get:
+      operationId: api_storage_retrieve
+      description: API view for :class:`Storage` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this storage.
+        required: true
+      tags:
+      - Storage
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+          description: ''
+      summary: Api storage retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    Storage:
+      type: object
+      description: Serializer for Storage objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        json: {}
+        name:
+          type: string
+        slug:
+          type:
+          - string
+          - 'null'
+      required:
+      - contributor
+      - created
+      - data
+      - id
+      - json
+      - modified
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

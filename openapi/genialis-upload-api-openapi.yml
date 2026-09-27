@@ -1,0 +1,103 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Upload API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Upload
+paths:
+  /api/upload/config:
+    get:
+      operationId: api_upload_config_retrieve
+      description: 'Return the JSON representing the upload configuration.
+
+
+        The returning object is JSON representation of the dictionary with the
+
+        following fields:
+
+
+        - type: the type of upload connector. Currently we
+
+        support ''LOCAL'', and ''S3'' connector types. Upload through server is
+
+        always supported.
+
+
+        - credentials: the dictionary representing the set of credentials that
+
+        are used to upload data. This dictionary is specific to connector
+
+        type and may be empty.'
+      tags:
+      - Upload
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadConfig'
+          description: ''
+      summary: Api upload config retrieve
+      x-summary-source: derived
+  /api/upload/credentials:
+    get:
+      operationId: api_upload_credentials_retrieve
+      description: Return the upload credentials.
+      tags:
+      - Upload
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadCredentials'
+          description: ''
+      summary: Api upload credentials retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    UploadCredentials:
+      type: object
+      description: Serializer for upload credentials.
+      properties:
+        AccessKeyId:
+          type: string
+        SecretAccessKey:
+          type: string
+        Token:
+          type: string
+        Expiration:
+          type: string
+          format: date-time
+      required:
+      - AccessKeyId
+      - Expiration
+      - SecretAccessKey
+      - Token
+    UploadConfig:
+      type: object
+      description: Serializer for upload configuration.
+      properties:
+        type:
+          type: string
+        config:
+          type: object
+          additionalProperties: {}
+      required:
+      - config
+      - type
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

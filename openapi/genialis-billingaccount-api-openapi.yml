@@ -1,0 +1,353 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Billingaccount API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Billingaccount
+paths:
+  /api/billingaccount:
+    get:
+      operationId: api_billingaccount_list
+      description: API view for :class:`BillingAccounts` objects.
+      parameters:
+      - in: query
+        name: active
+        schema:
+          type: boolean
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Billingaccount
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBillingAccountList'
+          description: ''
+      summary: Api billingaccount list
+      x-summary-source: derived
+  /api/billingaccount/{id}:
+    get:
+      operationId: api_billingaccount_retrieve
+      description: API view for :class:`BillingAccounts` objects.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9]+$
+        required: true
+      tags:
+      - Billingaccount
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAccount'
+          description: ''
+      summary: Api billingaccount retrieve
+      x-summary-source: derived
+  /api/billingaccount/{id}/collection:
+    post:
+      operationId: api_billingaccount_collection_create
+      description: 'Assign collection to the billing account.
+
+
+        Required arguments: collection_id.
+
+
+        The user is only allowed to perform the operation when:
+
+        - it has ''edit'' permission on the collection
+
+        - it has ''view'' permission on the billing account'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          pattern: ^[0-9]+$
+        required: true
+      tags:
+      - Billingaccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingAccountToCollection'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BillingAccountToCollection'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BillingAccountToCollection'
+        required: true
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ''
+      summary: Api billingaccount collection create
+      x-summary-source: derived
+  /api/billingaccount/estimated_usage:
+    get:
+      operationId: api_billingaccount_estimated_usage_list
+      description: API view for :class:`EstimatedCostByBillingAccount` objects.
+      parameters:
+      - in: query
+        name: billing_account_id
+        schema:
+          type: integer
+      - in: query
+        name: billing_account_id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: cost_type
+        schema:
+          type: string
+      - in: query
+        name: cost_type__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: date_after
+        schema:
+          type: string
+          format: date
+        required: true
+      - in: query
+        name: date_before
+        schema:
+          type: string
+          format: date
+        required: true
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: referenced_collection_id
+        schema:
+          type: integer
+      - in: query
+        name: referenced_collection_id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: referenced_collection_name
+        schema:
+          type: string
+      - in: query
+        name: referenced_collection_name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: referenced_collection_slug
+        schema:
+          type: string
+      - in: query
+        name: referenced_collection_slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      tags:
+      - Billingaccount
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEstimatedCostPerBillingAccountList'
+          description: ''
+      summary: Api billingaccount estimated usage list
+      x-summary-source: derived
+components:
+  schemas:
+    PaginatedEstimatedCostPerBillingAccountList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EstimatedCostPerBillingAccount'
+    BillingAccountToCollection:
+      type: object
+      description: Serializer for assigning a collection to a billing account.
+      properties:
+        collection_id:
+          type: integer
+      required:
+      - collection_id
+    EstimatedCostPerBillingAccount:
+      type: object
+      description: Serializer for cost per day per billing account.
+      properties:
+        cost_type:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        aggregated_cost:
+          type: number
+          format: double
+        billing_account_id:
+          type: integer
+          readOnly: true
+        referenced_collection_id:
+          type:
+          - integer
+          - 'null'
+          readOnly: true
+        referenced_collection_name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        referenced_collection_slug:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - aggregated_cost
+      - billing_account_id
+      - cost_type
+      - date
+      - referenced_collection_id
+      - referenced_collection_name
+      - referenced_collection_slug
+    BillingAccount:
+      type: object
+      description: Billing account serializer.
+      properties:
+        active:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - active
+      - id
+      - name
+    PaginatedBillingAccountList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingAccount'
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

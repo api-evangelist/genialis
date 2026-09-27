@@ -49,12 +49,12 @@ tags:
 - Genomics
 - Life Sciences
 - Healthcare
-- Machine-Learning
+- Machine Learning
 - Artificial Intelligence
 - Multiomics
 - Oncology
 - Data Platform
-- Open-Source
+- Open Source
 tags_raw:
 - Company
 - Bioinformatics
@@ -68,6 +68,8 @@ tags_raw:
 - Oncology
 - Data Platform
 - Open Source
+- Machine-Learning
+- Open-Source
 apis:
 - aid: genialis:genialis-about-api
   name: Genialis About API
@@ -81,21 +83,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/genialis-about-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-api-api
-  name: Genialis API
-  description: The api API from Genialis — 156 operation(s) for api.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags: []
-  tags_raw:
-  - api
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-api-api-openapi.yml
   - type: Documentation
     url: https://docs.genialis.com/resdk/
   - type: APIReference
@@ -140,6 +127,569 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/genialis-saml-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-annotation-api
+  name: Genialis Annotation API
+  description: The Annotation API from Genialis — 1 operation(s) for annotation.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-annotation-field-api
+  name: Genialis Annotation Field API
+  description: The Annotation Field API from Genialis — 2 operation(s) for annotation field.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Field
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-field-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-annotation-preset-api
+  name: Genialis Annotation Preset API
+  description: The Annotation Preset API from Genialis — 3 operation(s) for annotation preset.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Preset
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-preset-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-annotation-value-api
+  name: Genialis Annotation Value API
+  description: The Annotation Value API from Genialis — 2 operation(s) for annotation value.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Value
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-value-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-app-state-api
+  name: Genialis App State API
+  description: The App State API from Genialis — 2 operation(s) for app state.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - App State
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-app-state-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-base-api
+  name: Genialis Base API
+  description: The Base API from Genialis — 2 operation(s) for base.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Base
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-base-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-basespace-api
+  name: Genialis Basespace API
+  description: The Basespace API from Genialis — 12 operation(s) for basespace.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Basespace
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-basespace-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-basket-api
+  name: Genialis Basket API
+  description: The Basket API from Genialis — 17 operation(s) for basket.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Basket
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-basket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-billingaccount-api
+  name: Genialis Billingaccount API
+  description: The Billingaccount API from Genialis — 4 operation(s) for billingaccount.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Billingaccount
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-billingaccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-billingstatistics-api
+  name: Genialis Billingstatistics API
+  description: The Billingstatistics API from Genialis — 3 operation(s) for billingstatistics.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Billingstatistics
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-billingstatistics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-collection-api
+  name: Genialis Collection API
+  description: The Collection API from Genialis — 11 operation(s) for collection.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Collection
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-collection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-community-api
+  name: Genialis Community API
+  description: The Community API from Genialis — 1 operation(s) for community.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Community
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-community-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-configuration-api
+  name: Genialis Configuration API
+  description: The Configuration API from Genialis — 2 operation(s) for configuration.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-data-api
+  name: Genialis Data API
+  description: The Data API from Genialis — 13 operation(s) for data.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-descriptorschema-api
+  name: Genialis Descriptorschema API
+  description: The Descriptorschema API from Genialis — 3 operation(s) for descriptorschema.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Descriptorschema
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-descriptorschema-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-group-api
+  name: Genialis Group API
+  description: The Group API from Genialis — 4 operation(s) for group.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Group
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-kb-api
+  name: Genialis Kb API
+  description: The Kb API from Genialis — 5 operation(s) for kb.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Kb
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-kb-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-modules-api
+  name: Genialis Modules API
+  description: The Modules API from Genialis — 17 operation(s) for modules.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Modules
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-modules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-prediction-field-api
+  name: Genialis Prediction Field API
+  description: The Prediction Field API from Genialis — 2 operation(s) for prediction field.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Field
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-field-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-prediction-group-api
+  name: Genialis Prediction Group API
+  description: The Prediction Group API from Genialis — 2 operation(s) for prediction group.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Group
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-prediction-preset-api
+  name: Genialis Prediction Preset API
+  description: The Prediction Preset API from Genialis — 3 operation(s) for prediction preset.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Preset
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-preset-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-prediction-value-api
+  name: Genialis Prediction Value API
+  description: The Prediction Value API from Genialis — 2 operation(s) for prediction value.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Value
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-value-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-process-api
+  name: Genialis Process API
+  description: The Process API from Genialis — 4 operation(s) for process.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Process
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-process-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-relation-api
+  name: Genialis Relation API
+  description: The Relation API from Genialis — 2 operation(s) for relation.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Relation
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-relation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-resdk-minimal-supported-version-api
+  name: Genialis Resdk Minimal Supported Version API
+  description: >-
+    The Resdk Minimal Supported Version API from Genialis — 1 operation(s) for resdk minimal supported
+    version.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Resdk Minimal Supported Version
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-resdk-minimal-supported-version-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-sample-api
+  name: Genialis Sample API
+  description: The Sample API from Genialis — 11 operation(s) for sample.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Sample
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-sample-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-search-table-file-columns-api
+  name: Genialis Search Table File Columns API
+  description: >-
+    The Search Table File Columns API from Genialis — 1 operation(s) for search table file columns.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Search Table File Columns
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-search-table-file-columns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-storage-api
+  name: Genialis Storage API
+  description: The Storage API from Genialis — 1 operation(s) for storage.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-storage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-task-api
+  name: Genialis Task API
+  description: The Task API from Genialis — 4 operation(s) for task.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Task
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-task-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-upload-api
+  name: Genialis Upload API
+  description: The Upload API from Genialis — 2 operation(s) for upload.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-upload-config-api
+  name: Genialis Upload Config API
+  description: The Upload Config API from Genialis — 1 operation(s) for upload config.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Upload Config
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-upload-config-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-user-api
+  name: Genialis User API
+  description: The User API from Genialis — 2 operation(s) for user.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-user-settings-api
+  name: Genialis User Settings API
+  description: The User Settings API from Genialis — 2 operation(s) for user settings.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - User Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-user-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-usertag-api
+  name: Genialis Usertag API
+  description: The Usertag API from Genialis — 2 operation(s) for usertag.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Usertag
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-usertag-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-variant-annotations-api
+  name: Genialis Variant Annotations API
+  description: The Variant Annotations API from Genialis — 1 operation(s) for variant annotations.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-variant-api
+  name: Genialis Variant API
+  description: The Variant API from Genialis — 2 operation(s) for variant.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-variant-calls-api
+  name: Genialis Variant Calls API
+  description: The Variant Calls API from Genialis — 2 operation(s) for variant calls.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-calls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-variant-experiment-api
+  name: Genialis Variant Experiment API
+  description: The Variant Experiment API from Genialis — 2 operation(s) for variant experiment.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Experiment
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-experiment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-versions-api
+  name: Genialis Versions API
+  description: The Versions API from Genialis — 1 operation(s) for versions.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-versions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-access-token-api
+  name: Genialis Access Token API
+  description: The Access Token API from Genialis — 2 operation(s) for access token.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Access Token
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-access-token-api-openapi.yml
   - type: Documentation
     url: https://docs.genialis.com/resdk/
   - type: APIReference

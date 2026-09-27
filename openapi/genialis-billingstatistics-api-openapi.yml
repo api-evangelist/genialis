@@ -1,0 +1,247 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Billingstatistics API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Billingstatistics
+paths:
+  /api/billingstatistics/billing_accounts_usage:
+    get:
+      operationId: api_billingstatistics_billing_accounts_usage_list
+      description: 'Get the billing accounts usage.
+
+
+        The returned fields are: minimal_usage, maximal_usage, average_usage.
+
+
+        The parameters for the request are:
+
+        - date_from: ISO 8601 date representation, required.
+
+        - date_to: ISO 8601 date representation, required.
+
+        - fields: fields of interest, optional. When not specified, all the statistics
+
+        are returned.'
+      parameters:
+      - in: query
+        name: avg_usage
+        schema:
+          type: integer
+      - in: query
+        name: billing_account_id
+        schema:
+          type: integer
+        required: true
+      - in: query
+        name: max_usage
+        schema:
+          type: integer
+      - in: query
+        name: min_usage
+        schema:
+          type: integer
+      tags:
+      - Billingstatistics
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillingStatisticsCost'
+          description: ''
+      summary: Api billingstatistics billing accounts usage list
+      x-summary-source: derived
+  /api/billingstatistics/collections_usage:
+    get:
+      operationId: api_billingstatistics_collections_usage_list
+      description: 'Get the collection usage.
+
+
+        The returned fields are: created_date (could be null), minimal_usage,
+
+        maximal_usage, average_usage.
+
+
+        The parameters for the request are:
+
+        - collection_ids: the collections that the data should be returned for, required.
+
+        - date_from: ISO 8601 date representation, required.
+
+        - date_to: ISO 8601 date representation, required.
+
+        - fields: fields of interest, optional. When not specified, all the statistics
+
+        are returned.'
+      parameters:
+      - in: query
+        name: collection_ids
+        schema:
+          type: array
+          items:
+            type: integer
+        required: true
+      - in: query
+        name: date_from
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - in: query
+        name: date_to
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - in: query
+        name: fields
+        schema:
+          type: array
+          items:
+            enum:
+            - max_usage
+            - min_usage
+            - avg_usage
+            - created
+            type: string
+            description: '* `max_usage` - max_usage
+
+              * `min_usage` - min_usage
+
+              * `avg_usage` - avg_usage
+
+              * `created` - created'
+      tags:
+      - Billingstatistics
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BillingStatisticsCollection'
+          description: ''
+      summary: Api billingstatistics collections usage list
+      x-summary-source: derived
+  /api/billingstatistics/excel_report:
+    get:
+      operationId: api_billingstatistics_excel_report_retrieve
+      description: 'Get storage statistics.
+
+
+        The granularity is one month. One specifies the first (F) and the last
+
+        (L) month and the statistics is generated for all months M satisfying
+
+        the condition S <= M <= L.
+
+
+        The parameters of the request are first and last month:
+
+        - date_from: ISO 8601 date representation, required.
+
+        - date_to: ISO 8601 date representation, required.
+
+
+        Currently only year and month are extracted from the parameters. For
+
+        example if one is interested in statistics in January 2022 the values
+
+        could be the following.
+
+        - date_from: 2022-01-01
+
+        - date_to: 2022-01-31
+
+
+        Also the dates
+
+        - date_from: 2022-01-10
+
+        - date_to: 2022-01-12
+
+
+        would achieve the same effect.'
+      parameters:
+      - in: query
+        name: date_from
+        schema:
+          type: string
+          format: date-time
+        required: true
+      - in: query
+        name: date_to
+        schema:
+          type: string
+          format: date-time
+        required: true
+      tags:
+      - Billingstatistics
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+      summary: Api billingstatistics excel report retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    BillingStatisticsCost:
+      type: object
+      description: 'Serializer for the billing statistics by billing account.
+
+
+        Plus additional billing costs.'
+      properties:
+        max_usage:
+          type: integer
+        min_usage:
+          type: integer
+        avg_usage:
+          type: integer
+        billing_account_id:
+          type: integer
+        storage:
+          type: number
+          format: double
+          default: 0.0
+        compute:
+          type: number
+          format: double
+          default: 0.0
+      required:
+      - billing_account_id
+    BillingStatisticsCollection:
+      type: object
+      description: Serializer for the billing statistics by collection.
+      properties:
+        max_usage:
+          type: integer
+        min_usage:
+          type: integer
+        avg_usage:
+          type: integer
+        collection_id:
+          type: integer
+        created:
+          type: string
+          format: date-time
+      required:
+      - collection_id
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

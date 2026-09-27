@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Versions API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Versions
+paths:
+  /api/versions:
+    get:
+      operationId: api_versions_retrieve
+      description: Return the versions of the installed Genialis packages.
+      tags:
+      - Versions
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Versions'
+          description: ''
+      summary: Api versions retrieve
+      x-summary-source: derived
+components:
+  schemas:
+    Versions:
+      type: object
+      properties:
+        resolwe:
+          type: string
+          readOnly: true
+        resolwe-bio:
+          type: string
+          readOnly: true
+        genialis-bio:
+          type: string
+          readOnly: true
+      required:
+      - genialis-bio
+      - resolwe
+      - resolwe-bio
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

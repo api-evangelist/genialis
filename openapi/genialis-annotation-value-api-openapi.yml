@@ -1,0 +1,917 @@
+openapi: 3.2.0
+info:
+  title: Genialis base Annotation Value API
+  version: 0.0.0
+  description: Backend of the Genialis platform.
+servers:
+- url: https://app.genialis.com
+  description: Base URL declared by the provider in apis.yml (roadmap#122).
+tags:
+- name: Annotation Value
+paths:
+  /api/annotation_value:
+    get:
+      operationId: api_annotation_value_list
+      description: Annotation value viewset.
+      parameters:
+      - in: query
+        name: contributor
+        schema:
+          type: integer
+      - in: query
+        name: contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity
+        schema:
+          type: integer
+      - in: query
+        name: entity__annotations
+        schema:
+          type: string
+      - in: query
+        name: entity__basket
+        schema:
+          type: string
+      - in: query
+        name: entity__collection
+        schema:
+          type: integer
+      - in: query
+        name: entity__collection__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__collection__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__collection__name
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__collection__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__collection__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__collection__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__contributor
+        schema:
+          type: integer
+      - in: query
+        name: entity__contributor__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__contributor_name
+        schema:
+          type: string
+      - in: query
+        name: entity__created
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: entity__created__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__created__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__created__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity__description
+        schema:
+          type: string
+      - in: query
+        name: entity__description__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__description__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__description__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__description__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__description__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__description__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__description__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__group
+        schema:
+          type: string
+      - in: query
+        name: entity__gt
+        schema:
+          type: integer
+      - in: query
+        name: entity__gte
+        schema:
+          type: integer
+      - in: query
+        name: entity__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__lt
+        schema:
+          type: integer
+      - in: query
+        name: entity__lte
+        schema:
+          type: integer
+      - in: query
+        name: entity__modified
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: entity__modified__gt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__gte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__modified__lt
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__lte
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: entity__modified__time
+        schema:
+          type: string
+          format: time
+      - in: query
+        name: entity__name
+        schema:
+          type: string
+      - in: query
+        name: entity__name__contains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: entity__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: entity__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: entity__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: entity__owners
+        schema:
+          type: integer
+      - in: query
+        name: entity__owners_name
+        schema:
+          type: string
+      - in: query
+        name: entity__permission
+        schema:
+          type: string
+      - in: query
+        name: entity__relation_id
+        schema:
+          type: integer
+      - in: query
+        name: entity__shared_with_me
+        schema:
+          type: boolean
+      - in: query
+        name: entity__slug
+        schema:
+          type: string
+      - in: query
+        name: entity__slug__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__status
+        schema:
+          type: string
+      - in: query
+        name: entity__status__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__tags
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__type
+        schema:
+          type: string
+      - in: query
+        name: entity__version
+        schema:
+          type: string
+      - in: query
+        name: entity__version__gt
+        schema:
+          type: string
+      - in: query
+        name: entity__version__gte
+        schema:
+          type: string
+      - in: query
+        name: entity__version__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: entity__version__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: entity__version__lt
+        schema:
+          type: string
+      - in: query
+        name: entity__version__lte
+        schema:
+          type: string
+      - in: query
+        name: field__group__name
+        schema:
+          type: string
+      - in: query
+        name: field__group__name__contains
+        schema:
+          type: string
+      - in: query
+        name: field__group__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: field__group__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: field__group__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: field__group__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: field__group__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: field__group__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: field__id
+        schema:
+          type: integer
+      - in: query
+        name: field__id__gt
+        schema:
+          type: integer
+      - in: query
+        name: field__id__gte
+        schema:
+          type: integer
+      - in: query
+        name: field__id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: field__id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: field__id__lt
+        schema:
+          type: integer
+      - in: query
+        name: field__id__lte
+        schema:
+          type: integer
+      - in: query
+        name: field__label
+        schema:
+          type: string
+      - in: query
+        name: field__label__contains
+        schema:
+          type: string
+      - in: query
+        name: field__label__icontains
+        schema:
+          type: string
+      - in: query
+        name: field__label__iexact
+        schema:
+          type: string
+      - in: query
+        name: field__label__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: field__label__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: field__label__istartswith
+        schema:
+          type: string
+      - in: query
+        name: field__label__startswith
+        schema:
+          type: string
+      - in: query
+        name: field__name
+        schema:
+          type: string
+      - in: query
+        name: field__name__contains
+        schema:
+          type: string
+      - in: query
+        name: field__name__icontains
+        schema:
+          type: string
+      - in: query
+        name: field__name__iexact
+        schema:
+          type: string
+      - in: query
+        name: field__name__in
+        schema:
+          type: array
+          items:
+            type: string
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: field__name__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: field__name__istartswith
+        schema:
+          type: string
+      - in: query
+        name: field__name__startswith
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: id__gt
+        schema:
+          type: integer
+      - in: query
+        name: id__gte
+        schema:
+          type: integer
+      - in: query
+        name: id__in
+        schema:
+          type: array
+          items:
+            type: integer
+        description: Multiple values may be separated by commas.
+        explode: false
+        style: form
+      - in: query
+        name: id__isnull
+        schema:
+          type: boolean
+      - in: query
+        name: id__lt
+        schema:
+          type: integer
+      - in: query
+        name: id__lte
+        schema:
+          type: integer
+      - in: query
+        name: label
+        schema:
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      tags:
+      - Annotation Value
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAnnotationValueList'
+          description: ''
+      summary: Api annotation value list
+      x-summary-source: derived
+    post:
+      operationId: api_annotation_value_create
+      description: Create a resource.
+      tags:
+      - Annotation Value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationValue'
+          description: ''
+      summary: Api annotation value create
+      x-summary-source: derived
+  /api/annotation_value/{id}:
+    get:
+      operationId: api_annotation_value_retrieve
+      description: Annotation value viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this annotation value.
+        required: true
+      tags:
+      - Annotation Value
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationValue'
+          description: ''
+      summary: Api annotation value retrieve
+      x-summary-source: derived
+    put:
+      operationId: api_annotation_value_update
+      description: 'Update annotation value(s).
+
+
+        When posting multiple values, the request is treated as a bulk update. The bulk
+
+        update can create or delete values. Values are deleted when the value is set to
+
+        None.'
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this annotation value.
+        required: true
+      tags:
+      - Annotation Value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AnnotationValue'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationValue'
+          description: ''
+      summary: Api annotation value update
+      x-summary-source: derived
+    patch:
+      operationId: api_annotation_value_partial_update
+      description: Deny the partial updates of annotation values.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this annotation value.
+        required: true
+      tags:
+      - Annotation Value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAnnotationValue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAnnotationValue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAnnotationValue'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationValue'
+          description: ''
+      summary: Api annotation value partial update
+      x-summary-source: derived
+    delete:
+      operationId: api_annotation_value_destroy
+      description: Annotation value viewset.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this annotation value.
+        required: true
+      tags:
+      - Annotation Value
+      security:
+      - cookieAuth: []
+      responses:
+        '204':
+          description: No response body
+      summary: Api annotation value destroy
+      x-summary-source: derived
+components:
+  schemas:
+    PatchedAnnotationValue:
+      type: object
+      description: Serializer for AnnotationValue objects.
+      properties:
+        label:
+          description: Return the cached label.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: number
+            format: double
+          - type: string
+            format: date
+          description: Get the actual value or None if object is delete marker.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
+    PaginatedAnnotationValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationValue'
+    AnnotationValue:
+      type: object
+      description: Serializer for AnnotationValue objects.
+      properties:
+        label:
+          description: Return the cached label.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: number
+            format: double
+          - type: string
+            format: date
+          description: Get the actual value or None if object is delete marker.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
+      required:
+      - contributor
+      - created
+      - entity
+      - field
+      - id
+      - label
+      - value
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
