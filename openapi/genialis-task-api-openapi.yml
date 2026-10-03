@@ -186,20 +186,32 @@ components:
           format: uuid
       required:
       - subscription_id
-    BackgroundTaskStatusEnum:
-      enum:
-      - WT
-      - PR
-      - OK
-      - ER
-      type: string
-      description: '* `WT` - Waiting
-
-        * `PR` - Processing
-
-        * `OK` - Done
-
-        * `ER` - Error'
+    BackgroundTask:
+      type: object
+      description: Serialize the BackgroundTask model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/BackgroundTaskStatusEnum'
+        description:
+          type: string
+          maxLength: 256
+        output: {}
+      required:
+      - description
+      - id
     PaginatedBackgroundTaskList:
       type: object
       required:
@@ -239,32 +251,20 @@ components:
           type: string
       required:
       - session_id
-    BackgroundTask:
-      type: object
-      description: Serialize the BackgroundTask model.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        started:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        finished:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          $ref: '#/components/schemas/BackgroundTaskStatusEnum'
-        description:
-          type: string
-          maxLength: 256
-        output: {}
-      required:
-      - description
-      - id
+    BackgroundTaskStatusEnum:
+      enum:
+      - WT
+      - PR
+      - OK
+      - ER
+      type: string
+      description: '* `WT` - Waiting
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error'
   securitySchemes:
     cookieAuth:
       type: apiKey

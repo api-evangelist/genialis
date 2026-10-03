@@ -374,27 +374,62 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Contributor:
+    PatchedDataAccessToken:
       type: object
-      description: Serializer for contributor User objects.
+      description: Serializer for ``DataAccessToken``.
       properties:
-        first_name:
+        description:
           type: string
-          maxLength: 150
-        id:
-          type: integer
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        permissions:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
           readOnly: true
-        last_name:
+        revoked:
           type: string
-          maxLength: 150
-        username:
+          format: date-time
+          readOnly: true
+    DataAccessToken:
+      type: object
+      description: Serializer for ``DataAccessToken``.
+      properties:
+        description:
           type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
+          type: array
+          items:
+            type: integer
+        permissions:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        revoked:
+          type: string
+          format: date-time
+          readOnly: true
       required:
-      - id
-      - username
+      - created
+      - data
+      - permissions
+      - revoked
+      - user
     DataAccessTokenCreate:
       type: object
       description: Serializer for creating ``DataAccessToken``.
@@ -428,62 +463,6 @@ components:
       - permissions
       - revoked
       - user
-    DataAccessToken:
-      type: object
-      description: Serializer for ``DataAccessToken``.
-      properties:
-        description:
-          type: string
-        user:
-          $ref: '#/components/schemas/Contributor'
-        data:
-          type: array
-          items:
-            type: integer
-        permissions:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        revoked:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - created
-      - data
-      - permissions
-      - revoked
-      - user
-    PatchedDataAccessToken:
-      type: object
-      description: Serializer for ``DataAccessToken``.
-      properties:
-        description:
-          type: string
-        user:
-          $ref: '#/components/schemas/Contributor'
-        data:
-          type: array
-          items:
-            type: integer
-        permissions:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        revoked:
-          type: string
-          format: date-time
-          readOnly: true
     PaginatedDataAccessTokenList:
       type: object
       required:
@@ -509,6 +488,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataAccessToken'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
   securitySchemes:
     cookieAuth:
       type: apiKey

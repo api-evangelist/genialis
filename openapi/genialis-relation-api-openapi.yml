@@ -435,6 +435,121 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    BlankEnum:
+      enum:
+      - ''
+    RelationPartition:
+      type: object
+      description: Serializer for RelationPartition objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        position:
+          type:
+          - integer
+          - 'null'
+          maximum: 32767
+          minimum: 0
+        label:
+          type:
+          - string
+          - 'null'
+          maxLength: 30
+      required:
+      - entity
+      - id
+    PatchedRelation:
+      type: object
+      description: Serializer for Relation objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        descriptor_dirty:
+          type: boolean
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        type:
+          type: string
+        collection:
+          $ref: '#/components/schemas/RelationshipDict'
+        category:
+          type: string
+          maxLength: 100
+        partitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationPartition'
+        slug:
+          type:
+          - string
+          - 'null'
+        unit:
+          oneOf:
+          - $ref: '#/components/schemas/UnitEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        descriptor: {}
+        descriptor_schema:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipDict'
+    UnitEnum:
+      enum:
+      - s
+      - min
+      - hr
+      - d
+      - wk
+      type: string
+      description: '* `s` - Second
+
+        * `min` - Minute
+
+        * `hr` - Hour
+
+        * `d` - Day
+
+        * `wk` - Week'
+    NullEnum:
+      enum:
+      - null
+    PaginatedRelationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
     Relation:
       type: object
       description: Serializer for Relation objects.
@@ -489,49 +604,6 @@ components:
       - modified
       - partitions
       - type
-    UnitEnum:
-      enum:
-      - s
-      - min
-      - hr
-      - d
-      - wk
-      type: string
-      description: '* `s` - Second
-
-        * `min` - Minute
-
-        * `hr` - Hour
-
-        * `d` - Day
-
-        * `wk` - Week'
-    NullEnum:
-      enum:
-      - null
-    RelationPartition:
-      type: object
-      description: Serializer for RelationPartition objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        entity:
-          type: integer
-        position:
-          type:
-          - integer
-          - 'null'
-          maximum: 32767
-          minimum: 0
-        label:
-          type:
-          - string
-          - 'null'
-          maxLength: 30
-      required:
-      - entity
-      - id
     Contributor:
       type: object
       description: Serializer for contributor User objects.
@@ -553,78 +625,6 @@ components:
       required:
       - id
       - username
-    BlankEnum:
-      enum:
-      - ''
-    PaginatedRelationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
-    PatchedRelation:
-      type: object
-      description: Serializer for Relation objects.
-      properties:
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        modified:
-          type: string
-          format: date-time
-          readOnly: true
-        descriptor_dirty:
-          type: boolean
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        type:
-          type: string
-        collection:
-          $ref: '#/components/schemas/RelationshipDict'
-        category:
-          type: string
-          maxLength: 100
-        partitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelationPartition'
-        slug:
-          type:
-          - string
-          - 'null'
-        unit:
-          oneOf:
-          - $ref: '#/components/schemas/UnitEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
-        descriptor: {}
-        descriptor_schema:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipDict'
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.

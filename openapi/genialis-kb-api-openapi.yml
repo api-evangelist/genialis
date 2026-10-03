@@ -671,6 +671,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SubTypeEnum:
+      enum:
+      - protein-coding
+      - pseudo
+      - rRNA
+      - ncRNA
+      - snRNA
+      - snoRNA
+      - tRNA
+      - asRNA
+      - other
+      - unknown
+      type: string
+      description: '* `protein-coding` - Protein-coding
+
+        * `pseudo` - Pseudo
+
+        * `rRNA` - rRNA
+
+        * `ncRNA` - ncRNA
+
+        * `snRNA` - snRNA
+
+        * `snoRNA` - snoRNA
+
+        * `tRNA` - tRNA
+
+        * `asRNA` - asRNA
+
+        * `other` - Other
+
+        * `unknown` - Unknown'
     RelationTypeEnum:
       enum:
       - crossdb
@@ -685,42 +717,45 @@ components:
         * `transcript` - Transcript
 
         * `exon` - Exon'
-    Mapping:
+    PaginatedFeatureList:
       type: object
-      description: Serializer for mapping.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        relation_type:
-          $ref: '#/components/schemas/RelationTypeEnum'
-        source_db:
-          type: string
-          maxLength: 20
-        source_id:
-          type: string
-          maxLength: 50
-        source_species:
-          type: string
-          maxLength: 50
-        target_db:
-          type: string
-          maxLength: 20
-        target_id:
-          type: string
-          maxLength: 50
-        target_species:
-          type: string
-          maxLength: 50
       required:
-      - id
-      - relation_type
-      - source_db
-      - source_id
-      - source_species
-      - target_db
-      - target_id
-      - target_species
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+    FeatureTypeEnum:
+      enum:
+      - gene
+      - transcript
+      - exon
+      - probe
+      type: string
+      description: '* `gene` - Gene
+
+        * `transcript` - Transcript
+
+        * `exon` - Exon
+
+        * `probe` - Probe'
     PaginatedMappingList:
       type: object
       required:
@@ -746,20 +781,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Mapping'
-    FeatureTypeEnum:
-      enum:
-      - gene
-      - transcript
-      - exon
-      - probe
-      type: string
-      description: '* `gene` - Gene
-
-        * `transcript` - Transcript
-
-        * `exon` - Exon
-
-        * `probe` - Probe'
     Feature:
       type: object
       description: Serializer for feature.
@@ -801,63 +822,42 @@ components:
       - species
       - sub_type
       - type
-    PaginatedFeatureList:
+    Mapping:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for mapping.
       properties:
-        count:
+        id:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-    SubTypeEnum:
-      enum:
-      - protein-coding
-      - pseudo
-      - rRNA
-      - ncRNA
-      - snRNA
-      - snoRNA
-      - tRNA
-      - asRNA
-      - other
-      - unknown
-      type: string
-      description: '* `protein-coding` - Protein-coding
-
-        * `pseudo` - Pseudo
-
-        * `rRNA` - rRNA
-
-        * `ncRNA` - ncRNA
-
-        * `snRNA` - snRNA
-
-        * `snoRNA` - snoRNA
-
-        * `tRNA` - tRNA
-
-        * `asRNA` - asRNA
-
-        * `other` - Other
-
-        * `unknown` - Unknown'
+          readOnly: true
+        relation_type:
+          $ref: '#/components/schemas/RelationTypeEnum'
+        source_db:
+          type: string
+          maxLength: 20
+        source_id:
+          type: string
+          maxLength: 50
+        source_species:
+          type: string
+          maxLength: 50
+        target_db:
+          type: string
+          maxLength: 20
+        target_id:
+          type: string
+          maxLength: 50
+        target_species:
+          type: string
+          maxLength: 50
+      required:
+      - id
+      - relation_type
+      - source_db
+      - source_id
+      - source_species
+      - target_db
+      - target_id
+      - target_species
   securitySchemes:
     cookieAuth:
       type: apiKey

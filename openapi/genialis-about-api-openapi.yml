@@ -64,22 +64,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Resources:
-      type: object
-      description: Serialize the platform resource information.
-      properties:
-        max_memory:
-          type: integer
-        max_cores:
-          type: integer
-        max_storage:
-          type: integer
-        min_memory:
-          type: integer
-        min_cores:
-          type: integer
-        min_storage:
-          type: integer
     Versions:
       type: object
       properties:
@@ -96,6 +80,22 @@ components:
       - genialis-bio
       - resolwe
       - resolwe-bio
+    Resources:
+      type: object
+      description: Serialize the platform resource information.
+      properties:
+        max_memory:
+          type: integer
+        max_cores:
+          type: integer
+        max_storage:
+          type: integer
+        min_memory:
+          type: integer
+        min_cores:
+          type: integer
+        min_storage:
+          type: integer
     ReSDKMinimalSupportedVersion:
       type: object
       description: Serialize minimal supporter resdk version.

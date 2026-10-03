@@ -1554,43 +1554,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VariantExperiment:
-      type: object
-      description: Serializer for VariantExperiment objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        variant_data_source:
-          type: string
-          maxLength: 100
-      required:
-      - contributor
-      - id
-      - timestamp
-      - variant_data_source
-    PatchedVariantExperiment:
-      type: object
-      description: Serializer for VariantExperiment objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        variant_data_source:
-          type: string
-          maxLength: 100
     Contributor:
       type: object
       description: Serializer for contributor User objects.
@@ -1612,6 +1575,27 @@ components:
       required:
       - id
       - username
+    VariantExperiment:
+      type: object
+      description: Serializer for VariantExperiment objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        variant_data_source:
+          type: string
+          maxLength: 100
+      required:
+      - contributor
+      - id
+      - timestamp
+      - variant_data_source
     PaginatedVariantExperimentList:
       type: object
       required:
@@ -1637,6 +1621,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VariantExperiment'
+    PatchedVariantExperiment:
+      type: object
+      description: Serializer for VariantExperiment objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        variant_data_source:
+          type: string
+          maxLength: 100
   securitySchemes:
     cookieAuth:
       type: apiKey

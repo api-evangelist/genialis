@@ -790,6 +790,68 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    AnnotationValue:
+      type: object
+      description: Serializer for AnnotationValue objects.
+      properties:
+        label:
+          description: Return the cached label.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: number
+            format: double
+          - type: string
+            format: date
+          description: Get the actual value or None if object is delete marker.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
+      required:
+      - contributor
+      - created
+      - entity
+      - field
+      - id
+      - label
+      - value
     PatchedAnnotationValue:
       type: object
       description: Serializer for AnnotationValue objects.
@@ -848,68 +910,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnnotationValue'
-    AnnotationValue:
-      type: object
-      description: Serializer for AnnotationValue objects.
-      properties:
-        label:
-          description: Return the cached label.
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        entity:
-          type: integer
-        field:
-          type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        value:
-          oneOf:
-          - type: string
-          - type: integer
-          - type: number
-            format: double
-          - type: string
-            format: date
-          description: Get the actual value or None if object is delete marker.
-          readOnly: true
-        _value:
-          writeOnly: true
-          title: ' value'
-      required:
-      - contributor
-      - created
-      - entity
-      - field
-      - id
-      - label
-      - value
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
   securitySchemes:
     cookieAuth:
       type: apiKey

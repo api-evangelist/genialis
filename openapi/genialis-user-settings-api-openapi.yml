@@ -402,6 +402,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ParameterPreset:
+      type: object
+      description: Serializer for :class:`ParameterPreset` model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          type: integer
+        process:
+          type: integer
+        input_preset: {}
+      required:
+      - contributor
+      - created
+      - id
+      - modified
+      - name
+      - process
     PatchedParameterPreset:
       type: object
       description: Serializer for :class:`ParameterPreset` model.
@@ -450,36 +480,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ParameterPreset'
-    ParameterPreset:
-      type: object
-      description: Serializer for :class:`ParameterPreset` model.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        modified:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          type: integer
-        process:
-          type: integer
-        input_preset: {}
-      required:
-      - contributor
-      - created
-      - id
-      - modified
-      - name
-      - process
   securitySchemes:
     cookieAuth:
       type: apiKey

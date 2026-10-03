@@ -302,6 +302,41 @@ components:
           items:
             $ref: '#/components/schemas/CurrentUserPermissions'
           readOnly: true
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
     PaginatedPredictionPresetSerializerWithPermissionsList:
       type: object
       required:
@@ -327,27 +362,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
-    Contributor:
+    PredictionPresetSerializerWithPermissions:
       type: object
-      description: Serializer for contributor User objects.
+      description: Serializer for PredictionPreset objects.
       properties:
-        first_name:
-          type: string
-          maxLength: 150
         id:
           type: integer
           readOnly: true
-        last_name:
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        name:
           type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
+        fields:
+          type: array
+          items:
+            type: integer
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
       required:
+      - contributor
+      - current_user_permissions
       - id
-      - username
     Permission:
       type: object
       description: 'Permission serializer.
@@ -389,65 +427,6 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
-    PredictionPresetSerializerWithPermissions:
-      type: object
-      description: Serializer for PredictionPreset objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        name:
-          type: string
-        fields:
-          type: array
-          items:
-            type: integer
-        current_user_permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrentUserPermissions'
-          readOnly: true
-      required:
-      - contributor
-      - current_user_permissions
-      - id
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
-    CurrentUserPermissions:
-      type: object
-      description: Current user permissions serializer.
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
-        name:
-          type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
     CurrentUserPermissionsTypeEnum:
       enum:
       - user
@@ -476,6 +455,27 @@ components:
         * `share` - share
 
         * `owner` - owner'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -790,47 +790,52 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedPredictionValue:
+    Contributor:
       type: object
-      description: Serializer for PredictionValue objects.
+      description: Serializer for contributor User objects.
       properties:
-        created:
+        first_name:
           type: string
-          format: date-time
-          readOnly: true
+          maxLength: 150
         id:
           type: integer
           readOnly: true
-        entity:
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    PaginatedPredictionValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
           type: integer
-        field:
-          type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        value:
-          oneOf:
-          - type: object
-            properties:
-              class_:
-                type: string
-              probability:
-                type: number
-                format: double
-            required:
-            - class_
-            - probability
-          - type: object
-            properties:
-              score:
-                type: number
-                format: double
-            required:
-            - score
-          description: Get the actual value.
-          readOnly: true
-        _value:
-          writeOnly: true
-          title: ' value'
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionValue'
     PredictionValue:
       type: object
       description: Serializer for PredictionValue objects.
@@ -879,52 +884,47 @@ components:
       - field
       - id
       - value
-    Contributor:
+    PatchedPredictionValue:
       type: object
-      description: Serializer for contributor User objects.
+      description: Serializer for PredictionValue objects.
       properties:
-        first_name:
+        created:
           type: string
-          maxLength: 150
+          format: date-time
+          readOnly: true
         id:
           type: integer
           readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    PaginatedPredictionValueList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
+        entity:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionValue'
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: object
+            properties:
+              class_:
+                type: string
+              probability:
+                type: number
+                format: double
+            required:
+            - class_
+            - probability
+          - type: object
+            properties:
+              score:
+                type: number
+                format: double
+            required:
+            - score
+          description: Get the actual value.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
   securitySchemes:
     cookieAuth:
       type: apiKey

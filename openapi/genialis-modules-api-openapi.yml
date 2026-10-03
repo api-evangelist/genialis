@@ -3103,74 +3103,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    AggregatedExpressionBoxPlot:
-      type: object
-      description: Aggregated expression box plot serializer.
-      properties:
-        attribute:
-          type: string
-        gene:
-          type: string
-        exp_types:
-          type: array
-          items: {}
-        min:
-          type: number
-          format: double
-        max:
-          type: number
-          format: double
-        median:
-          type: number
-          format: double
-        q1:
-          type: number
-          format: double
-        q3:
-          type: number
-          format: double
-        lowerwhisker:
-          type: number
-          format: double
-        upperwhisker:
-          type: number
-          format: double
-        data_count:
-          type: integer
-      required:
-      - attribute
-      - data_count
-      - exp_types
-      - gene
-      - lowerwhisker
-      - max
-      - median
-      - min
-      - q1
-      - q3
-      - upperwhisker
-    PaginatedExpressionsList:
+    PaginatedProcessList:
       type: object
       required:
       - count
@@ -3194,72 +3127,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Expressions'
-    PaginatedAggregatedExpressionBoxPlotList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregatedExpressionBoxPlot'
-    PaginatedExpressionBoxPlotList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExpressionBoxPlot'
-    CollectionSpecies:
-      type: object
-      description: Species serializer.
-      properties:
-        collection_id:
-          type: integer
-        species:
-          type: array
-          items:
-            type: string
-          description: Return a list of species.
-          readOnly: true
-      required:
-      - collection_id
-      - species
+            $ref: '#/components/schemas/Process'
     GenesetSearchSerializerWithPermissions:
       type: object
       description: Serialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
@@ -3422,20 +3290,22 @@ components:
       - source
       - started
       - status
-    DifferentialExpressionsDeserializer:
+    CollectionSpecies:
       type: object
-      description: Deserialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
+      description: Species serializer.
       properties:
-        basket:
-          type: string
-          format: uuid
-        source:
-          type: string
+        collection_id:
+          type: integer
         species:
-          type: string
-        filter_de_by_basket:
-          type: boolean
-    PaginatedGenesetSearchSerializerWithPermissionsList:
+          type: array
+          items:
+            type: string
+          description: Return a list of species.
+          readOnly: true
+      required:
+      - collection_id
+      - species
+    PaginatedExpressionBoxPlotList:
       type: object
       required:
       - count
@@ -3459,58 +3329,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/GenesetSearchSerializerWithPermissions'
-    Heatmap:
-      type: object
-      description: Heatmap serializer.
-      properties:
-        sample_id:
-          type: integer
-          description: Return sample id.
-          readOnly: true
-        sample_name:
-          type: string
-          description: Return sample name.
-          readOnly: true
-        gene:
-          type: string
-        expression:
-          type: number
-          format: double
-        expression_type:
-          type:
-          - string
-          - 'null'
-          description: Return expression type.
-          readOnly: true
-      required:
-      - expression
-      - expression_type
-      - gene
-      - sample_id
-      - sample_name
-    Expressions:
-      type: object
-      description: Expressions serializer.
-      properties:
-        gene:
-          type: string
-        expression:
-          type: number
-          format: double
-        exp_type:
-          type: string
-        sample:
-          type: string
-        group_by:
-          type: string
-        color_by:
-          type: string
-      required:
-      - exp_type
-      - expression
-      - gene
-      - sample
+            $ref: '#/components/schemas/ExpressionBoxPlot'
     PaginatedHeatmapList:
       type: object
       required:
@@ -3536,72 +3355,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Heatmap'
-    RelationAttribute:
+    AttributeList:
       type: object
-      description: Relation attribute serializer.
+      description: Attribute serializer.
       properties:
-        attribute_type:
-          type: string
-        label:
-          type: string
-        relation_type:
-          type: string
-        relation_category:
-          type: string
-      required:
-      - attribute_type
-      - label
-      - relation_category
-      - relation_type
-    PaginatedSampleList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
+        descriptor_attributes:
           type: array
           items:
-            $ref: '#/components/schemas/Sample'
-    BasketExpressions:
-      type: object
-      description: Basket expressions serializer.
-      properties:
-        id:
-          type: integer
-        exp_type:
-          type: string
-          description: Return expression type.
-          readOnly: true
+            $ref: '#/components/schemas/DescriptorAttribute'
+        relation_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationAttribute'
       required:
-      - exp_type
-      - id
-    CurrentUserPermissionsTypeEnum:
-      enum:
-      - user
-      - group
-      - public
-      type: string
-      description: '* `user` - user
-
-        * `group` - group
-
-        * `public` - public'
+      - descriptor_attributes
+      - relation_attributes
+    DifferentialExpressionsDeserializer:
+      type: object
+      description: Deserialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
+      properties:
+        basket:
+          type: string
+          format: uuid
+        source:
+          type: string
+        species:
+          type: string
+        filter_de_by_basket:
+          type: boolean
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.
@@ -3612,53 +3393,72 @@ components:
           type:
           - string
           - 'null'
-    Statistics:
+    DescriptorAttribute:
       type: object
-      description: Statistics serializer.
+      description: Descriptor attribute serializer.
       properties:
-        name:
+        attribute_type:
           type: string
-        expression:
-          type: number
-          format: double
-        sterr:
-          type: number
-          format: double
-        type:
+        label:
           type: string
+        field_path:
+          type: string
+        group_label:
+          type: string
+          default: ''
+        field_type:
+          type: string
+          default: ''
       required:
-      - expression
-      - name
-      - sterr
-      - type
-    PaginatedProcessList:
+      - attribute_type
+      - field_path
+      - label
+    ExpressionBoxPlot:
       type: object
-      required:
-      - count
-      - results
+      description: ExpressionBoxPlot serializer.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
+        attribute:
+          type: string
+        gene:
+          type: string
+        exp_types:
           type: array
-          items:
-            $ref: '#/components/schemas/Process'
-    ExpressionBoxPlotDeserializer:
+          items: {}
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
+        q1:
+          type: number
+          format: double
+        q3:
+          type: number
+          format: double
+        lowerwhisker:
+          type: number
+          format: double
+        upperwhisker:
+          type: number
+          format: double
+      required:
+      - attribute
+      - exp_types
+      - gene
+      - lowerwhisker
+      - max
+      - median
+      - min
+      - q1
+      - q3
+      - upperwhisker
+    ExpressionsDeserializer:
       type: object
-      description: ExpressionBoxPlot deserializer.
+      description: Expressions deserializer.
       properties:
         gene_ids:
           type: array
@@ -3676,15 +3476,63 @@ components:
           allOf:
           - $ref: '#/components/schemas/AnnotationVersionEnum'
           default: v2
-        attribute:
-          type: object
-          additionalProperties: {}
         basket:
           type: string
           format: uuid
+        group_by:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+        color_by:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
       required:
       - basket
-    PaginatedGeneListList:
+    CaseControlExpressionsDeserializer:
+      type: object
+      description: Serializer for parsing case and control expressions endpoint input.
+      properties:
+        diff_expr_id:
+          type: integer
+        selected_genes:
+          type: array
+          items:
+            type: string
+        highlighted_genes:
+          type: array
+          items:
+            type: string
+        log2:
+          type: boolean
+          default: false
+      required:
+      - diff_expr_id
+      - selected_genes
+    Expression:
+      type: object
+      description: Expression serializer.
+      properties:
+        sample:
+          type: string
+        expression:
+          type: number
+          format: double
+        gene:
+          type: string
+        type:
+          type: string
+        exp_type:
+          type: string
+      required:
+      - exp_type
+      - expression
+      - gene
+      - sample
+      - type
+    PaginatedDifferentialExpressionsSerializerWithPermissionsList:
       type: object
       required:
       - count
@@ -3708,7 +3556,56 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/GeneList'
+            $ref: '#/components/schemas/DifferentialExpressionsSerializerWithPermissions'
+    PaginatedCollectionSpeciesList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionSpecies'
+    Process:
+      type: object
+      description: Process serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 100
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        category:
+          type: string
+          pattern: ^([a-zA-Z0-9]+[:\-])*[a-zA-Z0-9]+:$
+          maxLength: 200
+      required:
+      - id
+      - name
+      - slug
     DifferentialExpressionsSerializerWithPermissions:
       type: object
       description: Serialize ~`genesis.models.differential_expression.models.GeneSetSearch`.
@@ -3865,11 +3762,148 @@ components:
       - size
       - started
       - status
-    AnnotationVersionEnum:
+    PaginatedGeneListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeneList'
+    Statistics:
+      type: object
+      description: Statistics serializer.
+      properties:
+        name:
+          type: string
+        expression:
+          type: number
+          format: double
+        sterr:
+          type: number
+          format: double
+        type:
+          type: string
+      required:
+      - expression
+      - name
+      - sterr
+      - type
+    PermissionsEnum:
       enum:
-      - v2
+      - none
+      - view
+      - edit
+      - share
+      - owner
       type: string
-      description: '* `v2` - v2'
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    DataStatus:
+      enum:
+      - UP
+      - RE
+      - WT
+      - PP
+      - PR
+      - OK
+      - ER
+      - DR
+      type: string
+      description: '* `UP` - Uploading
+
+        * `RE` - Resolving
+
+        * `WT` - Waiting
+
+        * `PP` - Preparing
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error
+
+        * `DR` - Dirty'
+    AttributesDeserializer:
+      type: object
+      description: Serializer for parsing attributes endpoint input.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        sample_ids:
+          type: array
+          items:
+            type: integer
+        basket:
+          type: string
+          format: uuid
+    SampleTableDeserializer:
+      type: object
+      description: Serializer for parsing sample table endpoint input.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        sample_ids:
+          type: array
+          items:
+            type: integer
+        table_column_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - sample_ids
+      - table_column_ids
     PaginatedDataList:
       type: object
       required:
@@ -3895,10 +3929,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Data'
-    AttributesDeserializer:
+    AttributifyDeserializer:
       type: object
-      description: Serializer for parsing attributes endpoint input.
+      description: Serializer for parsing attributify endpoint input.
       properties:
+        attribute: {}
         annotation_version:
           allOf:
           - $ref: '#/components/schemas/AnnotationVersionEnum'
@@ -3910,6 +3945,79 @@ components:
         basket:
           type: string
           format: uuid
+      required:
+      - attribute
+    AggregatedExpressionBoxPlot:
+      type: object
+      description: Aggregated expression box plot serializer.
+      properties:
+        attribute:
+          type: string
+        gene:
+          type: string
+        exp_types:
+          type: array
+          items: {}
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+        median:
+          type: number
+          format: double
+        q1:
+          type: number
+          format: double
+        q3:
+          type: number
+          format: double
+        lowerwhisker:
+          type: number
+          format: double
+        upperwhisker:
+          type: number
+          format: double
+        data_count:
+          type: integer
+      required:
+      - attribute
+      - data_count
+      - exp_types
+      - gene
+      - lowerwhisker
+      - max
+      - median
+      - min
+      - q1
+      - q3
+      - upperwhisker
+    PaginatedExpressionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expressions'
     Data:
       type: object
       description: Serializer for Data objects.
@@ -4043,121 +4151,115 @@ components:
       - size
       - started
       - status
-    ExpressionBoxPlot:
+    BasketExpressions:
       type: object
-      description: ExpressionBoxPlot serializer.
+      description: Basket expressions serializer.
       properties:
-        attribute:
+        id:
+          type: integer
+        exp_type:
           type: string
-        gene:
-          type: string
-        exp_types:
-          type: array
-          items: {}
-        min:
-          type: number
-          format: double
-        max:
-          type: number
-          format: double
-        median:
-          type: number
-          format: double
-        q1:
-          type: number
-          format: double
-        q3:
-          type: number
-          format: double
-        lowerwhisker:
-          type: number
-          format: double
-        upperwhisker:
-          type: number
-          format: double
+          description: Return expression type.
+          readOnly: true
       required:
-      - attribute
-      - exp_types
-      - gene
-      - lowerwhisker
-      - max
-      - median
-      - min
-      - q1
-      - q3
-      - upperwhisker
-    AttributifyDeserializer:
+      - exp_type
+      - id
+    AnnotationVersionEnum:
+      enum:
+      - v2
+      type: string
+      description: '* `v2` - v2'
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    ExpressionBoxPlotDeserializer:
       type: object
-      description: Serializer for parsing attributify endpoint input.
+      description: ExpressionBoxPlot deserializer.
       properties:
-        attribute: {}
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
         annotation_version:
           allOf:
           - $ref: '#/components/schemas/AnnotationVersionEnum'
           default: v2
-        sample_ids:
-          type: array
-          items:
-            type: integer
+        attribute:
+          type: object
+          additionalProperties: {}
         basket:
           type: string
           format: uuid
       required:
-      - attribute
-    Sample:
+      - basket
+    Expressions:
       type: object
-      description: Sample serializer.
+      description: Expressions serializer.
+      properties:
+        gene:
+          type: string
+        expression:
+          type: number
+          format: double
+        exp_type:
+          type: string
+        sample:
+          type: string
+        group_by:
+          type: string
+        color_by:
+          type: string
+      required:
+      - exp_type
+      - expression
+      - gene
+      - sample
+    Heatmap:
+      type: object
+      description: Heatmap serializer.
       properties:
         sample_id:
           type: integer
+          description: Return sample id.
+          readOnly: true
         sample_name:
           type: string
-        attribute:
+          description: Return sample name.
+          readOnly: true
+        gene:
           type: string
+        expression:
+          type: number
+          format: double
+        expression_type:
+          type:
+          - string
+          - 'null'
+          description: Return expression type.
+          readOnly: true
       required:
-      - attribute
+      - expression
+      - expression_type
+      - gene
       - sample_id
       - sample_name
-    CaseControlExpressionsDeserializer:
-      type: object
-      description: Serializer for parsing case and control expressions endpoint input.
-      properties:
-        diff_expr_id:
-          type: integer
-        selected_genes:
-          type: array
-          items:
-            type: string
-        highlighted_genes:
-          type: array
-          items:
-            type: string
-        log2:
-          type: boolean
-          default: false
-      required:
-      - diff_expr_id
-      - selected_genes
-    SampleTableDeserializer:
-      type: object
-      description: Serializer for parsing sample table endpoint input.
-      properties:
-        annotation_version:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationVersionEnum'
-          default: v2
-        sample_ids:
-          type: array
-          items:
-            type: integer
-        table_column_ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - sample_ids
-      - table_column_ids
-    PaginatedBasketExpressionsList:
+    PaginatedGenesetSearchSerializerWithPermissionsList:
       type: object
       required:
       - count
@@ -4181,115 +4283,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/BasketExpressions'
-    CurrentUserPermissions:
-      type: object
-      description: Current user permissions serializer.
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
-        name:
-          type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
-    Expression:
-      type: object
-      description: Expression serializer.
-      properties:
-        sample:
-          type: string
-        expression:
-          type: number
-          format: double
-        gene:
-          type: string
-        type:
-          type: string
-        exp_type:
-          type: string
-      required:
-      - exp_type
-      - expression
-      - gene
-      - sample
-      - type
-    ExpressionsDeserializer:
-      type: object
-      description: Expressions deserializer.
-      properties:
-        gene_ids:
-          type: array
-          items:
-            type: string
-        source:
-          type:
-          - string
-          - 'null'
-        species:
-          type:
-          - string
-          - 'null'
-        annotation_version:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationVersionEnum'
-          default: v2
-        basket:
-          type: string
-          format: uuid
-        group_by:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-        color_by:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-      required:
-      - basket
-    GeneList:
-      type: object
-      description: Gene list serializer.
-      properties:
-        feature_id:
-          type: string
-        name:
-          type: string
-        full_name:
-          type: string
-      required:
-      - feature_id
-      - full_name
-      - name
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
+            $ref: '#/components/schemas/GenesetSearchSerializerWithPermissions'
     PaginatedRose2List:
       type: object
       required:
@@ -4315,68 +4309,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Rose2'
-    DescriptorAttribute:
+    Sample:
       type: object
-      description: Descriptor attribute serializer.
+      description: Sample serializer.
       properties:
-        attribute_type:
+        sample_id:
+          type: integer
+        sample_name:
           type: string
-        label:
+        attribute:
           type: string
-        field_path:
-          type: string
-        group_label:
-          type: string
-          default: ''
-        field_type:
-          type: string
-          default: ''
       required:
-      - attribute_type
-      - field_path
-      - label
-    DataStatus:
-      enum:
-      - UP
-      - RE
-      - WT
-      - PP
-      - PR
-      - OK
-      - ER
-      - DR
-      type: string
-      description: '* `UP` - Uploading
-
-        * `RE` - Resolving
-
-        * `WT` - Waiting
-
-        * `PP` - Preparing
-
-        * `PR` - Processing
-
-        * `OK` - Done
-
-        * `ER` - Error
-
-        * `DR` - Dirty'
-    AttributeList:
-      type: object
-      description: Attribute serializer.
-      properties:
-        descriptor_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/DescriptorAttribute'
-        relation_attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelationAttribute'
-      required:
-      - descriptor_attributes
-      - relation_attributes
-    PaginatedCollectionSpeciesList:
+      - attribute
+      - sample_id
+      - sample_name
+    PaginatedBasketExpressionsList:
       type: object
       required:
       - count
@@ -4400,7 +4347,169 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/CollectionSpecies'
+            $ref: '#/components/schemas/BasketExpressions'
+    GeneIds:
+      type: object
+      description: 'Serializer for gene_ids query parameter.
+
+
+        Enforce that if gene_ids are specified, source and species are also.'
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+    HeatmapDeserializer:
+      type: object
+      description: Heatmap deserializer.
+      properties:
+        gene_ids:
+          type: array
+          items:
+            type: string
+        source:
+          type:
+          - string
+          - 'null'
+        species:
+          type:
+          - string
+          - 'null'
+        sample_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - sample_ids
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
+    PaginatedSampleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sample'
+    RelationAttribute:
+      type: object
+      description: Relation attribute serializer.
+      properties:
+        attribute_type:
+          type: string
+        label:
+          type: string
+        relation_type:
+          type: string
+        relation_category:
+          type: string
+      required:
+      - attribute_type
+      - label
+      - relation_category
+      - relation_type
+    GeneList:
+      type: object
+      description: Gene list serializer.
+      properties:
+        feature_id:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+      required:
+      - feature_id
+      - full_name
+      - name
+    CaseControlExpressions:
+      type: object
+      description: CaseControlExpressions serializer.
+      properties:
+        expressions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Expression'
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Statistics'
+        exceptions:
+          type: array
+          items: {}
+      required:
+      - exceptions
+      - expressions
+      - stats
+    PaginatedAggregatedExpressionBoxPlotList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedExpressionBoxPlot'
     Rose2:
       type: object
       description: Rose2 serializer.
@@ -4425,115 +4534,6 @@ components:
       - id
       - name
       - slug
-    CaseControlExpressions:
-      type: object
-      description: CaseControlExpressions serializer.
-      properties:
-        expressions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Expression'
-        stats:
-          type: array
-          items:
-            $ref: '#/components/schemas/Statistics'
-        exceptions:
-          type: array
-          items: {}
-      required:
-      - exceptions
-      - expressions
-      - stats
-    Process:
-      type: object
-      description: Process serializer.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        slug:
-          type: string
-          maxLength: 100
-          pattern: ^[-a-zA-Z0-9_]+$
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type: string
-        category:
-          type: string
-          pattern: ^([a-zA-Z0-9]+[:\-])*[a-zA-Z0-9]+:$
-          maxLength: 200
-      required:
-      - id
-      - name
-      - slug
-    GeneIds:
-      type: object
-      description: 'Serializer for gene_ids query parameter.
-
-
-        Enforce that if gene_ids are specified, source and species are also.'
-      properties:
-        gene_ids:
-          type: array
-          items:
-            type: string
-        source:
-          type:
-          - string
-          - 'null'
-        species:
-          type:
-          - string
-          - 'null'
-    PaginatedDifferentialExpressionsSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DifferentialExpressionsSerializerWithPermissions'
-    HeatmapDeserializer:
-      type: object
-      description: Heatmap deserializer.
-      properties:
-        gene_ids:
-          type: array
-          items:
-            type: string
-        source:
-          type:
-          - string
-          - 'null'
-        species:
-          type:
-          - string
-          - 'null'
-        sample_ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - sample_ids
   securitySchemes:
     cookieAuth:
       type: apiKey

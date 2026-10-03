@@ -813,6 +813,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedPredictionField:
+      type: object
+      description: Serializer for PredictionField objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PredictionFieldTypeEnum'
+        version:
+          type: string
+          default: 0.0.0
+        description:
+          type: string
+          maxLength: 256
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipDict'
+        label:
+          type: string
+          maxLength: 128
+        required:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+    PaginatedPredictionFieldList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionField'
+    PredictionFieldTypeEnum:
+      enum:
+      - SCORE
+      - CLASS
+      type: string
+      description: '* `SCORE` - SCORE
+
+        * `CLASS` - CLASS'
     PredictionField:
       type: object
       description: Serializer for PredictionField objects.
@@ -853,71 +918,6 @@ components:
       - label
       - sort_order
       - type
-    PaginatedPredictionFieldList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionField'
-    PatchedPredictionField:
-      type: object
-      description: Serializer for PredictionField objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        group:
-          $ref: '#/components/schemas/RelationshipDict'
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/PredictionFieldTypeEnum'
-        version:
-          type: string
-          default: 0.0.0
-        description:
-          type: string
-          maxLength: 256
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelationshipDict'
-        label:
-          type: string
-          maxLength: 128
-        required:
-          type: boolean
-        sort_order:
-          type: integer
-          maximum: 32767
-          minimum: 0
-    PredictionFieldTypeEnum:
-      enum:
-      - SCORE
-      - CLASS
-      type: string
-      description: '* `SCORE` - SCORE
-
-        * `CLASS` - CLASS'
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.

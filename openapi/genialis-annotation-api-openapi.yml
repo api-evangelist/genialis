@@ -79,16 +79,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AnnotationUpload:
-      type: object
-      description: Serializer for the response when uploading an annotation file.
-      properties:
-        annotated_samples:
-          type: array
-          items:
-            type: integer
-      required:
-      - annotated_samples
     AnnotationUploadDeserializer:
       type: object
       description: Deserializer for request data when uploading an annotation file.
@@ -101,6 +91,16 @@ components:
       required:
       - annotation_file
       - annotation_type
+    AnnotationUpload:
+      type: object
+      description: Serializer for the response when uploading an annotation file.
+      properties:
+        annotated_samples:
+          type: array
+          items:
+            type: integer
+      required:
+      - annotated_samples
   securitySchemes:
     cookieAuth:
       type: apiKey

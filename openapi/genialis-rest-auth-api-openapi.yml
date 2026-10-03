@@ -311,23 +311,6 @@ components:
         last_name:
           type: string
           maxLength: 150
-    RestAuthDetail:
-      type: object
-      properties:
-        detail:
-          type: string
-          readOnly: true
-      required:
-      - detail
-    PasswordReset:
-      type: object
-      description: Serializer for requesting a password reset e-mail.
-      properties:
-        email:
-          type: string
-          format: email
-      required:
-      - email
     UserDetails:
       type: object
       description: User model w/o password
@@ -355,6 +338,23 @@ components:
       - email
       - pk
       - username
+    PasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    RestAuthDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
     PasswordResetConfirm:
       type: object
       description: Serializer for confirming a password reset attempt.

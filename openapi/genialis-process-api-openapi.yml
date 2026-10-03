@@ -415,6 +415,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
     PersistenceEnum:
       enum:
       - RAW
@@ -426,35 +447,45 @@ components:
         * `CAC` - Cached
 
         * `TMP` - Temp'
-    SchedulingClassEnum:
+    PublicEnum:
       enum:
-      - IN
-      - BA
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
       type: string
-      description: '* `IN` - Interactive
+      description: '* `VIEW` - VIEW
 
-        * `BA` - Batch'
-    Contributor:
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    PaginatedProcessSerializerWithPermissionsList:
       type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
       required:
-      - id
-      - username
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
     ProcessSerializerWithPermissions:
       type: object
       description: Serializer for Process objects.
@@ -574,66 +605,6 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
-    PaginatedProcessSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
-    CurrentUserPermissions:
-      type: object
-      description: Current user permissions serializer.
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
-        name:
-          type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
     CurrentUserPermissionsTypeEnum:
       enum:
       - user
@@ -662,6 +633,35 @@ components:
         * `share` - share
 
         * `owner` - owner'
+    SchedulingClassEnum:
+      enum:
+      - IN
+      - BA
+      type: string
+      description: '* `IN` - Interactive
+
+        * `BA` - Batch'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
   securitySchemes:
     cookieAuth:
       type: apiKey
