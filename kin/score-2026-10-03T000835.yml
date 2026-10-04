@@ -1,21 +1,19 @@
-# Kin Score artifact — genialis — 2026-08-27T094438
+# Kin Score artifact — genialis — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: genialis
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T094438
-  composite: 48.2
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 42.0
   band: developing
   facets:
-    discoverability: 79.6
-    contract_quality: 48.3
-    governance: 12.1
+    discoverability: 66.1
+    contract_quality: 44.5
+    contract_governance: 0.0
     operational_transparency: 18.4
     developer_ergonomics: 66.1
-    commercial_clarity: 36.8
-    contract_governance: 12.1
     access_clarity: 36.8
   agent_readiness:
     score: 34.4
@@ -44,14 +42,14 @@ kin_score:
     applies: true
     regime: Health
     regime_id: health
-    score: 43.8
+    score: 25.7
     matched_via: tags
   provenance:
     mcp: derived
     skills: derived
     conformance: first-party
     contracts:
-      total: 1
+      total: 44
       derived: 0
       coverage: 0.0
       callable: 100.0
