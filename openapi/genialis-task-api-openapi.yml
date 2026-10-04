@@ -177,15 +177,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ObserverSubscription:
+    PaginatedBackgroundTaskList:
       type: object
-      description: Serializer for the subscribe response.
-      properties:
-        subscription_id:
-          type: string
-          format: uuid
       required:
-      - subscription_id
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackgroundTask'
     BackgroundTask:
       type: object
       description: Serialize the BackgroundTask model.
@@ -212,45 +228,15 @@ components:
       required:
       - description
       - id
-    PaginatedBackgroundTaskList:
+    ObserverSubscription:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for the subscribe response.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BackgroundTask'
-    ObserverSubscribeRequest:
-      type: object
-      description: Serializer for the subscribe endpoint.
-      properties:
-        ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-        session_id:
+        subscription_id:
           type: string
+          format: uuid
       required:
-      - session_id
+      - subscription_id
     BackgroundTaskStatusEnum:
       enum:
       - WT
@@ -265,6 +251,20 @@ components:
         * `OK` - Done
 
         * `ER` - Error'
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -281,31 +281,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BillingAccount'
-    BillingAccount:
-      type: object
-      description: Billing account serializer.
-      properties:
-        active:
-          type: boolean
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-      required:
-      - active
-      - id
-      - name
-    BillingAccountToCollection:
-      type: object
-      description: Serializer for assigning a collection to a billing account.
-      properties:
-        collection_id:
-          type: integer
-      required:
-      - collection_id
     EstimatedCostPerBillingAccount:
       type: object
       description: Serializer for cost per day per billing account.
@@ -346,6 +321,31 @@ components:
       - referenced_collection_id
       - referenced_collection_name
       - referenced_collection_slug
+    BillingAccount:
+      type: object
+      description: Billing account serializer.
+      properties:
+        active:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - active
+      - id
+      - name
+    BillingAccountToCollection:
+      type: object
+      description: Serializer for assigning a collection to a billing account.
+      properties:
+        collection_id:
+          type: integer
+      required:
+      - collection_id
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -622,46 +622,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BasketClone:
-      type: object
-      description: Basket clone serializer.
-      properties:
-        id:
-          type: string
-        modified:
-          type: string
-          format: date-time
-        removed_samples:
-          type: boolean
-      required:
-      - id
-      - modified
-      - removed_samples
-    BasketSampleCount:
-      type: object
-      description: Basket sample count serializer.
-      properties:
-        sampleCount:
-          type: integer
-      required:
-      - sampleCount
-    SampleInBasket:
-      type: object
-      description: SampleInBasket serializer.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        selected:
-          type: boolean
-        sample:
-          $ref: '#/components/schemas/Entity'
-        breadcrumb:
-          $ref: '#/components/schemas/BasketBreadcrumb'
-      required:
-      - breadcrumb
-      - id
-      - sample
     BasketDataTypes:
       type: object
       description: Basket data types serializer.
@@ -672,24 +632,23 @@ components:
             type: string
       required:
       - data_types
-    BasketSource:
+    AnnotationVersionEnum:
+      enum:
+      - v2
+      type: string
+      description: '* `v2` - v2'
+    BasketMutation:
       type: object
-      description: Basket source list serializer.
-      properties:
-        source:
-          type: string
-      required:
-      - source
-    RelationshipDict:
-      type: object
-      description: Serializer for the DictRelatedField relation.
+      description: Basket update serializer.
       properties:
         id:
-          type: integer
-        slug:
-          type:
-          - string
-          - 'null'
+          type: string
+        modified:
+          type: string
+          format: date-time
+      required:
+      - id
+      - modified
     Basket:
       type: object
       description: Serializer for :class:`SampleInBasket` objects.
@@ -717,6 +676,98 @@ components:
       - created
       - id
       - modified
+    BasketAddSamples:
+      type: object
+      description: Basket add samples serializer.
+      properties:
+        id:
+          type: string
+        modified:
+          type: string
+          format: date-time
+        ignored:
+          type: array
+          items:
+            type: integer
+        duplicated:
+          type: array
+          items:
+            type: integer
+        permitted_organisms:
+          type: array
+          items:
+            type: string
+        permitted_sources:
+          type: array
+          items:
+            type: string
+        conflict_organisms:
+          type: array
+          items:
+            type: string
+        conflict_sources:
+          type: array
+          items:
+            type: string
+      required:
+      - conflict_organisms
+      - conflict_sources
+      - duplicated
+      - id
+      - ignored
+      - modified
+      - permitted_organisms
+      - permitted_sources
+    BasketSampleCount:
+      type: object
+      description: Basket sample count serializer.
+      properties:
+        sampleCount:
+          type: integer
+      required:
+      - sampleCount
+    BasketBreadcrumb:
+      type: object
+      description: SampleBasketBreadcrumb serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        data: {}
+        created:
+          type: string
+          format: date-time
+      required:
+      - id
+    BasketSource:
+      type: object
+      description: Basket source list serializer.
+      properties:
+        source:
+          type: string
+      required:
+      - source
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     Entity:
       type: object
       description: Serializer for Entity with added collection field.
@@ -777,107 +828,6 @@ components:
       - id
       - modified
       - status
-    PaginatedSampleInBasketList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SampleInBasket'
-    BasketAddSamplesDeserializer:
-      type: object
-      description: Basket add samples deserializer.
-      properties:
-        annotation_version:
-          allOf:
-          - $ref: '#/components/schemas/AnnotationVersionEnum'
-          default: v2
-        only_existing_organism:
-          type: boolean
-          default: false
-        breadcrumb: {}
-        samples:
-          type: array
-          items:
-            type: integer
-      required:
-      - samples
-    BasketMutation:
-      type: object
-      description: Basket update serializer.
-      properties:
-        id:
-          type: string
-        modified:
-          type: string
-          format: date-time
-      required:
-      - id
-      - modified
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    PaginatedBasketSourceList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BasketSource'
     BasketSubset:
       type: object
       description: Basket serializer where a subset of samples is selected.
@@ -887,57 +837,6 @@ components:
           items:
             type: integer
           default: []
-    AnnotationVersionEnum:
-      enum:
-      - v2
-      type: string
-      description: '* `v2` - v2'
-    BasketOrganism:
-      type: object
-      description: Basket organism list serializer.
-      properties:
-        organism:
-          type: string
-      required:
-      - organism
-    BasketBreadcrumb:
-      type: object
-      description: SampleBasketBreadcrumb serializer.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        data: {}
-        created:
-          type: string
-          format: date-time
-      required:
-      - id
-    PaginatedBasketOrganismList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BasketOrganism'
     PaginatedBasketBreadcrumbList:
       type: object
       required:
@@ -963,48 +862,149 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BasketBreadcrumb'
-    BasketAddSamples:
+    PaginatedSampleInBasketList:
       type: object
-      description: Basket add samples serializer.
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SampleInBasket'
+    BasketOrganism:
+      type: object
+      description: Basket organism list serializer.
+      properties:
+        organism:
+          type: string
+      required:
+      - organism
+    BasketClone:
+      type: object
+      description: Basket clone serializer.
       properties:
         id:
           type: string
         modified:
           type: string
           format: date-time
-        ignored:
-          type: array
-          items:
-            type: integer
-        duplicated:
-          type: array
-          items:
-            type: integer
-        permitted_organisms:
-          type: array
-          items:
-            type: string
-        permitted_sources:
-          type: array
-          items:
-            type: string
-        conflict_organisms:
-          type: array
-          items:
-            type: string
-        conflict_sources:
-          type: array
-          items:
-            type: string
+        removed_samples:
+          type: boolean
       required:
-      - conflict_organisms
-      - conflict_sources
-      - duplicated
       - id
-      - ignored
       - modified
-      - permitted_organisms
-      - permitted_sources
+      - removed_samples
+    BasketAddSamplesDeserializer:
+      type: object
+      description: Basket add samples deserializer.
+      properties:
+        annotation_version:
+          allOf:
+          - $ref: '#/components/schemas/AnnotationVersionEnum'
+          default: v2
+        only_existing_organism:
+          type: boolean
+          default: false
+        breadcrumb: {}
+        samples:
+          type: array
+          items:
+            type: integer
+      required:
+      - samples
+    SampleInBasket:
+      type: object
+      description: SampleInBasket serializer.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        selected:
+          type: boolean
+        sample:
+          $ref: '#/components/schemas/Entity'
+        breadcrumb:
+          $ref: '#/components/schemas/BasketBreadcrumb'
+      required:
+      - breadcrumb
+      - id
+      - sample
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+    PaginatedBasketOrganismList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketOrganism'
+    PaginatedBasketSourceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketSource'
   securitySchemes:
     cookieAuth:
       type: apiKey

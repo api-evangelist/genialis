@@ -392,51 +392,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Project:
-      type: object
-      description: BaseSpace project entity serializer.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
-    File:
-      type: object
-      description: BaseSpace file entity serializer.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
-    ObserverSubscription:
-      type: object
-      description: Serializer for the subscribe response.
-      properties:
-        subscription_id:
-          type: string
-          format: uuid
-      required:
-      - subscription_id
-    Projects:
-      type: object
-      description: BaseSpace projects serializer.
-      properties:
-        displayed_count:
-          type: integer
-          default: 0
-        total_count:
-          type: integer
-          default: 0
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
     BaseSpaceSample:
       type: object
       description: BaseSpace sample entity serializer.
@@ -451,14 +406,79 @@ components:
       - id
       - is_paired_end
       - name
-    BaseSpaceUser:
+    Projects:
       type: object
-      description: BaseSpace user serializer.
+      description: BaseSpace projects serializer.
       properties:
-        email:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    File:
+      type: object
+      description: BaseSpace file entity serializer.
+      properties:
+        id:
           type: string
         name:
           type: string
+      required:
+      - id
+      - name
+    BaseSpaceSamples:
+      type: object
+      description: BaseSpace samples serializer.
+      properties:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseSpaceSample'
+    Project:
+      type: object
+      description: BaseSpace project entity serializer.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+    Files:
+      type: object
+      description: BaseSpace files serializer.
+      properties:
+        displayed_count:
+          type: integer
+          default: 0
+        total_count:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    ObserverSubscription:
+      type: object
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
     Handle:
       type: object
       description: Handle serializer.
@@ -480,20 +500,6 @@ components:
           type: string
       required:
       - session_id
-    Files:
-      type: object
-      description: BaseSpace files serializer.
-      properties:
-        displayed_count:
-          type: integer
-          default: 0
-        total_count:
-          type: integer
-          default: 0
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
     Url:
       type: object
       description: BaseSpace url serializer.
@@ -503,20 +509,14 @@ components:
           format: uri
       required:
       - url
-    BaseSpaceSamples:
+    BaseSpaceUser:
       type: object
-      description: BaseSpace samples serializer.
+      description: BaseSpace user serializer.
       properties:
-        displayed_count:
-          type: integer
-          default: 0
-        total_count:
-          type: integer
-          default: 0
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseSpaceSample'
+        email:
+          type: string
+        name:
+          type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

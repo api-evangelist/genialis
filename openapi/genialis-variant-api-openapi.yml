@@ -1964,6 +1964,93 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Variant:
+      type: object
+      description: Serializer for Variant objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        species:
+          type: string
+          maxLength: 50
+        genome_assembly:
+          type: string
+          maxLength: 20
+        chromosome:
+          type: string
+          maxLength: 20
+        position:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: 0
+          format: int64
+        reference:
+          type: string
+        alternative:
+          type: string
+        annotation:
+          allOf:
+          - $ref: '#/components/schemas/VariantAnnotation'
+      required:
+      - alternative
+      - chromosome
+      - genome_assembly
+      - id
+      - position
+      - reference
+      - species
+    VariantTranscript:
+      type: object
+      description: Serializer for VariantAnnotationTranscript objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        variant_annotation_id:
+          type: integer
+          readOnly: true
+        annotation:
+          type: string
+        annotation_impact:
+          type: string
+          maxLength: 20
+        gene:
+          type: string
+          maxLength: 100
+        protein_impact:
+          type: string
+          maxLength: 100
+        transcript_id:
+          type: string
+          maxLength: 200
+        canonical:
+          type: boolean
+      required:
+      - annotation
+      - annotation_impact
+      - gene
+      - id
+      - protein_impact
+      - transcript_id
+      - variant_annotation_id
+    VariantAnnotationTypeEnum:
+      enum:
+      - SNP
+      - INDEL
+      - MIXED
+      - MNP
+      - SYMBOLIC
+      type: string
+      description: '* `SNP` - SNP
+
+        * `INDEL` - INDEL
+
+        * `MIXED` - MIXED
+
+        * `MNP` - MNP
+
+        * `SYMBOLIC` - SYMBOLIC'
     BlankEnum:
       enum:
       - ''
@@ -1992,34 +2079,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Variant'
-    PatchedVariant:
-      type: object
-      description: Serializer for Variant objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        species:
-          type: string
-          maxLength: 50
-        genome_assembly:
-          type: string
-          maxLength: 20
-        chromosome:
-          type: string
-          maxLength: 20
-        position:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: 0
-          format: int64
-        reference:
-          type: string
-        alternative:
-          type: string
-        annotation:
-          allOf:
-          - $ref: '#/components/schemas/VariantAnnotation'
     VariantAnnotation:
       type: object
       description: Serializer for VariantAnnotation objects.
@@ -2064,58 +2123,7 @@ components:
     NullEnum:
       enum:
       - null
-    VariantAnnotationTypeEnum:
-      enum:
-      - SNP
-      - INDEL
-      - MIXED
-      - MNP
-      - SYMBOLIC
-      type: string
-      description: '* `SNP` - SNP
-
-        * `INDEL` - INDEL
-
-        * `MIXED` - MIXED
-
-        * `MNP` - MNP
-
-        * `SYMBOLIC` - SYMBOLIC'
-    VariantTranscript:
-      type: object
-      description: Serializer for VariantAnnotationTranscript objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        variant_annotation_id:
-          type: integer
-          readOnly: true
-        annotation:
-          type: string
-        annotation_impact:
-          type: string
-          maxLength: 20
-        gene:
-          type: string
-          maxLength: 100
-        protein_impact:
-          type: string
-          maxLength: 100
-        transcript_id:
-          type: string
-          maxLength: 200
-        canonical:
-          type: boolean
-      required:
-      - annotation
-      - annotation_impact
-      - gene
-      - id
-      - protein_impact
-      - transcript_id
-      - variant_annotation_id
-    Variant:
+    PatchedVariant:
       type: object
       description: Serializer for Variant objects.
       properties:
@@ -2143,14 +2151,6 @@ components:
         annotation:
           allOf:
           - $ref: '#/components/schemas/VariantAnnotation'
-      required:
-      - alternative
-      - chromosome
-      - genome_assembly
-      - id
-      - position
-      - reference
-      - species
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -267,6 +267,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedUserTag:
+      type: object
+      description: Serializer for :class:`UserTag` model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+        tag_word:
+          type: string
+        start:
+          type: string
+          format: date
+        contributor:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+        created:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
     UserTag:
       type: object
       description: Serializer for :class:`UserTag` model.
@@ -322,30 +346,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserTag'
-    PatchedUserTag:
-      type: object
-      description: Serializer for :class:`UserTag` model.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        user:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-        tag_word:
-          type: string
-        start:
-          type: string
-          format: date
-        contributor:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-        created:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
   securitySchemes:
     cookieAuth:
       type: apiKey

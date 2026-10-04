@@ -726,6 +726,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
     PaginatedAnnotationFieldList:
       type: object
       required:
@@ -793,16 +803,6 @@ components:
       - label
       - sort_order
       - type
-    RelationshipDict:
-      type: object
-      description: Serializer for the DictRelatedField relation.
-      properties:
-        id:
-          type: integer
-        slug:
-          type:
-          - string
-          - 'null'
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -438,6 +438,41 @@ components:
     BlankEnum:
       enum:
       - ''
+    PaginatedRelationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
     RelationPartition:
       type: object
       description: Serializer for RelationPartition objects.
@@ -505,51 +540,6 @@ components:
         descriptor_schema:
           allOf:
           - $ref: '#/components/schemas/RelationshipDict'
-    UnitEnum:
-      enum:
-      - s
-      - min
-      - hr
-      - d
-      - wk
-      type: string
-      description: '* `s` - Second
-
-        * `min` - Minute
-
-        * `hr` - Hour
-
-        * `d` - Day
-
-        * `wk` - Week'
-    NullEnum:
-      enum:
-      - null
-    PaginatedRelationList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
     Relation:
       type: object
       description: Serializer for Relation objects.
@@ -604,6 +594,9 @@ components:
       - modified
       - partitions
       - type
+    NullEnum:
+      enum:
+      - null
     Contributor:
       type: object
       description: Serializer for contributor User objects.
@@ -625,16 +618,23 @@ components:
       required:
       - id
       - username
-    RelationshipDict:
-      type: object
-      description: Serializer for the DictRelatedField relation.
-      properties:
-        id:
-          type: integer
-        slug:
-          type:
-          - string
-          - 'null'
+    UnitEnum:
+      enum:
+      - s
+      - min
+      - hr
+      - d
+      - wk
+      type: string
+      description: '* `s` - Second
+
+        * `min` - Minute
+
+        * `hr` - Hour
+
+        * `d` - Day
+
+        * `wk` - Week'
   securitySchemes:
     cookieAuth:
       type: apiKey

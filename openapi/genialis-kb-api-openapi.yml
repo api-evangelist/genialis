@@ -671,6 +671,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedFeatureList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
     SubTypeEnum:
       enum:
       - protein-coding
@@ -717,31 +742,6 @@ components:
         * `transcript` - Transcript
 
         * `exon` - Exon'
-    PaginatedFeatureList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
     FeatureTypeEnum:
       enum:
       - gene
@@ -756,31 +756,42 @@ components:
         * `exon` - Exon
 
         * `probe` - Probe'
-    PaginatedMappingList:
+    Mapping:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for mapping.
       properties:
-        count:
+        id:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Mapping'
+          readOnly: true
+        relation_type:
+          $ref: '#/components/schemas/RelationTypeEnum'
+        source_db:
+          type: string
+          maxLength: 20
+        source_id:
+          type: string
+          maxLength: 50
+        source_species:
+          type: string
+          maxLength: 50
+        target_db:
+          type: string
+          maxLength: 20
+        target_id:
+          type: string
+          maxLength: 50
+        target_species:
+          type: string
+          maxLength: 50
+      required:
+      - id
+      - relation_type
+      - source_db
+      - source_id
+      - source_species
+      - target_db
+      - target_id
+      - target_species
     Feature:
       type: object
       description: Serializer for feature.
@@ -822,42 +833,31 @@ components:
       - species
       - sub_type
       - type
-    Mapping:
+    PaginatedMappingList:
       type: object
-      description: Serializer for mapping.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        relation_type:
-          $ref: '#/components/schemas/RelationTypeEnum'
-        source_db:
-          type: string
-          maxLength: 20
-        source_id:
-          type: string
-          maxLength: 50
-        source_species:
-          type: string
-          maxLength: 50
-        target_db:
-          type: string
-          maxLength: 20
-        target_id:
-          type: string
-          maxLength: 50
-        target_species:
-          type: string
-          maxLength: 50
       required:
-      - id
-      - relation_type
-      - source_db
-      - source_id
-      - source_species
-      - target_db
-      - target_id
-      - target_species
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mapping'
   securitySchemes:
     cookieAuth:
       type: apiKey

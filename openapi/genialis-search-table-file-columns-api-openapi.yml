@@ -66,14 +66,6 @@ components:
       required:
       - id
       - label
-    ActionEnum:
-      enum:
-      - download
-      - tab
-      type: string
-      description: '* `download` - Download
-
-        * `tab` - Tab'
     PaginatedSearchTableFileColumnList:
       type: object
       required:
@@ -99,6 +91,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SearchTableFileColumn'
+    ActionEnum:
+      enum:
+      - download
+      - tab
+      type: string
+      description: '* `download` - Download
+
+        * `tab` - Tab'
   securitySchemes:
     cookieAuth:
       type: apiKey

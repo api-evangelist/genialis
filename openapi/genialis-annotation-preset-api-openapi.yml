@@ -263,41 +263,37 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CurrentUserPermissions:
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    PatchedAnnotationPresetSerializerWithPermissions:
       type: object
-      description: Current user permissions serializer.
+      description: Serializer for AnnotationPreset objects.
       properties:
         id:
           type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+          readOnly: true
         name:
           type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
+            type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
     PaginatedAnnotationPresetSerializerWithPermissionsList:
       type: object
       required:
@@ -323,7 +319,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnnotationPresetSerializerWithPermissions'
-    PatchedAnnotationPresetSerializerWithPermissions:
+    AnnotationPresetSerializerWithPermissions:
       type: object
       description: Serializer for AnnotationPreset objects.
       properties:
@@ -343,6 +339,11 @@ components:
           items:
             $ref: '#/components/schemas/CurrentUserPermissions'
           readOnly: true
+      required:
+      - contributor
+      - current_user_permissions
+      - fields
+      - id
     Permission:
       type: object
       description: 'Permission serializer.
@@ -384,17 +385,6 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
-    CurrentUserPermissionsTypeEnum:
-      enum:
-      - user
-      - group
-      - public
-      type: string
-      description: '* `user` - user
-
-        * `group` - group
-
-        * `public` - public'
     PermissionsEnum:
       enum:
       - none
@@ -433,31 +423,41 @@ components:
       required:
       - id
       - username
-    AnnotationPresetSerializerWithPermissions:
+    CurrentUserPermissions:
       type: object
-      description: Serializer for AnnotationPreset objects.
+      description: Current user permissions serializer.
       properties:
         id:
           type: integer
-          readOnly: true
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
         name:
           type: string
-        fields:
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
           type: array
           items:
-            type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        current_user_permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrentUserPermissions'
-          readOnly: true
+            $ref: '#/components/schemas/PermissionsEnum'
       required:
-      - contributor
-      - current_user_permissions
-      - fields
-      - id
+      - permissions
+      - type
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
   securitySchemes:
     cookieAuth:
       type: apiKey

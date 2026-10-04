@@ -402,6 +402,54 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedParameterPresetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParameterPreset'
+    PatchedParameterPreset:
+      type: object
+      description: Serializer for :class:`ParameterPreset` model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          type: integer
+        process:
+          type: integer
+        input_preset: {}
     ParameterPreset:
       type: object
       description: Serializer for :class:`ParameterPreset` model.
@@ -432,54 +480,6 @@ components:
       - modified
       - name
       - process
-    PatchedParameterPreset:
-      type: object
-      description: Serializer for :class:`ParameterPreset` model.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        modified:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          type: integer
-        process:
-          type: integer
-        input_preset: {}
-    PaginatedParameterPresetList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParameterPreset'
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -1137,47 +1137,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BackgroundTask:
+    BackgroundTaskStatusEnum:
+      enum:
+      - WT
+      - PR
+      - OK
+      - ER
+      type: string
+      description: '* `WT` - Waiting
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error'
+    DataStatus:
+      enum:
+      - UP
+      - RE
+      - WT
+      - PP
+      - PR
+      - OK
+      - ER
+      - DR
+      type: string
+      description: '* `UP` - Uploading
+
+        * `RE` - Resolving
+
+        * `WT` - Waiting
+
+        * `PP` - Preparing
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error
+
+        * `DR` - Dirty'
+    PaginatedDataSerializerWithPermissionsList:
       type: object
-      description: Serialize the BackgroundTask model.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        started:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        finished:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        status:
-          $ref: '#/components/schemas/BackgroundTaskStatusEnum'
-        description:
-          type: string
-          maxLength: 256
-        output: {}
       required:
-      - description
-      - id
-    Restart:
-      type: object
-      description: Serializer for restarting a Data object.
+      - count
+      - results
       properties:
-        resource_overrides: {}
-    RelationshipDict:
-      type: object
-      description: Serializer for the DictRelatedField relation.
-      properties:
-        id:
+        count:
           type: integer
-        slug:
+          example: 123
+        next:
           type:
           - string
           - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSerializerWithPermissions'
     DataSerializerWithPermissions:
       type: object
       description: Serializer for Data objects.
@@ -1317,43 +1341,9 @@ components:
       - size
       - started
       - status
-    ObserverSubscription:
+    Duplicate:
       type: object
-      description: Serializer for the subscribe response.
-      properties:
-        subscription_id:
-          type: string
-          format: uuid
-      required:
-      - subscription_id
-    PaginatedDataSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSerializerWithPermissions'
-    Delete:
-      type: object
-      description: Bulk delete given objects.
+      description: Deserializer for duplicate endpoint.
       properties:
         ids:
           type: array
@@ -1361,72 +1351,6 @@ components:
             type: integer
       required:
       - ids
-    Permission:
-      type: object
-      description: 'Permission serializer.
-
-
-        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
-      properties:
-        users:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        groups:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        public:
-          $ref: '#/components/schemas/PublicEnum'
-    PaginatedDataList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Data'
     PermissionsEnum:
       enum:
       - none
@@ -1444,63 +1368,6 @@ components:
         * `share` - share
 
         * `owner` - owner'
-    DataStatus:
-      enum:
-      - UP
-      - RE
-      - WT
-      - PP
-      - PR
-      - OK
-      - ER
-      - DR
-      type: string
-      description: '* `UP` - Uploading
-
-        * `RE` - Resolving
-
-        * `WT` - Waiting
-
-        * `PP` - Preparing
-
-        * `PR` - Processing
-
-        * `OK` - Done
-
-        * `ER` - Error
-
-        * `DR` - Dirty'
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    Duplicate:
-      type: object
-      description: Deserializer for duplicate endpoint.
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - ids
     PatchedDataSerializerWithPermissions:
       type: object
       description: Serializer for Data objects.
@@ -1618,6 +1485,40 @@ components:
           items:
             $ref: '#/components/schemas/CurrentUserPermissions'
           readOnly: true
+    MoveDataToCollection:
+      type: object
+      description: Deserializer for data move to collection endpoint.
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+        destination_collection:
+          type: integer
+      required:
+      - destination_collection
+      - ids
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     PublicEnum:
       enum:
       - VIEW
@@ -1632,6 +1533,128 @@ components:
         * `SHARE` - SHARE
 
         * `OWNER` - OWNER'
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    PaginatedDataList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Data'
+    BackgroundTask:
+      type: object
+      description: Serialize the BackgroundTask model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        started:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        finished:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/BackgroundTaskStatusEnum'
+        description:
+          type: string
+          maxLength: 256
+        output: {}
+      required:
+      - description
+      - id
+    Permission:
+      type: object
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      properties:
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
+    Restart:
+      type: object
+      description: Serializer for restarting a Data object.
+      properties:
+        resource_overrides: {}
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
     Data:
       type: object
       description: Serializer for Data objects.
@@ -1765,30 +1788,6 @@ components:
       - size
       - started
       - status
-    CurrentUserPermissionsTypeEnum:
-      enum:
-      - user
-      - group
-      - public
-      type: string
-      description: '* `user` - user
-
-        * `group` - group
-
-        * `public` - public'
-    MoveDataToCollection:
-      type: object
-      description: Deserializer for data move to collection endpoint.
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-        destination_collection:
-          type: integer
-      required:
-      - destination_collection
-      - ids
     CurrentUserPermissions:
       type: object
       description: Current user permissions serializer.
@@ -1810,34 +1809,35 @@ components:
       required:
       - permissions
       - type
-    ObserverSubscribeRequest:
+    ObserverSubscription:
       type: object
-      description: Serializer for the subscribe endpoint.
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
+    Delete:
+      type: object
+      description: Bulk delete given objects.
       properties:
         ids:
-          type:
-          - array
-          - 'null'
+          type: array
           items:
             type: integer
-        session_id:
-          type: string
       required:
-      - session_id
-    BackgroundTaskStatusEnum:
-      enum:
-      - WT
-      - PR
-      - OK
-      - ER
-      type: string
-      description: '* `WT` - Waiting
-
-        * `PR` - Processing
-
-        * `OK` - Done
-
-        * `ER` - Error'
+      - ids
   securitySchemes:
     cookieAuth:
       type: apiKey

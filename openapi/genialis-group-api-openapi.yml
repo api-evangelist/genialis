@@ -279,6 +279,41 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedGroupList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+    AddOrRemoveUsers:
+      type: object
+      description: Serializer for adding or removing users from a group.
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - user_ids
     Group:
       type: object
       description: Serializer for :class:`Group` objects.
@@ -313,41 +348,6 @@ components:
           items:
             type: integer
           readOnly: true
-    AddOrRemoveUsers:
-      type: object
-      description: Serializer for adding or removing users from a group.
-      properties:
-        user_ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - user_ids
-    PaginatedGroupList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -64,22 +64,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Versions:
-      type: object
-      properties:
-        resolwe:
-          type: string
-          readOnly: true
-        resolwe-bio:
-          type: string
-          readOnly: true
-        genialis-bio:
-          type: string
-          readOnly: true
-      required:
-      - genialis-bio
-      - resolwe
-      - resolwe-bio
     Resources:
       type: object
       description: Serialize the platform resource information.
@@ -105,6 +89,22 @@ components:
           readOnly: true
       required:
       - minimal_supported_version
+    Versions:
+      type: object
+      properties:
+        resolwe:
+          type: string
+          readOnly: true
+        resolwe-bio:
+          type: string
+          readOnly: true
+        genialis-bio:
+          type: string
+          readOnly: true
+      required:
+      - genialis-bio
+      - resolwe
+      - resolwe-bio
   securitySchemes:
     cookieAuth:
       type: apiKey

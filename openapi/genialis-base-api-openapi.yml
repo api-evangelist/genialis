@@ -122,37 +122,6 @@ components:
         propertyName: single
         mapping:
           false: '#/components/schemas/UserDataUsage'
-    SingleUserDataUsage:
-      type: object
-      description: Serializer for data/sample usage of a user.
-      properties:
-        user_id:
-          type: integer
-        username:
-          type: string
-        full_name:
-          type: string
-        data_size:
-          type: number
-          format: double
-        data_count:
-          type: integer
-        sample_count:
-          type: integer
-        collection_count:
-          type: integer
-        single:
-          type: boolean
-          writeOnly: true
-          default: true
-      required:
-      - collection_count
-      - data_count
-      - data_size
-      - full_name
-      - sample_count
-      - user_id
-      - username
     UserDataUsage:
       type: object
       description: Serializer for data/sample usage per user with normalized fields too.
@@ -198,6 +167,37 @@ components:
       - full_name
       - sample_count
       - sample_count_normalized
+      - user_id
+      - username
+    SingleUserDataUsage:
+      type: object
+      description: Serializer for data/sample usage of a user.
+      properties:
+        user_id:
+          type: integer
+        username:
+          type: string
+        full_name:
+          type: string
+        data_size:
+          type: number
+          format: double
+        data_count:
+          type: integer
+        sample_count:
+          type: integer
+        collection_count:
+          type: integer
+        single:
+          type: boolean
+          writeOnly: true
+          default: true
+      required:
+      - collection_count
+      - data_count
+      - data_size
+      - full_name
+      - sample_count
       - user_id
       - username
   securitySchemes:

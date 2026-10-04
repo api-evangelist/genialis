@@ -81,6 +81,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CredentialsPoll:
+      type: object
+      description: Serializer for CredentialsPollView.
+      properties:
+        sessionid:
+          type: string
+        csrftoken:
+          type: string
+      required:
+      - csrftoken
+      - sessionid
     ApiLogin:
       type: object
       description: Deserializer for login credentials.
@@ -102,17 +113,6 @@ components:
           readOnly: true
       required:
       - auth_id
-    CredentialsPoll:
-      type: object
-      description: Serializer for CredentialsPollView.
-      properties:
-        sessionid:
-          type: string
-        csrftoken:
-          type: string
-      required:
-      - csrftoken
-      - sessionid
   securitySchemes:
     cookieAuth:
       type: apiKey

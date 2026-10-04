@@ -1350,65 +1350,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedVariantCall:
-      type: object
-      description: Serializer for VariantCall objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        sample:
-          type: integer
-        variant:
-          type:
-          - integer
-          - 'null'
-        experiment:
-          type:
-          - integer
-          - 'null'
-        data:
-          type:
-          - integer
-          - 'null'
-        quality:
-          type:
-          - number
-          - 'null'
-          format: double
-        genotype_quality:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        depth:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        depth_norm_quality:
-          type:
-          - number
-          - 'null'
-          format: double
-        alternative_allele_depth:
-          type:
-          - integer
-          - 'null'
-          maximum: 2147483647
-          minimum: 0
-        filter:
-          type:
-          - string
-          - 'null'
-          maxLength: 20
-        genotype:
-          type:
-          - string
-          - 'null'
-          maxLength: 3
     VariantCall:
       type: object
       description: Serializer for VariantCall objects.
@@ -1471,6 +1412,65 @@ components:
       required:
       - id
       - sample
+    PatchedVariantCall:
+      type: object
+      description: Serializer for VariantCall objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        sample:
+          type: integer
+        variant:
+          type:
+          - integer
+          - 'null'
+        experiment:
+          type:
+          - integer
+          - 'null'
+        data:
+          type:
+          - integer
+          - 'null'
+        quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        genotype_quality:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        depth_norm_quality:
+          type:
+          - number
+          - 'null'
+          format: double
+        alternative_allele_depth:
+          type:
+          - integer
+          - 'null'
+          maximum: 2147483647
+          minimum: 0
+        filter:
+          type:
+          - string
+          - 'null'
+          maxLength: 20
+        genotype:
+          type:
+          - string
+          - 'null'
+          maxLength: 3
     PaginatedVariantCallList:
       type: object
       required:
