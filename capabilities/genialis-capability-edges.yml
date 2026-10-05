@@ -1,0 +1,34 @@
+slug: genialis
+provider: Genialis
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Group
+  spec_file: genialis-group-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: 'POST /api/group/{id}/add_users ... POST /api/group/{id}/remove_users ... schemas: AddOrRemoveUsers'
+  reason: Manages user groups and group membership, which (together with the permission schemas across
+    the spec) is access-control administration — Identity & Access Management.
+- tag: Billingaccount
+  spec_file: genialis-billingaccount-api-openapi.yml
+  capability_id: BC-4250
+  capability_id_l1: BC-4250
+  capability_name: Subscription Billing & Revenue Management
+  confidence: 0.7
+  evidence: 'GET /api/billingaccount/estimated_usage ... schemas: EstimatedCostPerBillingAccount, BillingAccount'
+  reason: Operations expose billing accounts and estimated usage-based cost for platform consumption,
+    which is subscription/usage billing of the SaaS service. L1 only, since the surface is read-only and
+    does not clearly name metering vs rating vs invoicing.
