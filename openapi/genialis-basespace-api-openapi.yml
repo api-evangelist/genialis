@@ -392,6 +392,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Handle:
+      type: object
+      description: Handle serializer.
+      properties:
+        handle:
+          type: string
+          format: uuid
     BaseSpaceSample:
       type: object
       description: BaseSpace sample entity serializer.
@@ -406,6 +413,20 @@ components:
       - id
       - is_paired_end
       - name
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
     Projects:
       type: object
       description: BaseSpace projects serializer.
@@ -420,6 +441,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Project'
+    Project:
+      type: object
+      description: BaseSpace project entity serializer.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
     File:
       type: object
       description: BaseSpace file entity serializer.
@@ -431,6 +463,14 @@ components:
       required:
       - id
       - name
+    BaseSpaceUser:
+      type: object
+      description: BaseSpace user serializer.
+      properties:
+        email:
+          type: string
+        name:
+          type: string
     BaseSpaceSamples:
       type: object
       description: BaseSpace samples serializer.
@@ -445,17 +485,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BaseSpaceSample'
-    Project:
+    Url:
       type: object
-      description: BaseSpace project entity serializer.
+      description: BaseSpace url serializer.
       properties:
-        id:
+        url:
           type: string
-        name:
-          type: string
+          format: uri
       required:
-      - id
-      - name
+      - url
     Files:
       type: object
       description: BaseSpace files serializer.
@@ -479,44 +517,6 @@ components:
           format: uuid
       required:
       - subscription_id
-    Handle:
-      type: object
-      description: Handle serializer.
-      properties:
-        handle:
-          type: string
-          format: uuid
-    ObserverSubscribeRequest:
-      type: object
-      description: Serializer for the subscribe endpoint.
-      properties:
-        ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-        session_id:
-          type: string
-      required:
-      - session_id
-    Url:
-      type: object
-      description: BaseSpace url serializer.
-      properties:
-        url:
-          type: string
-          format: uri
-      required:
-      - url
-    BaseSpaceUser:
-      type: object
-      description: BaseSpace user serializer.
-      properties:
-        email:
-          type: string
-        name:
-          type: string
   securitySchemes:
     cookieAuth:
       type: apiKey

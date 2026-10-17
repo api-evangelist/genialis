@@ -66,18 +66,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UploadConfig:
-      type: object
-      description: Serializer for upload configuration.
-      properties:
-        type:
-          type: string
-        config:
-          type: object
-          additionalProperties: {}
-      required:
-      - config
-      - type
     UploadCredentials:
       type: object
       description: Serializer for upload credentials.
@@ -96,6 +84,18 @@ components:
       - Expiration
       - SecretAccessKey
       - Token
+    UploadConfig:
+      type: object
+      description: Serializer for upload configuration.
+      properties:
+        type:
+          type: string
+        config:
+          type: object
+          additionalProperties: {}
+      required:
+      - config
+      - type
   securitySchemes:
     cookieAuth:
       type: apiKey

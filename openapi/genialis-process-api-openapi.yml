@@ -415,119 +415,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SchedulingClassEnum:
-      enum:
-      - IN
-      - BA
-      type: string
-      description: '* `IN` - Interactive
-
-        * `BA` - Batch'
-    PersistenceEnum:
-      enum:
-      - RAW
-      - CAC
-      - TMP
-      type: string
-      description: '* `RAW` - Raw
-
-        * `CAC` - Cached
-
-        * `TMP` - Temp'
-    CurrentUserPermissionsTypeEnum:
-      enum:
-      - user
-      - group
-      - public
-      type: string
-      description: '* `user` - user
-
-        * `group` - group
-
-        * `public` - public'
-    PaginatedProcessSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
-    Permission:
-      type: object
-      description: 'Permission serializer.
-
-
-        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
-      properties:
-        users:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        groups:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        public:
-          $ref: '#/components/schemas/PublicEnum'
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
     Contributor:
       type: object
       description: Serializer for contributor User objects.
@@ -627,6 +514,114 @@ components:
       - is_active
       - modified
       - type
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    Permission:
+      type: object
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      properties:
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
+    PaginatedProcessSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
     CurrentUserPermissions:
       type: object
       description: Current user permissions serializer.
@@ -648,20 +643,25 @@ components:
       required:
       - permissions
       - type
-    PublicEnum:
+    PersistenceEnum:
       enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
+      - RAW
+      - CAC
+      - TMP
       type: string
-      description: '* `VIEW` - VIEW
+      description: '* `RAW` - Raw
 
-        * `EDIT` - EDIT
+        * `CAC` - Cached
 
-        * `SHARE` - SHARE
+        * `TMP` - Temp'
+    SchedulingClassEnum:
+      enum:
+      - IN
+      - BA
+      type: string
+      description: '* `IN` - Interactive
 
-        * `OWNER` - OWNER'
+        * `BA` - Batch'
   securitySchemes:
     cookieAuth:
       type: apiKey

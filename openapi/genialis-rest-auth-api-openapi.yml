@@ -303,25 +303,6 @@ components:
       - email
       - pk
       - username
-    PasswordResetConfirm:
-      type: object
-      description: Serializer for confirming a password reset attempt.
-      properties:
-        new_password1:
-          type: string
-          maxLength: 128
-        new_password2:
-          type: string
-          maxLength: 128
-        uid:
-          type: string
-        token:
-          type: string
-      required:
-      - new_password1
-      - new_password2
-      - token
-      - uid
     RestAuthDetail:
       type: object
       properties:
@@ -330,39 +311,6 @@ components:
           readOnly: true
       required:
       - detail
-    PasswordChange:
-      type: object
-      properties:
-        new_password1:
-          type: string
-          maxLength: 128
-        new_password2:
-          type: string
-          maxLength: 128
-      required:
-      - new_password1
-      - new_password2
-    ApiLogin:
-      type: object
-      description: Deserializer for login credentials.
-      properties:
-        email:
-          type: string
-          format: email
-        password:
-          type: string
-      required:
-      - email
-      - password
-    PasswordReset:
-      type: object
-      description: Serializer for requesting a password reset e-mail.
-      properties:
-        email:
-          type: string
-          format: email
-      required:
-      - email
     PatchedUserDetails:
       type: object
       description: User model w/o password
@@ -386,6 +334,58 @@ components:
         last_name:
           type: string
           maxLength: 150
+    PasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    ApiLogin:
+      type: object
+      description: Deserializer for login credentials.
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - email
+      - password
+    PasswordResetConfirm:
+      type: object
+      description: Serializer for confirming a password reset attempt.
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - new_password1
+      - new_password2
+      - token
+      - uid
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
   securitySchemes:
     cookieAuth:
       type: apiKey

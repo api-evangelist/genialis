@@ -448,40 +448,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VariantTranscript:
-      type: object
-      description: Serializer for VariantAnnotationTranscript objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        variant_annotation_id:
-          type: integer
-          readOnly: true
-        annotation:
-          type: string
-        annotation_impact:
-          type: string
-          maxLength: 20
-        gene:
-          type: string
-          maxLength: 100
-        protein_impact:
-          type: string
-          maxLength: 100
-        transcript_id:
-          type: string
-          maxLength: 200
-        canonical:
-          type: boolean
-      required:
-      - annotation
-      - annotation_impact
-      - gene
-      - id
-      - protein_impact
-      - transcript_id
-      - variant_annotation_id
+    BlankEnum:
+      enum:
+      - ''
     VariantAnnotationTypeEnum:
       enum:
       - SNP
@@ -499,9 +468,31 @@ components:
         * `MNP` - MNP
 
         * `SYMBOLIC` - SYMBOLIC'
-    BlankEnum:
-      enum:
-      - ''
+    PaginatedVariantAnnotationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantAnnotation'
     VariantAnnotation:
       type: object
       description: Serializer for VariantAnnotation objects.
@@ -546,31 +537,40 @@ components:
     NullEnum:
       enum:
       - null
-    PaginatedVariantAnnotationList:
+    VariantTranscript:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for VariantAnnotationTranscript objects.
       properties:
-        count:
+        id:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantAnnotation'
+          readOnly: true
+        variant_annotation_id:
+          type: integer
+          readOnly: true
+        annotation:
+          type: string
+        annotation_impact:
+          type: string
+          maxLength: 20
+        gene:
+          type: string
+          maxLength: 100
+        protein_impact:
+          type: string
+          maxLength: 100
+        transcript_id:
+          type: string
+          maxLength: 200
+        canonical:
+          type: boolean
+      required:
+      - annotation
+      - annotation_impact
+      - gene
+      - id
+      - protein_impact
+      - transcript_id
+      - variant_annotation_id
   securitySchemes:
     cookieAuth:
       type: apiKey

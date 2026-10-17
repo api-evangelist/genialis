@@ -853,6 +853,48 @@ components:
       - label
       - sort_order
       - type
+    PatchedPredictionField:
+      type: object
+      description: Serializer for PredictionField objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          $ref: '#/components/schemas/RelationshipDict'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PredictionFieldTypeEnum'
+        version:
+          type: string
+          default: 0.0.0
+        description:
+          type: string
+          maxLength: 256
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipDict'
+        label:
+          type: string
+          maxLength: 128
+        required:
+          type: boolean
+        sort_order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+    RelationshipDict:
+      type: object
+      description: Serializer for the DictRelatedField relation.
+      properties:
+        id:
+          type: integer
+        slug:
+          type:
+          - string
+          - 'null'
     PredictionFieldTypeEnum:
       enum:
       - SCORE
@@ -886,48 +928,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PredictionField'
-    RelationshipDict:
-      type: object
-      description: Serializer for the DictRelatedField relation.
-      properties:
-        id:
-          type: integer
-        slug:
-          type:
-          - string
-          - 'null'
-    PatchedPredictionField:
-      type: object
-      description: Serializer for PredictionField objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        group:
-          $ref: '#/components/schemas/RelationshipDict'
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/PredictionFieldTypeEnum'
-        version:
-          type: string
-          default: 0.0.0
-        description:
-          type: string
-          maxLength: 256
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelationshipDict'
-        label:
-          type: string
-          maxLength: 128
-        required:
-          type: boolean
-        sort_order:
-          type: integer
-          maximum: 32767
-          minimum: 0
   securitySchemes:
     cookieAuth:
       type: apiKey

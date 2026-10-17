@@ -822,54 +822,6 @@ components:
         * `OK` - Done
 
         * `ER` - Error'
-    Duplicate:
-      type: object
-      description: Deserializer for duplicate endpoint.
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - ids
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
     PatchedCollectionSerializerWithPermissions:
       type: object
       description: Serializer for Collection objects.
@@ -929,6 +881,43 @@ components:
           items:
             $ref: '#/components/schemas/CurrentUserPermissions'
           readOnly: true
+    AnnotationFieldDict:
+      type: object
+      description: Serializer for actions that deal with annotation fields.
+      properties:
+        annotation_fields:
+          type: array
+          items:
+            type: integer
+      required:
+      - annotation_fields
+    ObserverSubscribeRequest:
+      type: object
+      description: Serializer for the subscribe endpoint.
+      properties:
+        ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+        session_id:
+          type: string
+      required:
+      - session_id
+    PredictionFieldDict:
+      type: object
+      description: Serializer for actions that deal with prediction fields.
+      properties:
+        prediction_fields:
+          type: array
+          items:
+            type: integer
+        confirm_action:
+          type: boolean
+          default: false
+      required:
+      - prediction_fields
     PublicEnum:
       enum:
       - VIEW
@@ -943,16 +932,82 @@ components:
         * `SHARE` - SHARE
 
         * `OWNER` - OWNER'
-    AnnotationFieldDict:
+    PaginatedCollectionSerializerWithPermissionsList:
       type: object
-      description: Serializer for actions that deal with annotation fields.
+      required:
+      - count
+      - results
       properties:
-        annotation_fields:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
           type: array
           items:
-            type: integer
+            $ref: '#/components/schemas/CollectionSerializerWithPermissions'
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
       required:
-      - annotation_fields
+      - permissions
+      - type
+    ObserverSubscription:
+      type: object
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     CurrentUserPermissionsTypeEnum:
       enum:
       - user
@@ -964,6 +1019,47 @@ components:
         * `group` - group
 
         * `public` - public'
+    Permission:
+      type: object
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      properties:
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
     CollectionSerializerWithPermissions:
       type: object
       description: Serializer for Collection objects.
@@ -1033,6 +1129,43 @@ components:
       - id
       - modified
       - status
+    BillingAccount:
+      type: object
+      description: Billing account serializer.
+      properties:
+        active:
+          type: boolean
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - active
+      - id
+      - name
+    Duplicate:
+      type: object
+      description: Deserializer for duplicate endpoint.
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - ids
+    Delete:
+      type: object
+      description: Bulk delete given objects.
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      required:
+      - ids
     BackgroundTask:
       type: object
       description: Serialize the BackgroundTask model.
@@ -1059,146 +1192,23 @@ components:
       required:
       - description
       - id
-    Permission:
-      type: object
-      description: 'Permission serializer.
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
 
+        * `view` - view
 
-        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
-      properties:
-        users:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
+        * `edit` - edit
 
-              * `EDIT` - EDIT
+        * `share` - share
 
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        groups:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        public:
-          $ref: '#/components/schemas/PublicEnum'
-    ObserverSubscribeRequest:
-      type: object
-      description: Serializer for the subscribe endpoint.
-      properties:
-        ids:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-        session_id:
-          type: string
-      required:
-      - session_id
-    PredictionFieldDict:
-      type: object
-      description: Serializer for actions that deal with prediction fields.
-      properties:
-        prediction_fields:
-          type: array
-          items:
-            type: integer
-        confirm_action:
-          type: boolean
-          default: false
-      required:
-      - prediction_fields
-    CurrentUserPermissions:
-      type: object
-      description: Current user permissions serializer.
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
-        name:
-          type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
-    PaginatedCollectionSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionSerializerWithPermissions'
-    ObserverSubscription:
-      type: object
-      description: Serializer for the subscribe response.
-      properties:
-        subscription_id:
-          type: string
-          format: uuid
-      required:
-      - subscription_id
-    BillingAccount:
-      type: object
-      description: Billing account serializer.
-      properties:
-        active:
-          type: boolean
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-      required:
-      - active
-      - id
-      - name
+        * `owner` - owner'
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.
@@ -1209,16 +1219,6 @@ components:
           type:
           - string
           - 'null'
-    Delete:
-      type: object
-      description: Bulk delete given objects.
-      properties:
-        ids:
-          type: array
-          items:
-            type: integer
-      required:
-      - ids
   securitySchemes:
     cookieAuth:
       type: apiKey

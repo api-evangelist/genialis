@@ -263,6 +263,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     CurrentUserPermissionsTypeEnum:
       enum:
       - user
@@ -274,26 +295,6 @@ components:
         * `group` - group
 
         * `public` - public'
-    PatchedAnnotationPresetSerializerWithPermissions:
-      type: object
-      description: Serializer for AnnotationPreset objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-        fields:
-          type: array
-          items:
-            type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        current_user_permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrentUserPermissions'
-          readOnly: true
     PaginatedAnnotationPresetSerializerWithPermissionsList:
       type: object
       required:
@@ -319,31 +320,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnnotationPresetSerializerWithPermissions'
-    AnnotationPresetSerializerWithPermissions:
-      type: object
-      description: Serializer for AnnotationPreset objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-        fields:
-          type: array
-          items:
-            type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        current_user_permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrentUserPermissions'
-          readOnly: true
-      required:
-      - contributor
-      - current_user_permissions
-      - fields
-      - id
     Permission:
       type: object
       description: 'Permission serializer.
@@ -385,6 +361,31 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
+    AnnotationPresetSerializerWithPermissions:
+      type: object
+      description: Serializer for AnnotationPreset objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - contributor
+      - current_user_permissions
+      - fields
+      - id
     PermissionsEnum:
       enum:
       - none
@@ -402,27 +403,20 @@ components:
         * `share` - share
 
         * `owner` - owner'
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
     CurrentUserPermissions:
       type: object
       description: Current user permissions serializer.
@@ -444,20 +438,26 @@ components:
       required:
       - permissions
       - type
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
+    PatchedAnnotationPresetSerializerWithPermissions:
+      type: object
+      description: Serializer for AnnotationPreset objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+        fields:
+          type: array
+          items:
+            type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
   securitySchemes:
     cookieAuth:
       type: apiKey

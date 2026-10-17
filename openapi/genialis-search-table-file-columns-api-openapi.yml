@@ -42,30 +42,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SearchTableFileColumn:
-      type: object
-      description: Serializer for :class:`SearchTableFileColumn` objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        type:
-          type: string
-        label:
-          type: string
-        file_path:
-          type: string
-        action:
-          $ref: '#/components/schemas/ActionEnum'
-        column_name:
-          type: string
-        exclude_builds:
-          type: array
-          items:
-            type: string
-      required:
-      - id
-      - label
     PaginatedSearchTableFileColumnList:
       type: object
       required:
@@ -99,6 +75,30 @@ components:
       description: '* `download` - Download
 
         * `tab` - Tab'
+    SearchTableFileColumn:
+      type: object
+      description: Serializer for :class:`SearchTableFileColumn` objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        type:
+          type: string
+        label:
+          type: string
+        file_path:
+          type: string
+        action:
+          $ref: '#/components/schemas/ActionEnum'
+        column_name:
+          type: string
+        exclude_builds:
+          type: array
+          items:
+            type: string
+      required:
+      - id
+      - label
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -114,14 +114,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserDataUsagePolymorphic:
-      oneOf:
-      - $ref: '#/components/schemas/SingleUserDataUsage'
-      - $ref: '#/components/schemas/UserDataUsage'
-      discriminator:
-        propertyName: single
-        mapping:
-          false: '#/components/schemas/UserDataUsage'
     UserDataUsage:
       type: object
       description: Serializer for data/sample usage per user with normalized fields too.
@@ -169,6 +161,14 @@ components:
       - sample_count_normalized
       - user_id
       - username
+    UserDataUsagePolymorphic:
+      oneOf:
+      - $ref: '#/components/schemas/SingleUserDataUsage'
+      - $ref: '#/components/schemas/UserDataUsage'
+      discriminator:
+        propertyName: single
+        mapping:
+          false: '#/components/schemas/UserDataUsage'
     SingleUserDataUsage:
       type: object
       description: Serializer for data/sample usage of a user.

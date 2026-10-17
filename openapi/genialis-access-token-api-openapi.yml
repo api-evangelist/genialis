@@ -374,31 +374,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PatchedDataAccessToken:
+    Contributor:
       type: object
-      description: Serializer for ``DataAccessToken``.
+      description: Serializer for contributor User objects.
       properties:
-        description:
+        first_name:
           type: string
-        user:
-          $ref: '#/components/schemas/Contributor'
-        data:
-          type: array
-          items:
-            type: integer
-        permissions:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        created:
-          type: string
-          format: date-time
+          maxLength: 150
+        id:
+          type: integer
           readOnly: true
-        revoked:
+        last_name:
           type: string
-          format: date-time
-          readOnly: true
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     DataAccessToken:
       type: object
       description: Serializer for ``DataAccessToken``.
@@ -430,6 +426,31 @@ components:
       - permissions
       - revoked
       - user
+    PaginatedDataAccessTokenList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataAccessToken'
     DataAccessTokenCreate:
       type: object
       description: Serializer for creating ``DataAccessToken``.
@@ -463,52 +484,31 @@ components:
       - permissions
       - revoked
       - user
-    PaginatedDataAccessTokenList:
+    PatchedDataAccessToken:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for ``DataAccessToken``.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
+        description:
+          type: string
+        user:
+          $ref: '#/components/schemas/Contributor'
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/DataAccessToken'
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
+            type: integer
+        permissions:
           type: string
-          maxLength: 150
-        id:
-          type: integer
+        expires:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
           readOnly: true
-        last_name:
+        revoked:
           type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
+          format: date-time
+          readOnly: true
   securitySchemes:
     cookieAuth:
       type: apiKey

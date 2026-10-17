@@ -336,6 +336,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     CurrentUserPermissionsTypeEnum:
       enum:
       - user
@@ -347,71 +368,6 @@ components:
         * `group` - group
 
         * `public` - public'
-    PaginatedDescriptorSchemaSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DescriptorSchemaSerializerWithPermissions'
-    DescriptorSchemaSerializerWithPermissions:
-      type: object
-      description: Serializer for DescriptorSchema objects.
-      properties:
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        modified:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        version:
-          type: string
-          default: 0.0.0
-        description:
-          type: string
-        name:
-          type: string
-        schema: {}
-        slug:
-          type:
-          - string
-          - 'null'
-        current_user_permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CurrentUserPermissions'
-          readOnly: true
-      required:
-      - contributor
-      - created
-      - current_user_permissions
-      - id
-      - modified
     Permission:
       type: object
       description: 'Permission serializer.
@@ -453,6 +409,46 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
+    DescriptorSchemaSerializerWithPermissions:
+      type: object
+      description: Serializer for DescriptorSchema objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        version:
+          type: string
+          default: 0.0.0
+        description:
+          type: string
+        name:
+          type: string
+        schema: {}
+        slug:
+          type:
+          - string
+          - 'null'
+        current_user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrentUserPermissions'
+          readOnly: true
+      required:
+      - contributor
+      - created
+      - current_user_permissions
+      - id
+      - modified
     PermissionsEnum:
       enum:
       - none
@@ -470,27 +466,45 @@ components:
         * `share` - share
 
         * `owner` - owner'
-    Contributor:
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    PaginatedDescriptorSchemaSerializerWithPermissionsList:
       type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
       required:
-      - id
-      - username
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DescriptorSchemaSerializerWithPermissions'
     CurrentUserPermissions:
       type: object
       description: Current user permissions serializer.
@@ -512,20 +526,6 @@ components:
       required:
       - permissions
       - type
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
   securitySchemes:
     cookieAuth:
       type: apiKey
