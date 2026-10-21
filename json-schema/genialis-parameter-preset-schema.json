@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-parameter-preset-schema.json",
+  "title": "ParameterPreset",
+  "description": "Serializer for :class:`ParameterPreset` model.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-user-settings-api-openapi.yml#/components/schemas/ParameterPreset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "contributor": {
+      "type": "integer"
+    },
+    "process": {
+      "type": "integer"
+    },
+    "input_preset": {}
+  },
+  "required": [
+    "contributor",
+    "created",
+    "id",
+    "modified",
+    "name",
+    "process"
+  ]
+}

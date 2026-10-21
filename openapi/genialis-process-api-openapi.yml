@@ -415,27 +415,122 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Contributor:
+    PermissionsEnum:
+      enum:
+      - none
+      - view
+      - edit
+      - share
+      - owner
+      type: string
+      description: '* `none` - none
+
+        * `view` - view
+
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
+    SchedulingClassEnum:
+      enum:
+      - IN
+      - BA
+      type: string
+      description: '* `IN` - Interactive
+
+        * `BA` - Batch'
+    Permission:
       type: object
-      description: Serializer for contributor User objects.
+      description: 'Permission serializer.
+
+
+        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
       properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
+        users:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        groups:
+          type: object
+          additionalProperties:
+            enum:
+            - VIEW
+            - EDIT
+            - SHARE
+            - OWNER
+            type: string
+            description: '* `VIEW` - VIEW
+
+              * `EDIT` - EDIT
+
+              * `SHARE` - SHARE
+
+              * `OWNER` - OWNER'
+        public:
+          $ref: '#/components/schemas/PublicEnum'
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    PaginatedProcessSerializerWithPermissionsList:
+      type: object
       required:
-      - id
-      - username
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
     ProcessSerializerWithPermissions:
       type: object
       description: Serializer for Process objects.
@@ -514,114 +609,27 @@ components:
       - is_active
       - modified
       - type
-    CurrentUserPermissionsTypeEnum:
-      enum:
-      - user
-      - group
-      - public
-      type: string
-      description: '* `user` - user
-
-        * `group` - group
-
-        * `public` - public'
-    Permission:
+    Contributor:
       type: object
-      description: 'Permission serializer.
-
-
-        Dictionary keys for users and groups are either ids or usernames (emails) or group names.'
+      description: Serializer for contributor User objects.
       properties:
-        users:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        groups:
-          type: object
-          additionalProperties:
-            enum:
-            - VIEW
-            - EDIT
-            - SHARE
-            - OWNER
-            type: string
-            description: '* `VIEW` - VIEW
-
-              * `EDIT` - EDIT
-
-              * `SHARE` - SHARE
-
-              * `OWNER` - OWNER'
-        public:
-          $ref: '#/components/schemas/PublicEnum'
-    PaginatedProcessSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessSerializerWithPermissions'
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     CurrentUserPermissions:
       type: object
       description: Current user permissions serializer.
@@ -654,14 +662,6 @@ components:
         * `CAC` - Cached
 
         * `TMP` - Temp'
-    SchedulingClassEnum:
-      enum:
-      - IN
-      - BA
-      type: string
-      description: '* `IN` - Interactive
-
-        * `BA` - Batch'
   securitySchemes:
     cookieAuth:
       type: apiKey

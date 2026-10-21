@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-annotation-upload-deserializer-schema.json",
+  "title": "AnnotationUploadDeserializer",
+  "description": "Deserializer for request data when uploading an annotation file.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-annotation-api-openapi.yml#/components/schemas/AnnotationUploadDeserializer",
+  "type": "object",
+  "properties": {
+    "annotation_type": {
+      "type": "string"
+    },
+    "annotation_file": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": [
+    "annotation_file",
+    "annotation_type"
+  ]
+}

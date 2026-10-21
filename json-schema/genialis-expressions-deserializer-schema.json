@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-expressions-deserializer-schema.json",
+  "title": "ExpressionsDeserializer",
+  "description": "Expressions deserializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-modules-api-openapi.yml#/components/schemas/ExpressionsDeserializer",
+  "type": "object",
+  "properties": {
+    "gene_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "species": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "annotation_version": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/AnnotationVersionEnum"
+        }
+      ],
+      "default": "v2"
+    },
+    "basket": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "group_by": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {}
+    },
+    "color_by": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {}
+    }
+  },
+  "required": [
+    "basket"
+  ],
+  "$defs": {
+    "AnnotationVersionEnum": {
+      "enum": [
+        "v2"
+      ],
+      "type": "string",
+      "description": "* `v2` - v2"
+    }
+  }
+}

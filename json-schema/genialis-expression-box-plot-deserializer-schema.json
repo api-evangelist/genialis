@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-expression-box-plot-deserializer-schema.json",
+  "title": "ExpressionBoxPlotDeserializer",
+  "description": "ExpressionBoxPlot deserializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-modules-api-openapi.yml#/components/schemas/ExpressionBoxPlotDeserializer",
+  "type": "object",
+  "properties": {
+    "gene_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "species": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "annotation_version": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/AnnotationVersionEnum"
+        }
+      ],
+      "default": "v2"
+    },
+    "attribute": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "basket": {
+      "type": "string",
+      "format": "uuid"
+    }
+  },
+  "required": [
+    "basket"
+  ],
+  "$defs": {
+    "AnnotationVersionEnum": {
+      "enum": [
+        "v2"
+      ],
+      "type": "string",
+      "description": "* `v2` - v2"
+    }
+  }
+}

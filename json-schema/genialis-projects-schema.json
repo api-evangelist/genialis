@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-projects-schema.json",
+  "title": "Projects",
+  "description": "BaseSpace projects serializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-basespace-api-openapi.yml#/components/schemas/Projects",
+  "type": "object",
+  "properties": {
+    "displayed_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "total_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Project"
+      }
+    }
+  },
+  "$defs": {
+    "Project": {
+      "type": "object",
+      "description": "BaseSpace project entity serializer.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  }
+}

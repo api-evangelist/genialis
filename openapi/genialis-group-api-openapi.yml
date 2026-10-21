@@ -308,6 +308,21 @@ components:
             type: integer
       required:
       - user_ids
+    PatchedGroup:
+      type: object
+      description: Serializer for :class:`Group` objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 150
+        users:
+          type: array
+          items:
+            type: integer
+          readOnly: true
     PaginatedGroupList:
       type: object
       required:
@@ -333,21 +348,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Group'
-    PatchedGroup:
-      type: object
-      description: Serializer for :class:`Group` objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 150
-        users:
-          type: array
-          items:
-            type: integer
-          readOnly: true
   securitySchemes:
     cookieAuth:
       type: apiKey

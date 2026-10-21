@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-permission-schema.json",
+  "title": "Permission",
+  "description": "Permission serializer.\n\nDictionary keys for users and groups are either ids or usernames (emails) or group names.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/Permission",
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "VIEW",
+          "EDIT",
+          "SHARE",
+          "OWNER"
+        ],
+        "type": "string",
+        "description": "* `VIEW` - VIEW\n* `EDIT` - EDIT\n* `SHARE` - SHARE\n* `OWNER` - OWNER"
+      }
+    },
+    "groups": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "VIEW",
+          "EDIT",
+          "SHARE",
+          "OWNER"
+        ],
+        "type": "string",
+        "description": "* `VIEW` - VIEW\n* `EDIT` - EDIT\n* `SHARE` - SHARE\n* `OWNER` - OWNER"
+      }
+    },
+    "public": {
+      "$ref": "#/$defs/PublicEnum"
+    }
+  },
+  "$defs": {
+    "PublicEnum": {
+      "enum": [
+        "VIEW",
+        "EDIT",
+        "SHARE",
+        "OWNER"
+      ],
+      "type": "string",
+      "description": "* `VIEW` - VIEW\n* `EDIT` - EDIT\n* `SHARE` - SHARE\n* `OWNER` - OWNER"
+    }
+  }
+}

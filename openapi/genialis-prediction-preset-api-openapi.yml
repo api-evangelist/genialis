@@ -282,63 +282,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    PaginatedPredictionPresetSerializerWithPermissionsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
-    CurrentUserPermissionsTypeEnum:
+    PermissionsEnum:
       enum:
-      - user
-      - group
-      - public
+      - none
+      - view
+      - edit
+      - share
+      - owner
       type: string
-      description: '* `user` - user
+      description: '* `none` - none
 
-        * `group` - group
+        * `view` - view
 
-        * `public` - public'
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
     Permission:
       type: object
       description: 'Permission serializer.
@@ -380,23 +340,6 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
     PublicEnum:
       enum:
       - VIEW
@@ -411,6 +354,63 @@ components:
         * `SHARE` - SHARE
 
         * `OWNER` - OWNER'
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
+    PaginatedPredictionPresetSerializerWithPermissionsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionPresetSerializerWithPermissions'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     PatchedPredictionPresetSerializerWithPermissions:
       type: object
       description: Serializer for PredictionPreset objects.
@@ -431,6 +431,27 @@ components:
           items:
             $ref: '#/components/schemas/CurrentUserPermissions'
           readOnly: true
+    CurrentUserPermissions:
+      type: object
+      description: Current user permissions serializer.
+      properties:
+        id:
+          type: integer
+        type:
+          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
+        name:
+          type: string
+          maxLength: 100
+        username:
+          type: string
+          maxLength: 150
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionsEnum'
+      required:
+      - permissions
+      - type
     PredictionPresetSerializerWithPermissions:
       type: object
       description: Serializer for PredictionPreset objects.
@@ -455,27 +476,6 @@ components:
       - contributor
       - current_user_permissions
       - id
-    CurrentUserPermissions:
-      type: object
-      description: Current user permissions serializer.
-      properties:
-        id:
-          type: integer
-        type:
-          $ref: '#/components/schemas/CurrentUserPermissionsTypeEnum'
-        name:
-          type: string
-          maxLength: 100
-        username:
-          type: string
-          maxLength: 150
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermissionsEnum'
-      required:
-      - permissions
-      - type
   securitySchemes:
     cookieAuth:
       type: apiKey

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-prediction-group-list-schema.json",
+  "title": "PaginatedPredictionGroupList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-prediction-group-api-openapi.yml#/components/schemas/PaginatedPredictionGroupList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PredictionGroup"
+      }
+    }
+  },
+  "$defs": {
+    "PredictionGroup": {
+      "type": "object",
+      "description": "Serializer for PredictionGroup objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "sort_order": {
+          "type": "integer",
+          "maximum": 32767,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "sort_order"
+      ]
+    }
+  }
+}

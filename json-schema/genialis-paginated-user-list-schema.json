@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-user-list-schema.json",
+  "title": "PaginatedUserList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-user-api-openapi.yml#/components/schemas/PaginatedUserList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/User"
+      }
+    }
+  },
+  "$defs": {
+    "User": {
+      "type": "object",
+      "description": "Serializer for :class:`User` objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lab": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        },
+        "password": {
+          "type": "string",
+          "writeOnly": true,
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 254
+        },
+        "community": {
+          "type": "string",
+          "writeOnly": true
+        },
+        "date_joined": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_login": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "email",
+        "id",
+        "password",
+        "username"
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-base-space-samples-schema.json",
+  "title": "BaseSpaceSamples",
+  "description": "BaseSpace samples serializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-basespace-api-openapi.yml#/components/schemas/BaseSpaceSamples",
+  "type": "object",
+  "properties": {
+    "displayed_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "total_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BaseSpaceSample"
+      }
+    }
+  },
+  "$defs": {
+    "BaseSpaceSample": {
+      "type": "object",
+      "description": "BaseSpace sample entity serializer.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "is_paired_end": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "is_paired_end",
+        "name"
+      ]
+    }
+  }
+}

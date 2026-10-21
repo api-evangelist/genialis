@@ -790,6 +790,72 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedPredictionValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PredictionValue'
+    PatchedPredictionValue:
+      type: object
+      description: Serializer for PredictionValue objects.
+      properties:
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: object
+            properties:
+              class_:
+                type: string
+              probability:
+                type: number
+                format: double
+            required:
+            - class_
+            - probability
+          - type: object
+            properties:
+              score:
+                type: number
+                format: double
+            required:
+            - score
+          description: Get the actual value.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
     PredictionValue:
       type: object
       description: Serializer for PredictionValue objects.
@@ -838,47 +904,6 @@ components:
       - field
       - id
       - value
-    PatchedPredictionValue:
-      type: object
-      description: Serializer for PredictionValue objects.
-      properties:
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        entity:
-          type: integer
-        field:
-          type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        value:
-          oneOf:
-          - type: object
-            properties:
-              class_:
-                type: string
-              probability:
-                type: number
-                format: double
-            required:
-            - class_
-            - probability
-          - type: object
-            properties:
-              score:
-                type: number
-                format: double
-            required:
-            - score
-          description: Get the actual value.
-          readOnly: true
-        _value:
-          writeOnly: true
-          title: ' value'
     Contributor:
       type: object
       description: Serializer for contributor User objects.
@@ -900,31 +925,6 @@ components:
       required:
       - id
       - username
-    PaginatedPredictionValueList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/PredictionValue'
   securitySchemes:
     cookieAuth:
       type: apiKey

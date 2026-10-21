@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-variant-call-list-schema.json",
+  "title": "PaginatedVariantCallList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-variant-calls-api-openapi.yml#/components/schemas/PaginatedVariantCallList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/VariantCall"
+      }
+    }
+  },
+  "$defs": {
+    "VariantCall": {
+      "type": "object",
+      "description": "Serializer for VariantCall objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "sample": {
+          "type": "integer"
+        },
+        "variant": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "experiment": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "data": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "quality": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "genotype_quality": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "depth_norm_quality": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "alternative_allele_depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "filter": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 20
+        },
+        "genotype": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 3
+        }
+      },
+      "required": [
+        "id",
+        "sample"
+      ]
+    }
+  }
+}

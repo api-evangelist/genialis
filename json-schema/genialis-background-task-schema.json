@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-background-task-schema.json",
+  "title": "BackgroundTask",
+  "description": "Serialize the BackgroundTask model.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-collection-api-openapi.yml#/components/schemas/BackgroundTask",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "started": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "finished": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "status": {
+      "$ref": "#/$defs/BackgroundTaskStatusEnum"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "output": {}
+  },
+  "required": [
+    "description",
+    "id"
+  ],
+  "$defs": {
+    "BackgroundTaskStatusEnum": {
+      "enum": [
+        "WT",
+        "PR",
+        "OK",
+        "ER"
+      ],
+      "type": "string",
+      "description": "* `WT` - Waiting\n* `PR` - Processing\n* `OK` - Done\n* `ER` - Error"
+    }
+  }
+}

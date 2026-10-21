@@ -726,6 +726,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PaginatedAnnotationFieldList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationField'
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.
@@ -778,31 +803,6 @@ components:
       - label
       - sort_order
       - type
-    PaginatedAnnotationFieldList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationField'
   securitySchemes:
     cookieAuth:
       type: apiKey

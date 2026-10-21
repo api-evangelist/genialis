@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-estimated-cost-per-billing-account-list-schema.json",
+  "title": "PaginatedEstimatedCostPerBillingAccountList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/PaginatedEstimatedCostPerBillingAccountList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EstimatedCostPerBillingAccount"
+      }
+    }
+  },
+  "$defs": {
+    "EstimatedCostPerBillingAccount": {
+      "type": "object",
+      "description": "Serializer for cost per day per billing account.",
+      "properties": {
+        "cost_type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "readOnly": true
+        },
+        "aggregated_cost": {
+          "type": "number",
+          "format": "double"
+        },
+        "billing_account_id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "referenced_collection_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "referenced_collection_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "referenced_collection_slug": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "readOnly": true
+        }
+      },
+      "required": [
+        "aggregated_cost",
+        "billing_account_id",
+        "cost_type",
+        "date",
+        "referenced_collection_id",
+        "referenced_collection_name",
+        "referenced_collection_slug"
+      ]
+    }
+  }
+}

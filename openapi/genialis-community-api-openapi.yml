@@ -42,6 +42,26 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Community:
+      type: object
+      description: Serializer for :class:`Community` objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        slug:
+          type: string
+          maxLength: 100
+          pattern: ^[-a-zA-Z0-9_]+$
+        default:
+          type: boolean
+      required:
+      - id
+      - name
+      - slug
     PaginatedCommunityList:
       type: object
       required:
@@ -67,26 +87,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Community'
-    Community:
-      type: object
-      description: Serializer for :class:`Community` objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        slug:
-          type: string
-          maxLength: 100
-          pattern: ^[-a-zA-Z0-9_]+$
-        default:
-          type: boolean
-      required:
-      - id
-      - name
-      - slug
   securitySchemes:
     cookieAuth:
       type: apiKey

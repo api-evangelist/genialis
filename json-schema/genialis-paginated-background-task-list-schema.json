@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-background-task-list-schema.json",
+  "title": "PaginatedBackgroundTaskList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-task-api-openapi.yml#/components/schemas/PaginatedBackgroundTaskList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BackgroundTask"
+      }
+    }
+  },
+  "$defs": {
+    "BackgroundTask": {
+      "type": "object",
+      "description": "Serialize the BackgroundTask model.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "started": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "finished": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/$defs/BackgroundTaskStatusEnum"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "output": {}
+      },
+      "required": [
+        "description",
+        "id"
+      ]
+    },
+    "BackgroundTaskStatusEnum": {
+      "enum": [
+        "WT",
+        "PR",
+        "OK",
+        "ER"
+      ],
+      "type": "string",
+      "description": "* `WT` - Waiting\n* `PR` - Processing\n* `OK` - Done\n* `ER` - Error"
+    }
+  }
+}

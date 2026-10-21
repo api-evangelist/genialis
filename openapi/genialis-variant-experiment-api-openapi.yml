@@ -1554,6 +1554,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedVariantExperiment:
+      type: object
+      description: Serializer for VariantExperiment objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        variant_data_source:
+          type: string
+          maxLength: 100
+    VariantExperiment:
+      type: object
+      description: Serializer for VariantExperiment objects.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        variant_data_source:
+          type: string
+          maxLength: 100
+      required:
+      - contributor
+      - id
+      - timestamp
+      - variant_data_source
     PaginatedVariantExperimentList:
       type: object
       required:
@@ -1600,43 +1637,6 @@ components:
       required:
       - id
       - username
-    PatchedVariantExperiment:
-      type: object
-      description: Serializer for VariantExperiment objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        variant_data_source:
-          type: string
-          maxLength: 100
-    VariantExperiment:
-      type: object
-      description: Serializer for VariantExperiment objects.
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          readOnly: true
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        variant_data_source:
-          type: string
-          maxLength: 100
-      required:
-      - contributor
-      - id
-      - timestamp
-      - variant_data_source
   securitySchemes:
     cookieAuth:
       type: apiKey

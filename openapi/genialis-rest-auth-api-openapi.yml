@@ -276,6 +276,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    RestAuthDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
     UserDetails:
       type: object
       description: User model w/o password
@@ -303,14 +311,6 @@ components:
       - email
       - pk
       - username
-    RestAuthDetail:
-      type: object
-      properties:
-        detail:
-          type: string
-          readOnly: true
-      required:
-      - detail
     PatchedUserDetails:
       type: object
       description: User model w/o password
@@ -334,15 +334,6 @@ components:
         last_name:
           type: string
           maxLength: 150
-    PasswordReset:
-      type: object
-      description: Serializer for requesting a password reset e-mail.
-      properties:
-        email:
-          type: string
-          format: email
-      required:
-      - email
     ApiLogin:
       type: object
       description: Deserializer for login credentials.
@@ -355,6 +346,18 @@ components:
       required:
       - email
       - password
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
     PasswordResetConfirm:
       type: object
       description: Serializer for confirming a password reset attempt.
@@ -374,18 +377,15 @@ components:
       - new_password2
       - token
       - uid
-    PasswordChange:
+    PasswordReset:
       type: object
+      description: Serializer for requesting a password reset e-mail.
       properties:
-        new_password1:
+        email:
           type: string
-          maxLength: 128
-        new_password2:
-          type: string
-          maxLength: 128
+          format: email
       required:
-      - new_password1
-      - new_password2
+      - email
   securitySchemes:
     cookieAuth:
       type: apiKey

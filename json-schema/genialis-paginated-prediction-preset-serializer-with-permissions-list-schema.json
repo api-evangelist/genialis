@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-prediction-preset-serializer-with-permissions-list-schema.json",
+  "title": "PaginatedPredictionPresetSerializerWithPermissionsList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-prediction-preset-api-openapi.yml#/components/schemas/PaginatedPredictionPresetSerializerWithPermissionsList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PredictionPresetSerializerWithPermissions"
+      }
+    }
+  },
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "CurrentUserPermissions": {
+      "type": "object",
+      "description": "Current user permissions serializer.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "$ref": "#/$defs/CurrentUserPermissionsTypeEnum"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PermissionsEnum"
+          }
+        }
+      },
+      "required": [
+        "permissions",
+        "type"
+      ]
+    },
+    "CurrentUserPermissionsTypeEnum": {
+      "enum": [
+        "user",
+        "group",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `user` - user\n* `group` - group\n* `public` - public"
+    },
+    "PermissionsEnum": {
+      "enum": [
+        "none",
+        "view",
+        "edit",
+        "share",
+        "owner"
+      ],
+      "type": "string",
+      "description": "* `none` - none\n* `view` - view\n* `edit` - edit\n* `share` - share\n* `owner` - owner"
+    },
+    "PredictionPresetSerializerWithPermissions": {
+      "type": "object",
+      "description": "Serializer for PredictionPreset objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "contributor": {
+          "$ref": "#/$defs/Contributor"
+        },
+        "name": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "current_user_permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CurrentUserPermissions"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contributor",
+        "current_user_permissions",
+        "id"
+      ]
+    }
+  }
+}

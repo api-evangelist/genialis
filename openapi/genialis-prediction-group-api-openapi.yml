@@ -327,7 +327,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PredictionGroup:
+    PatchedPredictionGroup:
       type: object
       description: Serializer for PredictionGroup objects.
       properties:
@@ -343,10 +343,6 @@ components:
           type: integer
           maximum: 32767
           minimum: 0
-      required:
-      - id
-      - label
-      - sort_order
     PaginatedPredictionGroupList:
       type: object
       required:
@@ -372,7 +368,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PredictionGroup'
-    PatchedPredictionGroup:
+    PredictionGroup:
       type: object
       description: Serializer for PredictionGroup objects.
       properties:
@@ -388,6 +384,10 @@ components:
           type: integer
           maximum: 32767
           minimum: 0
+      required:
+      - id
+      - label
+      - sort_order
   securitySchemes:
     cookieAuth:
       type: apiKey

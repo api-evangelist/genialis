@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-patched-data-access-token-schema.json",
+  "title": "PatchedDataAccessToken",
+  "description": "Serializer for ``DataAccessToken``.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-access-token-api-openapi.yml#/components/schemas/PatchedDataAccessToken",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "user": {
+      "$ref": "#/$defs/Contributor"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "permissions": {
+      "type": "string"
+    },
+    "expires": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "revoked": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-mapping-list-schema.json",
+  "title": "PaginatedMappingList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-kb-api-openapi.yml#/components/schemas/PaginatedMappingList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Mapping"
+      }
+    }
+  },
+  "$defs": {
+    "Mapping": {
+      "type": "object",
+      "description": "Serializer for mapping.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "relation_type": {
+          "$ref": "#/$defs/RelationTypeEnum"
+        },
+        "source_db": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "source_id": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "source_species": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "target_db": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "target_id": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "target_species": {
+          "type": "string",
+          "maxLength": 50
+        }
+      },
+      "required": [
+        "id",
+        "relation_type",
+        "source_db",
+        "source_id",
+        "source_species",
+        "target_db",
+        "target_id",
+        "target_species"
+      ]
+    },
+    "RelationTypeEnum": {
+      "enum": [
+        "crossdb",
+        "ortholog",
+        "transcript",
+        "exon"
+      ],
+      "type": "string",
+      "description": "* `crossdb` - Crossdb\n* `ortholog` - Ortholog\n* `transcript` - Transcript\n* `exon` - Exon"
+    }
+  }
+}

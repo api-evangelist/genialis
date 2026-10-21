@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-patched-prediction-field-schema.json",
+  "title": "PatchedPredictionField",
+  "description": "Serializer for PredictionField objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-prediction-field-api-openapi.yml#/components/schemas/PatchedPredictionField",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "group": {
+      "$ref": "#/$defs/RelationshipDict"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/PredictionFieldTypeEnum"
+    },
+    "version": {
+      "type": "string",
+      "default": "0.0.0"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RelationshipDict"
+      }
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "sort_order": {
+      "type": "integer",
+      "maximum": 32767,
+      "minimum": 0
+    }
+  },
+  "$defs": {
+    "PredictionFieldTypeEnum": {
+      "enum": [
+        "SCORE",
+        "CLASS"
+      ],
+      "type": "string",
+      "description": "* `SCORE` - SCORE\n* `CLASS` - CLASS"
+    },
+    "RelationshipDict": {
+      "type": "object",
+      "description": "Serializer for the DictRelatedField relation.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

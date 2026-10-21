@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-app-state-schema.json",
+  "title": "AppState",
+  "description": "Serializer for :class:`AppState` objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-app-state-api-openapi.yml#/components/schemas/AppState",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "state": {},
+    "contributor": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contributor",
+    "state",
+    "uuid"
+  ]
+}

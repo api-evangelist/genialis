@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-user-data-usage-polymorphic-schema.json",
+  "title": "UserDataUsagePolymorphic",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-base-api-openapi.yml#/components/schemas/UserDataUsagePolymorphic",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/SingleUserDataUsage"
+    },
+    {
+      "$ref": "#/$defs/UserDataUsage"
+    }
+  ],
+  "$defs": {
+    "SingleUserDataUsage": {
+      "type": "object",
+      "description": "Serializer for data/sample usage of a user.",
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "data_size": {
+          "type": "number",
+          "format": "double"
+        },
+        "data_count": {
+          "type": "integer"
+        },
+        "sample_count": {
+          "type": "integer"
+        },
+        "collection_count": {
+          "type": "integer"
+        },
+        "single": {
+          "type": "boolean",
+          "writeOnly": true,
+          "default": true
+        }
+      },
+      "required": [
+        "collection_count",
+        "data_count",
+        "data_size",
+        "full_name",
+        "sample_count",
+        "user_id",
+        "username"
+      ]
+    },
+    "UserDataUsage": {
+      "type": "object",
+      "description": "Serializer for data/sample usage per user with normalized fields too.",
+      "properties": {
+        "user_id": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "data_size": {
+          "type": "number",
+          "format": "double"
+        },
+        "data_count": {
+          "type": "integer"
+        },
+        "sample_count": {
+          "type": "integer"
+        },
+        "collection_count": {
+          "type": "integer"
+        },
+        "single": {
+          "type": "boolean",
+          "writeOnly": true,
+          "default": false
+        },
+        "data_size_normalized": {
+          "type": "number",
+          "format": "double"
+        },
+        "data_count_normalized": {
+          "type": "number",
+          "format": "double"
+        },
+        "sample_count_normalized": {
+          "type": "number",
+          "format": "double"
+        },
+        "collection_count_normalized": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "collection_count",
+        "collection_count_normalized",
+        "data_count",
+        "data_count_normalized",
+        "data_size",
+        "data_size_normalized",
+        "full_name",
+        "sample_count",
+        "sample_count_normalized",
+        "user_id",
+        "username"
+      ]
+    }
+  }
+}

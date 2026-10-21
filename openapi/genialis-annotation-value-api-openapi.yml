@@ -790,6 +790,72 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    AnnotationValue:
+      type: object
+      description: Serializer for AnnotationValue objects.
+      properties:
+        label:
+          description: Return the cached label.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        entity:
+          type: integer
+        field:
+          type: integer
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        value:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: number
+            format: double
+          - type: string
+            format: date
+          description: Get the actual value or None if object is delete marker.
+          readOnly: true
+        _value:
+          writeOnly: true
+          title: ' value'
+      required:
+      - contributor
+      - created
+      - entity
+      - field
+      - id
+      - label
+      - value
+    PaginatedAnnotationValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnnotationValue'
     PatchedAnnotationValue:
       type: object
       description: Serializer for AnnotationValue objects.
@@ -844,72 +910,6 @@ components:
       required:
       - id
       - username
-    PaginatedAnnotationValueList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnnotationValue'
-    AnnotationValue:
-      type: object
-      description: Serializer for AnnotationValue objects.
-      properties:
-        label:
-          description: Return the cached label.
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-          readOnly: true
-        id:
-          type: integer
-          readOnly: true
-        entity:
-          type: integer
-        field:
-          type: integer
-        contributor:
-          $ref: '#/components/schemas/Contributor'
-        value:
-          oneOf:
-          - type: string
-          - type: integer
-          - type: number
-            format: double
-          - type: string
-            format: date
-          description: Get the actual value or None if object is delete marker.
-          readOnly: true
-        _value:
-          writeOnly: true
-          title: ' value'
-      required:
-      - contributor
-      - created
-      - entity
-      - field
-      - id
-      - label
-      - value
   securitySchemes:
     cookieAuth:
       type: apiKey

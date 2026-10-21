@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-feature-schema.json",
+  "title": "Feature",
+  "description": "Serializer for feature.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-kb-api-openapi.yml#/components/schemas/Feature",
+  "type": "object",
+  "properties": {
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 256
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "feature_id": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "full_name": {
+      "type": "string",
+      "maxLength": 350
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "source": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "species": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "sub_type": {
+      "$ref": "#/$defs/SubTypeEnum"
+    },
+    "type": {
+      "$ref": "#/$defs/FeatureTypeEnum"
+    }
+  },
+  "required": [
+    "feature_id",
+    "id",
+    "name",
+    "source",
+    "species",
+    "sub_type",
+    "type"
+  ],
+  "$defs": {
+    "FeatureTypeEnum": {
+      "enum": [
+        "gene",
+        "transcript",
+        "exon",
+        "probe"
+      ],
+      "type": "string",
+      "description": "* `gene` - Gene\n* `transcript` - Transcript\n* `exon` - Exon\n* `probe` - Probe"
+    },
+    "SubTypeEnum": {
+      "enum": [
+        "protein-coding",
+        "pseudo",
+        "rRNA",
+        "ncRNA",
+        "snRNA",
+        "snoRNA",
+        "tRNA",
+        "asRNA",
+        "other",
+        "unknown"
+      ],
+      "type": "string",
+      "description": "* `protein-coding` - Protein-coding\n* `pseudo` - Pseudo\n* `rRNA` - rRNA\n* `ncRNA` - ncRNA\n* `snRNA` - snRNA\n* `snoRNA` - snoRNA\n* `tRNA` - tRNA\n* `asRNA` - asRNA\n* `other` - Other\n* `unknown` - Unknown"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-versions-schema.json",
+  "title": "Versions",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-about-api-openapi.yml#/components/schemas/Versions",
+  "type": "object",
+  "properties": {
+    "resolwe": {
+      "type": "string",
+      "readOnly": true
+    },
+    "resolwe-bio": {
+      "type": "string",
+      "readOnly": true
+    },
+    "genialis-bio": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "genialis-bio",
+    "resolwe",
+    "resolwe-bio"
+  ]
+}

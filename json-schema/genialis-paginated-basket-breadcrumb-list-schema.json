@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-basket-breadcrumb-list-schema.json",
+  "title": "PaginatedBasketBreadcrumbList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-basket-api-openapi.yml#/components/schemas/PaginatedBasketBreadcrumbList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BasketBreadcrumb"
+      }
+    }
+  },
+  "$defs": {
+    "BasketBreadcrumb": {
+      "type": "object",
+      "description": "SampleBasketBreadcrumb serializer.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "data": {},
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    }
+  }
+}

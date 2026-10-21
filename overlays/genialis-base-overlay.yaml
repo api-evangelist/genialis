@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for the Genialis Expressions API
   version: 1.0.0
-extends: openapi/genialis-base-openapi.yaml
+extends: ../openapi/_original/genialis-base-openapi.yaml
 x-generated: '2026-08-21'
 x-method: generated
 x-source: >-

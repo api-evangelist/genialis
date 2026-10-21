@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-basket-schema.json",
+  "title": "Basket",
+  "description": "Serializer for :class:`SampleInBasket` objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-basket-api-openapi.yml#/components/schemas/Basket",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "read_only": {
+      "type": "boolean"
+    },
+    "contributor": {
+      "$ref": "#/$defs/Contributor"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "readOnly": true
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "contributor",
+    "created",
+    "id",
+    "modified"
+  ],
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    }
+  }
+}

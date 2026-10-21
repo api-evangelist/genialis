@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-annotation-field-list-schema.json",
+  "title": "PaginatedAnnotationFieldList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-annotation-field-api-openapi.yml#/components/schemas/PaginatedAnnotationFieldList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AnnotationField"
+      }
+    }
+  },
+  "$defs": {
+    "AnnotationField": {
+      "type": "object",
+      "description": "Serializer for AnnotationField objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "group": {
+          "$ref": "#/$defs/RelationshipDict"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string"
+        },
+        "sort_order": {
+          "type": "integer",
+          "maximum": 32767,
+          "minimum": 0
+        },
+        "type": {
+          "type": "string",
+          "maxLength": 16
+        },
+        "validator_regex": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 128
+        },
+        "vocabulary": {},
+        "required": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string",
+          "default": "0.0.0"
+        }
+      },
+      "required": [
+        "description",
+        "group",
+        "id",
+        "label",
+        "sort_order",
+        "type"
+      ]
+    },
+    "RelationshipDict": {
+      "type": "object",
+      "description": "Serializer for the DictRelatedField relation.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

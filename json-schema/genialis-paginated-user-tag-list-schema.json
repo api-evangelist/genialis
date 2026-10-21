@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-user-tag-list-schema.json",
+  "title": "PaginatedUserTagList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-usertag-api-openapi.yml#/components/schemas/PaginatedUserTagList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/UserTag"
+      }
+    }
+  },
+  "$defs": {
+    "UserTag": {
+      "type": "object",
+      "description": "Serializer for :class:`UserTag` model.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "user": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        },
+        "tag_word": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string",
+          "format": "date"
+        },
+        "contributor": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        },
+        "created": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contributor",
+        "created",
+        "id",
+        "tag_word",
+        "user"
+      ]
+    }
+  }
+}

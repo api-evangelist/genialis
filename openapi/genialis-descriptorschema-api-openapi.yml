@@ -336,38 +336,23 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
-    CurrentUserPermissionsTypeEnum:
+    PermissionsEnum:
       enum:
-      - user
-      - group
-      - public
+      - none
+      - view
+      - edit
+      - share
+      - owner
       type: string
-      description: '* `user` - user
+      description: '* `none` - none
 
-        * `group` - group
+        * `view` - view
 
-        * `public` - public'
+        * `edit` - edit
+
+        * `share` - share
+
+        * `owner` - owner'
     Permission:
       type: object
       description: 'Permission serializer.
@@ -409,6 +394,31 @@ components:
               * `OWNER` - OWNER'
         public:
           $ref: '#/components/schemas/PublicEnum'
+    PublicEnum:
+      enum:
+      - VIEW
+      - EDIT
+      - SHARE
+      - OWNER
+      type: string
+      description: '* `VIEW` - VIEW
+
+        * `EDIT` - EDIT
+
+        * `SHARE` - SHARE
+
+        * `OWNER` - OWNER'
+    CurrentUserPermissionsTypeEnum:
+      enum:
+      - user
+      - group
+      - public
+      type: string
+      description: '* `user` - user
+
+        * `group` - group
+
+        * `public` - public'
     DescriptorSchemaSerializerWithPermissions:
       type: object
       description: Serializer for DescriptorSchema objects.
@@ -449,37 +459,27 @@ components:
       - current_user_permissions
       - id
       - modified
-    PermissionsEnum:
-      enum:
-      - none
-      - view
-      - edit
-      - share
-      - owner
-      type: string
-      description: '* `none` - none
-
-        * `view` - view
-
-        * `edit` - edit
-
-        * `share` - share
-
-        * `owner` - owner'
-    PublicEnum:
-      enum:
-      - VIEW
-      - EDIT
-      - SHARE
-      - OWNER
-      type: string
-      description: '* `VIEW` - VIEW
-
-        * `EDIT` - EDIT
-
-        * `SHARE` - SHARE
-
-        * `OWNER` - OWNER'
+    Contributor:
+      type: object
+      description: Serializer for contributor User objects.
+      properties:
+        first_name:
+          type: string
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
     PaginatedDescriptorSchemaSerializerWithPermissionsList:
       type: object
       required:

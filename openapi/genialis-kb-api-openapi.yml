@@ -671,6 +671,63 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SubTypeEnum:
+      enum:
+      - protein-coding
+      - pseudo
+      - rRNA
+      - ncRNA
+      - snRNA
+      - snoRNA
+      - tRNA
+      - asRNA
+      - other
+      - unknown
+      type: string
+      description: '* `protein-coding` - Protein-coding
+
+        * `pseudo` - Pseudo
+
+        * `rRNA` - rRNA
+
+        * `ncRNA` - ncRNA
+
+        * `snRNA` - snRNA
+
+        * `snoRNA` - snoRNA
+
+        * `tRNA` - tRNA
+
+        * `asRNA` - asRNA
+
+        * `other` - Other
+
+        * `unknown` - Unknown'
+    PaginatedMappingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mapping'
     RelationTypeEnum:
       enum:
       - crossdb
@@ -685,6 +742,31 @@ components:
         * `transcript` - Transcript
 
         * `exon` - Exon'
+    PaginatedFeatureList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
     Feature:
       type: object
       description: Serializer for feature.
@@ -726,6 +808,20 @@ components:
       - species
       - sub_type
       - type
+    FeatureTypeEnum:
+      enum:
+      - gene
+      - transcript
+      - exon
+      - probe
+      type: string
+      description: '* `gene` - Gene
+
+        * `transcript` - Transcript
+
+        * `exon` - Exon
+
+        * `probe` - Probe'
     Mapping:
       type: object
       description: Serializer for mapping.
@@ -762,102 +858,6 @@ components:
       - target_db
       - target_id
       - target_species
-    PaginatedFeatureList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-    PaginatedMappingList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Mapping'
-    FeatureTypeEnum:
-      enum:
-      - gene
-      - transcript
-      - exon
-      - probe
-      type: string
-      description: '* `gene` - Gene
-
-        * `transcript` - Transcript
-
-        * `exon` - Exon
-
-        * `probe` - Probe'
-    SubTypeEnum:
-      enum:
-      - protein-coding
-      - pseudo
-      - rRNA
-      - ncRNA
-      - snRNA
-      - snoRNA
-      - tRNA
-      - asRNA
-      - other
-      - unknown
-      type: string
-      description: '* `protein-coding` - Protein-coding
-
-        * `pseudo` - Pseudo
-
-        * `rRNA` - rRNA
-
-        * `ncRNA` - ncRNA
-
-        * `snRNA` - snRNA
-
-        * `snoRNA` - snoRNA
-
-        * `tRNA` - tRNA
-
-        * `asRNA` - asRNA
-
-        * `other` - Other
-
-        * `unknown` - Unknown'
   securitySchemes:
     cookieAuth:
       type: apiKey

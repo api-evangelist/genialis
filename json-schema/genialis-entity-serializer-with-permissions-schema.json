@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-entity-serializer-with-permissions-schema.json",
+  "title": "EntitySerializerWithPermissions",
+  "description": "Serializer for Entity with added collection field.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-sample-api-openapi.yml#/components/schemas/EntitySerializerWithPermissions",
+  "type": "object",
+  "properties": {
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "duplicated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "data_count": {
+      "type": "integer",
+      "description": "Return number of data objects on the collection.",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true
+    },
+    "contributor": {
+      "$ref": "#/$defs/Contributor"
+    },
+    "description": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "settings": {},
+    "slug": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 255
+      }
+    },
+    "collection": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RelationshipDict"
+        }
+      ]
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 100
+    },
+    "current_user_permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CurrentUserPermissions"
+      },
+      "readOnly": true
+    }
+  },
+  "required": [
+    "contributor",
+    "created",
+    "current_user_permissions",
+    "data_count",
+    "duplicated",
+    "id",
+    "modified",
+    "status"
+  ],
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "CurrentUserPermissions": {
+      "type": "object",
+      "description": "Current user permissions serializer.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "$ref": "#/$defs/CurrentUserPermissionsTypeEnum"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PermissionsEnum"
+          }
+        }
+      },
+      "required": [
+        "permissions",
+        "type"
+      ]
+    },
+    "CurrentUserPermissionsTypeEnum": {
+      "enum": [
+        "user",
+        "group",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `user` - user\n* `group` - group\n* `public` - public"
+    },
+    "PermissionsEnum": {
+      "enum": [
+        "none",
+        "view",
+        "edit",
+        "share",
+        "owner"
+      ],
+      "type": "string",
+      "description": "* `none` - none\n* `view` - view\n* `edit` - edit\n* `share` - share\n* `owner` - owner"
+    },
+    "RelationshipDict": {
+      "type": "object",
+      "description": "Serializer for the DictRelatedField relation.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

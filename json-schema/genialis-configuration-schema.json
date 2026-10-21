@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-configuration-schema.json",
+  "title": "Configuration",
+  "description": "Serializer for :class:`Configuration` objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-configuration-api-openapi.yml#/components/schemas/Configuration",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "community": {
+      "type": "string",
+      "readOnly": true
+    },
+    "gene_info_filtering_organisms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gene_info_filtering_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "import_visible": {
+      "type": "boolean"
+    },
+    "krasid_help_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "krasid_visible": {
+      "type": "boolean"
+    },
+    "landing_page_content": {
+      "type": "string"
+    },
+    "require_login_visible": {
+      "type": "boolean"
+    },
+    "search_archiver_process": {
+      "type": "string"
+    },
+    "search_filter_by_community": {
+      "type": "boolean"
+    },
+    "search_process_group_stubs": {},
+    "search_table_columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SearchTableFileColumn"
+      }
+    },
+    "search_visible": {
+      "type": "boolean"
+    },
+    "visualizations_de_color_palette": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 7
+      },
+      "title": "Visualizations comparison table color palette",
+      "maxItems": 9
+    },
+    "visualizations_de_creation_processes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Visualizations differential expression creation processes"
+    },
+    "visualizations_gene_view_visible": {
+      "type": "boolean"
+    },
+    "visualizations_genome_browser_visible": {
+      "type": "boolean"
+    },
+    "visualizations_visible": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "community",
+    "id"
+  ],
+  "$defs": {
+    "ActionEnum": {
+      "enum": [
+        "download",
+        "tab"
+      ],
+      "type": "string",
+      "description": "* `download` - Download\n* `tab` - Tab"
+    },
+    "SearchTableFileColumn": {
+      "type": "object",
+      "description": "Serializer for :class:`SearchTableFileColumn` objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "file_path": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/$defs/ActionEnum"
+        },
+        "column_name": {
+          "type": "string"
+        },
+        "exclude_builds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ]
+    }
+  }
+}

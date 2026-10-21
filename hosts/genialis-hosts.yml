@@ -1,0 +1,125 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 8
+  own: 4
+  other_domain: 3
+  platform: 1
+  roles:
+  - api
+  - docs
+  - other
+  - portal
+  - source
+  - support
+  - website
+hosts:
+- host: api.atlassian.net
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: atlassian.net
+  role: api
+  relation: other-domain
+- host: api.genialis.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: genialis.com
+  role: api
+  relation: own
+- host: app.genialis.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - APIReference
+  - SignUp
+  serves:
+  - api
+  - docs
+  registrable_domain: genialis.com
+  role: docs
+  relation: own
+- host: docs.genialis.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - DeveloperPortal
+  - Documentation
+  - GettingStarted
+  serves:
+  - docs
+  - cdn
+  - documentation
+  vendor: cloudfront
+  registrable_domain: genialis.com
+  role: portal
+  relation: own
+- host: genialis.atlassian.net
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: atlassian.net
+  role: support
+  relation: other-domain
+- host: genialis.us.auth0.com
+  found_by:
+  - vendor-detect
+  types: []
+  serves:
+  - identity
+  vendor: auth0
+  registrable_domain: auth0.com
+  role: other
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: www.genialis.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Leadership
+  - BlogRSS
+  - Website
+  - Blog
+  - TermsOfService
+  - PrivacyPolicy
+  - Compliance
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: genialis.com
+  role: website
+  relation: own

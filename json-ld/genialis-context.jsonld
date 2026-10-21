@@ -1,0 +1,918 @@
+{
+  "@context": {
+    "@vocab": "https://genialis.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "genialis": "https://genialis.com/schema#",
+    "ReSDKMinimalSupportedVersion": "genialis:ReSDKMinimalSupportedVersion",
+    "minimal_supported_version": {
+      "@id": "genialis:minimal_supported_version",
+      "@type": "xsd:string"
+    },
+    "Resources": "genialis:Resources",
+    "max_memory": {
+      "@id": "genialis:max_memory",
+      "@type": "xsd:integer"
+    },
+    "max_cores": {
+      "@id": "genialis:max_cores",
+      "@type": "xsd:integer"
+    },
+    "max_storage": {
+      "@id": "genialis:max_storage",
+      "@type": "xsd:integer"
+    },
+    "min_memory": {
+      "@id": "genialis:min_memory",
+      "@type": "xsd:integer"
+    },
+    "min_cores": {
+      "@id": "genialis:min_cores",
+      "@type": "xsd:integer"
+    },
+    "min_storage": {
+      "@id": "genialis:min_storage",
+      "@type": "xsd:integer"
+    },
+    "Versions": "genialis:Versions",
+    "resolwe": {
+      "@id": "genialis:resolwe",
+      "@type": "xsd:string"
+    },
+    "resolwe-bio": {
+      "@id": "genialis:resolwe-bio",
+      "@type": "xsd:string"
+    },
+    "genialis-bio": {
+      "@id": "genialis:genialis-bio",
+      "@type": "xsd:string"
+    },
+    "Contributor": "genialis:Contributor",
+    "first_name": {
+      "@id": "genialis:first_name",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "genialis:id",
+      "@type": "xsd:integer"
+    },
+    "last_name": {
+      "@id": "genialis:last_name",
+      "@type": "xsd:string"
+    },
+    "username": {
+      "@id": "genialis:username",
+      "@type": "xsd:string"
+    },
+    "DataAccessToken": "genialis:DataAccessToken",
+    "description": {
+      "@id": "genialis:description",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "genialis:user",
+      "@type": "@id"
+    },
+    "data": {
+      "@id": "genialis:data",
+      "@container": "@list"
+    },
+    "permissions": {
+      "@id": "genialis:permissions",
+      "@type": "xsd:string"
+    },
+    "expires": {
+      "@id": "genialis:expires",
+      "@type": "xsd:dateTime"
+    },
+    "created": {
+      "@id": "genialis:created",
+      "@type": "xsd:dateTime"
+    },
+    "revoked": {
+      "@id": "genialis:revoked",
+      "@type": "xsd:dateTime"
+    },
+    "PaginatedDataAccessTokenList": "genialis:PaginatedDataAccessTokenList",
+    "count": {
+      "@id": "genialis:count",
+      "@type": "xsd:integer"
+    },
+    "next": {
+      "@id": "genialis:next",
+      "@type": "@id"
+    },
+    "previous": {
+      "@id": "genialis:previous",
+      "@type": "@id"
+    },
+    "results": {
+      "@id": "genialis:results",
+      "@container": "@list"
+    },
+    "DataAccessTokenCreate": "genialis:DataAccessTokenCreate",
+    "token": {
+      "@id": "genialis:token",
+      "@type": "xsd:string"
+    },
+    "PatchedDataAccessToken": "genialis:PatchedDataAccessToken",
+    "AnnotationUpload": "genialis:AnnotationUpload",
+    "annotated_samples": {
+      "@id": "genialis:annotated_samples",
+      "@container": "@list"
+    },
+    "AnnotationUploadDeserializer": "genialis:AnnotationUploadDeserializer",
+    "annotation_type": {
+      "@id": "genialis:annotation_type",
+      "@type": "xsd:string"
+    },
+    "annotation_file": {
+      "@id": "genialis:annotation_file",
+      "@type": "@id"
+    },
+    "RelationshipDict": "genialis:RelationshipDict",
+    "slug": {
+      "@id": "genialis:slug",
+      "@type": "xsd:string"
+    },
+    "AnnotationField": "genialis:AnnotationField",
+    "group": {
+      "@id": "genialis:group",
+      "@type": "@id"
+    },
+    "label": {
+      "@id": "genialis:label",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "genialis:name",
+      "@type": "xsd:string"
+    },
+    "sort_order": {
+      "@id": "genialis:sort_order",
+      "@type": "xsd:integer"
+    },
+    "type": {
+      "@id": "genialis:type",
+      "@type": "xsd:string"
+    },
+    "validator_regex": {
+      "@id": "genialis:validator_regex",
+      "@type": "xsd:string"
+    },
+    "vocabulary": {
+      "@id": "genialis:vocabulary"
+    },
+    "required": {
+      "@id": "genialis:required",
+      "@type": "xsd:boolean"
+    },
+    "version": {
+      "@id": "genialis:version",
+      "@type": "xsd:string"
+    },
+    "PaginatedAnnotationFieldList": "genialis:PaginatedAnnotationFieldList",
+    "CurrentUserPermissionsTypeEnum": "genialis:CurrentUserPermissionsTypeEnum",
+    "PaginatedAnnotationPresetSerializerWithPermissionsList": "genialis:PaginatedAnnotationPresetSerializerWithPermissionsList",
+    "Permission": "genialis:Permission",
+    "users": {
+      "@id": "genialis:users"
+    },
+    "groups": {
+      "@id": "genialis:groups"
+    },
+    "public": {
+      "@id": "genialis:public",
+      "@type": "@id"
+    },
+    "AnnotationPresetSerializerWithPermissions": "genialis:AnnotationPresetSerializerWithPermissions",
+    "fields": {
+      "@id": "genialis:fields",
+      "@container": "@list"
+    },
+    "contributor": {
+      "@id": "genialis:contributor",
+      "@type": "@id"
+    },
+    "current_user_permissions": {
+      "@id": "genialis:current_user_permissions",
+      "@container": "@list"
+    },
+    "PermissionsEnum": "genialis:PermissionsEnum",
+    "PublicEnum": "genialis:PublicEnum",
+    "CurrentUserPermissions": "genialis:CurrentUserPermissions",
+    "PatchedAnnotationPresetSerializerWithPermissions": "genialis:PatchedAnnotationPresetSerializerWithPermissions",
+    "PatchedAnnotationValue": "genialis:PatchedAnnotationValue",
+    "entity": {
+      "@id": "genialis:entity",
+      "@type": "xsd:integer"
+    },
+    "field": {
+      "@id": "genialis:field",
+      "@type": "xsd:integer"
+    },
+    "value": {
+      "@id": "genialis:value"
+    },
+    "_value": {
+      "@id": "genialis:_value"
+    },
+    "PaginatedAnnotationValueList": "genialis:PaginatedAnnotationValueList",
+    "AnnotationValue": "genialis:AnnotationValue",
+    "AppState": "genialis:AppState",
+    "uuid": {
+      "@id": "genialis:uuid",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "genialis:state"
+    },
+    "UserDataUsage": "genialis:UserDataUsage",
+    "user_id": {
+      "@id": "genialis:user_id",
+      "@type": "xsd:integer"
+    },
+    "full_name": {
+      "@id": "genialis:full_name",
+      "@type": "xsd:string"
+    },
+    "data_size": {
+      "@id": "genialis:data_size",
+      "@type": "xsd:decimal"
+    },
+    "data_count": {
+      "@id": "genialis:data_count",
+      "@type": "xsd:integer"
+    },
+    "sample_count": {
+      "@id": "genialis:sample_count",
+      "@type": "xsd:integer"
+    },
+    "collection_count": {
+      "@id": "genialis:collection_count",
+      "@type": "xsd:integer"
+    },
+    "single": {
+      "@id": "genialis:single",
+      "@type": "xsd:boolean"
+    },
+    "data_size_normalized": {
+      "@id": "genialis:data_size_normalized",
+      "@type": "xsd:decimal"
+    },
+    "data_count_normalized": {
+      "@id": "genialis:data_count_normalized",
+      "@type": "xsd:decimal"
+    },
+    "sample_count_normalized": {
+      "@id": "genialis:sample_count_normalized",
+      "@type": "xsd:decimal"
+    },
+    "collection_count_normalized": {
+      "@id": "genialis:collection_count_normalized",
+      "@type": "xsd:decimal"
+    },
+    "SingleUserDataUsage": "genialis:SingleUserDataUsage",
+    "Handle": "genialis:Handle",
+    "handle": {
+      "@id": "genialis:handle",
+      "@type": "xsd:string"
+    },
+    "BaseSpaceSample": "genialis:BaseSpaceSample",
+    "is_paired_end": {
+      "@id": "genialis:is_paired_end",
+      "@type": "xsd:boolean"
+    },
+    "ObserverSubscribeRequest": "genialis:ObserverSubscribeRequest",
+    "ids": {
+      "@id": "genialis:ids",
+      "@container": "@list"
+    },
+    "session_id": {
+      "@id": "genialis:session_id",
+      "@type": "xsd:string"
+    },
+    "Projects": "genialis:Projects",
+    "displayed_count": {
+      "@id": "genialis:displayed_count",
+      "@type": "xsd:integer"
+    },
+    "total_count": {
+      "@id": "genialis:total_count",
+      "@type": "xsd:integer"
+    },
+    "items": {
+      "@id": "genialis:items",
+      "@container": "@list"
+    },
+    "Project": "genialis:Project",
+    "File": "genialis:File",
+    "BaseSpaceUser": "genialis:BaseSpaceUser",
+    "email": {
+      "@id": "genialis:email",
+      "@type": "xsd:string"
+    },
+    "BaseSpaceSamples": "genialis:BaseSpaceSamples",
+    "Url": "genialis:Url",
+    "url": {
+      "@id": "genialis:url",
+      "@type": "@id"
+    },
+    "Files": "genialis:Files",
+    "ObserverSubscription": "genialis:ObserverSubscription",
+    "subscription_id": {
+      "@id": "genialis:subscription_id",
+      "@type": "xsd:string"
+    },
+    "PaginatedBasketBreadcrumbList": "genialis:PaginatedBasketBreadcrumbList",
+    "BasketBreadcrumb": "genialis:BasketBreadcrumb",
+    "BasketSource": "genialis:BasketSource",
+    "source": {
+      "@id": "genialis:source",
+      "@type": "xsd:string"
+    },
+    "SampleInBasket": "genialis:SampleInBasket",
+    "selected": {
+      "@id": "genialis:selected",
+      "@type": "xsd:boolean"
+    },
+    "sample": {
+      "@id": "genialis:sample",
+      "@type": "@id"
+    },
+    "breadcrumb": {
+      "@id": "genialis:breadcrumb",
+      "@type": "@id"
+    },
+    "BasketMutation": "genialis:BasketMutation",
+    "modified": {
+      "@id": "genialis:modified",
+      "@type": "xsd:dateTime"
+    },
+    "BasketAddSamplesDeserializer": "genialis:BasketAddSamplesDeserializer",
+    "annotation_version": {
+      "@id": "genialis:annotation_version"
+    },
+    "only_existing_organism": {
+      "@id": "genialis:only_existing_organism",
+      "@type": "xsd:boolean"
+    },
+    "samples": {
+      "@id": "genialis:samples",
+      "@container": "@list"
+    },
+    "BasketAddSamples": "genialis:BasketAddSamples",
+    "ignored": {
+      "@id": "genialis:ignored",
+      "@container": "@list"
+    },
+    "duplicated": {
+      "@id": "genialis:duplicated",
+      "@container": "@list"
+    },
+    "permitted_organisms": {
+      "@id": "genialis:permitted_organisms",
+      "@container": "@list"
+    },
+    "permitted_sources": {
+      "@id": "genialis:permitted_sources",
+      "@container": "@list"
+    },
+    "conflict_organisms": {
+      "@id": "genialis:conflict_organisms",
+      "@container": "@list"
+    },
+    "conflict_sources": {
+      "@id": "genialis:conflict_sources",
+      "@container": "@list"
+    },
+    "Basket": "genialis:Basket",
+    "read_only": {
+      "@id": "genialis:read_only",
+      "@type": "xsd:boolean"
+    },
+    "BasketClone": "genialis:BasketClone",
+    "removed_samples": {
+      "@id": "genialis:removed_samples",
+      "@type": "xsd:boolean"
+    },
+    "Entity": "genialis:Entity",
+    "status": {
+      "@id": "genialis:status",
+      "@type": "xsd:string"
+    },
+    "settings": {
+      "@id": "genialis:settings"
+    },
+    "tags": {
+      "@id": "genialis:tags",
+      "@container": "@list"
+    },
+    "collection": {
+      "@id": "genialis:collection"
+    },
+    "BasketSampleCount": "genialis:BasketSampleCount",
+    "sampleCount": {
+      "@id": "genialis:sampleCount",
+      "@type": "xsd:integer"
+    },
+    "PaginatedBasketOrganismList": "genialis:PaginatedBasketOrganismList",
+    "AnnotationVersionEnum": "genialis:AnnotationVersionEnum",
+    "BasketOrganism": "genialis:BasketOrganism",
+    "organism": {
+      "@id": "genialis:organism",
+      "@type": "xsd:string"
+    },
+    "BasketDataTypes": "genialis:BasketDataTypes",
+    "data_types": {
+      "@id": "genialis:data_types",
+      "@container": "@list"
+    },
+    "PaginatedSampleInBasketList": "genialis:PaginatedSampleInBasketList",
+    "PaginatedBasketSourceList": "genialis:PaginatedBasketSourceList",
+    "BasketSubset": "genialis:BasketSubset",
+    "PaginatedBillingAccountList": "genialis:PaginatedBillingAccountList",
+    "PaginatedEstimatedCostPerBillingAccountList": "genialis:PaginatedEstimatedCostPerBillingAccountList",
+    "BillingAccountToCollection": "genialis:BillingAccountToCollection",
+    "collection_id": {
+      "@id": "genialis:collection_id",
+      "@type": "xsd:integer"
+    },
+    "EstimatedCostPerBillingAccount": "genialis:EstimatedCostPerBillingAccount",
+    "cost_type": {
+      "@id": "genialis:cost_type",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "genialis:date",
+      "@type": "xsd:date"
+    },
+    "aggregated_cost": {
+      "@id": "genialis:aggregated_cost",
+      "@type": "xsd:decimal"
+    },
+    "billing_account_id": {
+      "@id": "genialis:billing_account_id",
+      "@type": "xsd:integer"
+    },
+    "referenced_collection_id": {
+      "@id": "genialis:referenced_collection_id",
+      "@type": "xsd:integer"
+    },
+    "referenced_collection_name": {
+      "@id": "genialis:referenced_collection_name",
+      "@type": "xsd:string"
+    },
+    "referenced_collection_slug": {
+      "@id": "genialis:referenced_collection_slug",
+      "@type": "xsd:string"
+    },
+    "BillingAccount": "genialis:BillingAccount",
+    "active": {
+      "@id": "genialis:active",
+      "@type": "xsd:boolean"
+    },
+    "BillingStatisticsCost": "genialis:BillingStatisticsCost",
+    "max_usage": {
+      "@id": "genialis:max_usage",
+      "@type": "xsd:integer"
+    },
+    "min_usage": {
+      "@id": "genialis:min_usage",
+      "@type": "xsd:integer"
+    },
+    "avg_usage": {
+      "@id": "genialis:avg_usage",
+      "@type": "xsd:integer"
+    },
+    "storage": {
+      "@id": "genialis:storage",
+      "@type": "xsd:decimal"
+    },
+    "compute": {
+      "@id": "genialis:compute",
+      "@type": "xsd:decimal"
+    },
+    "BillingStatisticsCollection": "genialis:BillingStatisticsCollection",
+    "BackgroundTaskStatusEnum": "genialis:BackgroundTaskStatusEnum",
+    "PatchedCollectionSerializerWithPermissions": "genialis:PatchedCollectionSerializerWithPermissions",
+    "entity_count": {
+      "@id": "genialis:entity_count",
+      "@type": "xsd:integer"
+    },
+    "descriptor": {
+      "@id": "genialis:descriptor"
+    },
+    "descriptor_schema": {
+      "@id": "genialis:descriptor_schema"
+    },
+    "descriptor_dirty": {
+      "@id": "genialis:descriptor_dirty",
+      "@type": "xsd:boolean"
+    },
+    "AnnotationFieldDict": "genialis:AnnotationFieldDict",
+    "annotation_fields": {
+      "@id": "genialis:annotation_fields",
+      "@container": "@list"
+    },
+    "PredictionFieldDict": "genialis:PredictionFieldDict",
+    "prediction_fields": {
+      "@id": "genialis:prediction_fields",
+      "@container": "@list"
+    },
+    "confirm_action": {
+      "@id": "genialis:confirm_action",
+      "@type": "xsd:boolean"
+    },
+    "PaginatedCollectionSerializerWithPermissionsList": "genialis:PaginatedCollectionSerializerWithPermissionsList",
+    "CollectionSerializerWithPermissions": "genialis:CollectionSerializerWithPermissions",
+    "Duplicate": "genialis:Duplicate",
+    "Delete": "genialis:Delete",
+    "BackgroundTask": "genialis:BackgroundTask",
+    "started": {
+      "@id": "genialis:started",
+      "@type": "xsd:dateTime"
+    },
+    "finished": {
+      "@id": "genialis:finished",
+      "@type": "xsd:dateTime"
+    },
+    "output": {
+      "@id": "genialis:output"
+    },
+    "PaginatedCommunityList": "genialis:PaginatedCommunityList",
+    "Community": "genialis:Community",
+    "default": {
+      "@id": "genialis:default",
+      "@type": "xsd:boolean"
+    },
+    "Configuration": "genialis:Configuration",
+    "community": {
+      "@id": "genialis:community",
+      "@type": "xsd:string"
+    },
+    "gene_info_filtering_organisms": {
+      "@id": "genialis:gene_info_filtering_organisms",
+      "@container": "@list"
+    },
+    "gene_info_filtering_sources": {
+      "@id": "genialis:gene_info_filtering_sources",
+      "@container": "@list"
+    },
+    "import_visible": {
+      "@id": "genialis:import_visible",
+      "@type": "xsd:boolean"
+    },
+    "krasid_help_text": {
+      "@id": "genialis:krasid_help_text",
+      "@type": "xsd:string"
+    },
+    "krasid_visible": {
+      "@id": "genialis:krasid_visible",
+      "@type": "xsd:boolean"
+    },
+    "landing_page_content": {
+      "@id": "genialis:landing_page_content",
+      "@type": "xsd:string"
+    },
+    "require_login_visible": {
+      "@id": "genialis:require_login_visible",
+      "@type": "xsd:boolean"
+    },
+    "search_archiver_process": {
+      "@id": "genialis:search_archiver_process",
+      "@type": "xsd:string"
+    },
+    "search_filter_by_community": {
+      "@id": "genialis:search_filter_by_community",
+      "@type": "xsd:boolean"
+    },
+    "search_process_group_stubs": {
+      "@id": "genialis:search_process_group_stubs"
+    },
+    "search_table_columns": {
+      "@id": "genialis:search_table_columns",
+      "@container": "@list"
+    },
+    "search_visible": {
+      "@id": "genialis:search_visible",
+      "@type": "xsd:boolean"
+    },
+    "visualizations_de_color_palette": {
+      "@id": "genialis:visualizations_de_color_palette",
+      "@container": "@list"
+    },
+    "visualizations_de_creation_processes": {
+      "@id": "genialis:visualizations_de_creation_processes",
+      "@container": "@list"
+    },
+    "visualizations_gene_view_visible": {
+      "@id": "genialis:visualizations_gene_view_visible",
+      "@type": "xsd:boolean"
+    },
+    "visualizations_genome_browser_visible": {
+      "@id": "genialis:visualizations_genome_browser_visible",
+      "@type": "xsd:boolean"
+    },
+    "visualizations_visible": {
+      "@id": "genialis:visualizations_visible",
+      "@type": "xsd:boolean"
+    },
+    "ActionEnum": "genialis:ActionEnum",
+    "SearchTableFileColumn": "genialis:SearchTableFileColumn",
+    "file_path": {
+      "@id": "genialis:file_path",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "genialis:action",
+      "@type": "@id"
+    },
+    "column_name": {
+      "@id": "genialis:column_name",
+      "@type": "xsd:string"
+    },
+    "exclude_builds": {
+      "@id": "genialis:exclude_builds",
+      "@container": "@list"
+    },
+    "PaginatedConfigurationList": "genialis:PaginatedConfigurationList",
+    "PaginatedDataSerializerWithPermissionsList": "genialis:PaginatedDataSerializerWithPermissionsList",
+    "Data": "genialis:Data",
+    "checksum": {
+      "@id": "genialis:checksum",
+      "@type": "xsd:string"
+    },
+    "process_cores": {
+      "@id": "genialis:process_cores",
+      "@type": "xsd:integer"
+    },
+    "process_error": {
+      "@id": "genialis:process_error",
+      "@container": "@list"
+    },
+    "process_info": {
+      "@id": "genialis:process_info",
+      "@container": "@list"
+    },
+    "process_memory": {
+      "@id": "genialis:process_memory",
+      "@type": "xsd:integer"
+    },
+    "process_progress": {
+      "@id": "genialis:process_progress",
+      "@type": "xsd:integer"
+    },
+    "process_rc": {
+      "@id": "genialis:process_rc",
+      "@type": "xsd:integer"
+    },
+    "process_warning": {
+      "@id": "genialis:process_warning",
+      "@container": "@list"
+    },
+    "scheduled": {
+      "@id": "genialis:scheduled",
+      "@type": "xsd:dateTime"
+    },
+    "size": {
+      "@id": "genialis:size",
+      "@type": "xsd:integer"
+    },
+    "input": {
+      "@id": "genialis:input"
+    },
+    "process": {
+      "@id": "genialis:process",
+      "@type": "@id"
+    },
+    "process_resources": {
+      "@id": "genialis:process_resources"
+    },
+    "PatchedDataSerializerWithPermissions": "genialis:PatchedDataSerializerWithPermissions",
+    "Restart": "genialis:Restart",
+    "resource_overrides": {
+      "@id": "genialis:resource_overrides"
+    },
+    "MoveDataToCollection": "genialis:MoveDataToCollection",
+    "destination_collection": {
+      "@id": "genialis:destination_collection",
+      "@type": "xsd:integer"
+    },
+    "PaginatedDataList": "genialis:PaginatedDataList",
+    "DataStatus": "genialis:DataStatus",
+    "DataSerializerWithPermissions": "genialis:DataSerializerWithPermissions",
+    "DescriptorSchemaSerializerWithPermissions": "genialis:DescriptorSchemaSerializerWithPermissions",
+    "PaginatedDescriptorSchemaSerializerWithPermissionsList": "genialis:PaginatedDescriptorSchemaSerializerWithPermissionsList",
+    "Group": "genialis:Group",
+    "AddOrRemoveUsers": "genialis:AddOrRemoveUsers",
+    "user_ids": {
+      "@id": "genialis:user_ids",
+      "@container": "@list"
+    },
+    "PaginatedGroupList": "genialis:PaginatedGroupList",
+    "PatchedGroup": "genialis:PatchedGroup",
+    "RelationTypeEnum": "genialis:RelationTypeEnum",
+    "Feature": "genialis:Feature",
+    "aliases": {
+      "@id": "genialis:aliases",
+      "@container": "@list"
+    },
+    "feature_id": {
+      "@id": "genialis:feature_id",
+      "@type": "xsd:string"
+    },
+    "species": {
+      "@id": "genialis:species",
+      "@type": "xsd:string"
+    },
+    "sub_type": {
+      "@id": "genialis:sub_type",
+      "@type": "@id"
+    },
+    "Mapping": "genialis:Mapping",
+    "relation_type": {
+      "@id": "genialis:relation_type",
+      "@type": "@id"
+    },
+    "source_db": {
+      "@id": "genialis:source_db",
+      "@type": "xsd:string"
+    },
+    "source_id": {
+      "@id": "genialis:source_id",
+      "@type": "xsd:string"
+    },
+    "source_species": {
+      "@id": "genialis:source_species",
+      "@type": "xsd:string"
+    },
+    "target_db": {
+      "@id": "genialis:target_db",
+      "@type": "xsd:string"
+    },
+    "target_id": {
+      "@id": "genialis:target_id",
+      "@type": "xsd:string"
+    },
+    "target_species": {
+      "@id": "genialis:target_species",
+      "@type": "xsd:string"
+    },
+    "PaginatedFeatureList": "genialis:PaginatedFeatureList",
+    "PaginatedMappingList": "genialis:PaginatedMappingList",
+    "FeatureTypeEnum": "genialis:FeatureTypeEnum",
+    "SubTypeEnum": "genialis:SubTypeEnum",
+    "Heatmap": "genialis:Heatmap",
+    "sample_id": {
+      "@id": "genialis:sample_id",
+      "@type": "xsd:integer"
+    },
+    "sample_name": {
+      "@id": "genialis:sample_name",
+      "@type": "xsd:string"
+    },
+    "gene": {
+      "@id": "genialis:gene",
+      "@type": "xsd:string"
+    },
+    "expression": {
+      "@id": "genialis:expression",
+      "@type": "xsd:decimal"
+    },
+    "expression_type": {
+      "@id": "genialis:expression_type",
+      "@type": "xsd:string"
+    },
+    "ExpressionsDeserializer": "genialis:ExpressionsDeserializer",
+    "gene_ids": {
+      "@id": "genialis:gene_ids",
+      "@container": "@list"
+    },
+    "basket": {
+      "@id": "genialis:basket",
+      "@type": "xsd:string"
+    },
+    "group_by": {
+      "@id": "genialis:group_by"
+    },
+    "color_by": {
+      "@id": "genialis:color_by"
+    },
+    "PaginatedRose2List": "genialis:PaginatedRose2List",
+    "DifferentialExpressionsDeserializer": "genialis:DifferentialExpressionsDeserializer",
+    "filter_de_by_basket": {
+      "@id": "genialis:filter_de_by_basket",
+      "@type": "xsd:boolean"
+    },
+    "Process": "genialis:Process",
+    "category": {
+      "@id": "genialis:category",
+      "@type": "xsd:string"
+    },
+    "GeneList": "genialis:GeneList",
+    "PaginatedBasketExpressionsList": "genialis:PaginatedBasketExpressionsList",
+    "CaseControlExpressions": "genialis:CaseControlExpressions",
+    "expressions": {
+      "@id": "genialis:expressions",
+      "@container": "@list"
+    },
+    "stats": {
+      "@id": "genialis:stats",
+      "@container": "@list"
+    },
+    "exceptions": {
+      "@id": "genialis:exceptions",
+      "@container": "@list"
+    },
+    "CaseControlExpressionsDeserializer": "genialis:CaseControlExpressionsDeserializer",
+    "diff_expr_id": {
+      "@id": "genialis:diff_expr_id",
+      "@type": "xsd:integer"
+    },
+    "selected_genes": {
+      "@id": "genialis:selected_genes",
+      "@container": "@list"
+    },
+    "highlighted_genes": {
+      "@id": "genialis:highlighted_genes",
+      "@container": "@list"
+    },
+    "log2": {
+      "@id": "genialis:log2",
+      "@type": "xsd:boolean"
+    },
+    "AttributeList": "genialis:AttributeList",
+    "descriptor_attributes": {
+      "@id": "genialis:descriptor_attributes",
+      "@container": "@list"
+    },
+    "relation_attributes": {
+      "@id": "genialis:relation_attributes",
+      "@container": "@list"
+    },
+    "Sample": "genialis:Sample",
+    "attribute": {
+      "@id": "genialis:attribute",
+      "@type": "xsd:string"
+    },
+    "RelationAttribute": "genialis:RelationAttribute",
+    "attribute_type": {
+      "@id": "genialis:attribute_type",
+      "@type": "xsd:string"
+    },
+    "relation_category": {
+      "@id": "genialis:relation_category",
+      "@type": "xsd:string"
+    },
+    "GenesetSearchSerializerWithPermissions": "genialis:GenesetSearchSerializerWithPermissions",
+    "logfc_threshold": {
+      "@id": "genialis:logfc_threshold",
+      "@type": "xsd:decimal"
+    },
+    "prob_field": {
+      "@id": "genialis:prob_field",
+      "@type": "xsd:string"
+    },
+    "prob_threshold": {
+      "@id": "genialis:prob_threshold",
+      "@type": "xsd:decimal"
+    },
+    "up_regulated": {
+      "@id": "genialis:up_regulated",
+      "@type": "xsd:integer"
+    },
+    "down_regulated": {
+      "@id": "genialis:down_regulated",
+      "@type": "xsd:integer"
+    },
+    "number_of_genes": {
+      "@id": "genialis:number_of_genes",
+      "@type": "xsd:integer"
+    },
+    "PaginatedExpressionBoxPlotList": "genialis:PaginatedExpressionBoxPlotList",
+    "PaginatedSampleList": "genialis:PaginatedSampleList",
+    "Rose2": "genialis:Rose2",
+    "HeatmapDeserializer": "genialis:HeatmapDeserializer",
+    "sample_ids": {
+      "@id": "genialis:sample_ids",
+      "@container": "@list"
+    },
+    "AttributifyDeserializer": "genialis:AttributifyDeserializer",
+    "PaginatedHeatmapList": "genialis:PaginatedHeatmapList",
+    "PaginatedCollectionSpeciesList": "genialis:PaginatedCollectionSpeciesList",
+    "PaginatedProcessList": "genialis:PaginatedProcessList"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Genialis API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Genialis's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/genialis-about-api-openapi.yml, openapi/genialis-access-token-api-openapi.yml, openapi/genialis-annotation-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/genialis-about-api-openapi.yml",
+    "openapi/genialis-access-token-api-openapi.yml",
+    "openapi/genialis-annotation-api-openapi.yml",
+    "openapi/genialis-annotation-field-api-openapi.yml",
+    "openapi/genialis-annotation-preset-api-openapi.yml"
+  ]
+}

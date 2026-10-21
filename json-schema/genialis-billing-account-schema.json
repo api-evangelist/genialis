@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-billing-account-schema.json",
+  "title": "BillingAccount",
+  "description": "Billing account serializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/BillingAccount",
+  "type": "object",
+  "properties": {
+    "active": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "active",
+    "id",
+    "name"
+  ]
+}

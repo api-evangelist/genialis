@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-prediction-value-list-schema.json",
+  "title": "PaginatedPredictionValueList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-prediction-value-api-openapi.yml#/components/schemas/PaginatedPredictionValueList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PredictionValue"
+      }
+    }
+  },
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "PredictionValue": {
+      "type": "object",
+      "description": "Serializer for PredictionValue objects.",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "entity": {
+          "type": "integer"
+        },
+        "field": {
+          "type": "integer"
+        },
+        "contributor": {
+          "$ref": "#/$defs/Contributor"
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "class_": {
+                  "type": "string"
+                },
+                "probability": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "required": [
+                "class_",
+                "probability"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "number",
+                  "format": "double"
+                }
+              },
+              "required": [
+                "score"
+              ]
+            }
+          ],
+          "description": "Get the actual value.",
+          "readOnly": true
+        },
+        "_value": {
+          "writeOnly": true,
+          "title": " value"
+        }
+      },
+      "required": [
+        "contributor",
+        "created",
+        "entity",
+        "field",
+        "id",
+        "value"
+      ]
+    }
+  }
+}

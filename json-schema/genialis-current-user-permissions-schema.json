@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-current-user-permissions-schema.json",
+  "title": "CurrentUserPermissions",
+  "description": "Current user permissions serializer.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/CurrentUserPermissions",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "type": {
+      "$ref": "#/$defs/CurrentUserPermissionsTypeEnum"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "username": {
+      "type": "string",
+      "maxLength": 150
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PermissionsEnum"
+      }
+    }
+  },
+  "required": [
+    "permissions",
+    "type"
+  ],
+  "$defs": {
+    "CurrentUserPermissionsTypeEnum": {
+      "enum": [
+        "user",
+        "group",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `user` - user\n* `group` - group\n* `public` - public"
+    },
+    "PermissionsEnum": {
+      "enum": [
+        "none",
+        "view",
+        "edit",
+        "share",
+        "owner"
+      ],
+      "type": "string",
+      "description": "* `none` - none\n* `view` - view\n* `edit` - edit\n* `share` - share\n* `owner` - owner"
+    }
+  }
+}

@@ -435,34 +435,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BlankEnum:
-      enum:
-      - ''
-    PaginatedRelationList:
+    RelationPartition:
       type: object
-      required:
-      - count
-      - results
+      description: Serializer for RelationPartition objects.
       properties:
-        count:
+        id:
           type: integer
-          example: 123
-        next:
+          readOnly: true
+        entity:
+          type: integer
+        position:
+          type:
+          - integer
+          - 'null'
+          maximum: 32767
+          minimum: 0
+        label:
           type:
           - string
           - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
+          maxLength: 30
+      required:
+      - entity
+      - id
     Relation:
       type: object
       description: Serializer for Relation objects.
@@ -517,27 +512,9 @@ components:
       - modified
       - partitions
       - type
-    Contributor:
-      type: object
-      description: Serializer for contributor User objects.
-      properties:
-        first_name:
-          type: string
-          maxLength: 150
-        id:
-          type: integer
-          readOnly: true
-        last_name:
-          type: string
-          maxLength: 150
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-          pattern: ^[\w.@+-]+$
-          maxLength: 150
-      required:
-      - id
-      - username
+    BlankEnum:
+      enum:
+      - ''
     RelationshipDict:
       type: object
       description: Serializer for the DictRelatedField relation.
@@ -548,6 +525,26 @@ components:
           type:
           - string
           - 'null'
+    UnitEnum:
+      enum:
+      - s
+      - min
+      - hr
+      - d
+      - wk
+      type: string
+      description: '* `s` - Second
+
+        * `min` - Minute
+
+        * `hr` - Hour
+
+        * `d` - Day
+
+        * `wk` - Week'
+    NullEnum:
+      enum:
+      - null
     PatchedRelation:
       type: object
       description: Serializer for Relation objects.
@@ -592,49 +589,52 @@ components:
         descriptor_schema:
           allOf:
           - $ref: '#/components/schemas/RelationshipDict'
-    RelationPartition:
+    Contributor:
       type: object
-      description: Serializer for RelationPartition objects.
+      description: Serializer for contributor User objects.
       properties:
+        first_name:
+          type: string
+          maxLength: 150
         id:
           type: integer
           readOnly: true
-        entity:
+        last_name:
+          type: string
+          maxLength: 150
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    PaginatedRelationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
           type: integer
-        position:
-          type:
-          - integer
-          - 'null'
-          maximum: 32767
-          minimum: 0
-        label:
+          example: 123
+        next:
           type:
           - string
           - 'null'
-          maxLength: 30
-      required:
-      - entity
-      - id
-    UnitEnum:
-      enum:
-      - s
-      - min
-      - hr
-      - d
-      - wk
-      type: string
-      description: '* `s` - Second
-
-        * `min` - Minute
-
-        * `hr` - Hour
-
-        * `d` - Day
-
-        * `wk` - Week'
-    NullEnum:
-      enum:
-      - null
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
   securitySchemes:
     cookieAuth:
       type: apiKey

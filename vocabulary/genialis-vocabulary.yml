@@ -1,0 +1,415 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/genialis-about-api-openapi.yml
+- openapi/genialis-access-token-api-openapi.yml
+- openapi/genialis-annotation-api-openapi.yml
+- openapi/genialis-annotation-field-api-openapi.yml
+- openapi/genialis-annotation-preset-api-openapi.yml
+vocabulary:
+  name: Genialis Domain Vocabulary
+  description: 'Terms declared by Genialis''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: ReSDKMinimalSupportedVersion
+    definition: Serialize minimal supporter resdk version.
+    tags:
+    - Object
+    source: openapi/genialis-about-api-openapi.yml#/components/schemas/ReSDKMinimalSupportedVersion
+  - term: Resources
+    definition: Serialize the platform resource information.
+    tags:
+    - Object
+    source: openapi/genialis-about-api-openapi.yml#/components/schemas/Resources
+  - term: Versions
+    definition: 'Object declared by the contract with fields: resolwe, resolwe-bio, genialis-bio.'
+    tags:
+    - Object
+    source: openapi/genialis-about-api-openapi.yml#/components/schemas/Versions
+  - term: Contributor
+    definition: Serializer for contributor User objects.
+    tags:
+    - Object
+    source: openapi/genialis-access-token-api-openapi.yml#/components/schemas/Contributor
+  - term: DataAccessToken
+    definition: Serializer for ``DataAccessToken``.
+    tags:
+    - Object
+    source: openapi/genialis-access-token-api-openapi.yml#/components/schemas/DataAccessToken
+  - term: PaginatedDataAccessTokenList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-access-token-api-openapi.yml#/components/schemas/PaginatedDataAccessTokenList
+  - term: DataAccessTokenCreate
+    definition: Serializer for creating ``DataAccessToken``.
+    tags:
+    - Object
+    source: openapi/genialis-access-token-api-openapi.yml#/components/schemas/DataAccessTokenCreate
+  - term: PatchedDataAccessToken
+    definition: Serializer for ``DataAccessToken``.
+    tags:
+    - Object
+    source: openapi/genialis-access-token-api-openapi.yml#/components/schemas/PatchedDataAccessToken
+  - term: AnnotationUpload
+    definition: Serializer for the response when uploading an annotation file.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-api-openapi.yml#/components/schemas/AnnotationUpload
+  - term: AnnotationUploadDeserializer
+    definition: Deserializer for request data when uploading an annotation file.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-api-openapi.yml#/components/schemas/AnnotationUploadDeserializer
+  - term: RelationshipDict
+    definition: Serializer for the DictRelatedField relation.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-field-api-openapi.yml#/components/schemas/RelationshipDict
+  - term: AnnotationField
+    definition: Serializer for AnnotationField objects.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-field-api-openapi.yml#/components/schemas/AnnotationField
+  - term: PaginatedAnnotationFieldList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-annotation-field-api-openapi.yml#/components/schemas/PaginatedAnnotationFieldList
+  - term: CurrentUserPermissionsTypeEnum
+    definition: '* `user` - user * `group` - group * `public` - public'
+    tags:
+    - Enumeration
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/CurrentUserPermissionsTypeEnum
+  - term: PaginatedAnnotationPresetSerializerWithPermissionsList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/PaginatedAnnotationPresetSerializerWithPermissionsList
+  - term: Permission
+    definition: Permission serializer. Dictionary keys for users and groups are either ids or usernames (emails) or group names.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/Permission
+  - term: AnnotationPresetSerializerWithPermissions
+    definition: Serializer for AnnotationPreset objects.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/AnnotationPresetSerializerWithPermissions
+  - term: PermissionsEnum
+    definition: '* `none` - none * `view` - view * `edit` - edit * `share` - share * `owner` - owner'
+    tags:
+    - Enumeration
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/PermissionsEnum
+  - term: PublicEnum
+    definition: '* `VIEW` - VIEW * `EDIT` - EDIT * `SHARE` - SHARE * `OWNER` - OWNER'
+    tags:
+    - Enumeration
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/PublicEnum
+  - term: CurrentUserPermissions
+    definition: Current user permissions serializer.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/CurrentUserPermissions
+  - term: PatchedAnnotationPresetSerializerWithPermissions
+    definition: Serializer for AnnotationPreset objects.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-preset-api-openapi.yml#/components/schemas/PatchedAnnotationPresetSerializerWithPermissions
+  - term: PatchedAnnotationValue
+    definition: Serializer for AnnotationValue objects.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-value-api-openapi.yml#/components/schemas/PatchedAnnotationValue
+  - term: PaginatedAnnotationValueList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-annotation-value-api-openapi.yml#/components/schemas/PaginatedAnnotationValueList
+  - term: AnnotationValue
+    definition: Serializer for AnnotationValue objects.
+    tags:
+    - Object
+    source: openapi/genialis-annotation-value-api-openapi.yml#/components/schemas/AnnotationValue
+  - term: AppState
+    definition: Serializer for :class:`AppState` objects.
+    tags:
+    - Object
+    source: openapi/genialis-app-state-api-openapi.yml#/components/schemas/AppState
+  - term: UserDataUsage
+    definition: Serializer for data/sample usage per user with normalized fields too.
+    tags:
+    - Object
+    source: openapi/genialis-base-api-openapi.yml#/components/schemas/UserDataUsage
+  - term: SingleUserDataUsage
+    definition: Serializer for data/sample usage of a user.
+    tags:
+    - Object
+    source: openapi/genialis-base-api-openapi.yml#/components/schemas/SingleUserDataUsage
+  - term: Handle
+    definition: Handle serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/Handle
+  - term: BaseSpaceSample
+    definition: BaseSpace sample entity serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/BaseSpaceSample
+  - term: ObserverSubscribeRequest
+    definition: Serializer for the subscribe endpoint.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/ObserverSubscribeRequest
+  - term: Projects
+    definition: BaseSpace projects serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/Projects
+  - term: Project
+    definition: BaseSpace project entity serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/Project
+  - term: File
+    definition: BaseSpace file entity serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/File
+  - term: BaseSpaceUser
+    definition: BaseSpace user serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/BaseSpaceUser
+  - term: BaseSpaceSamples
+    definition: BaseSpace samples serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/BaseSpaceSamples
+  - term: Url
+    definition: BaseSpace url serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/Url
+  - term: Files
+    definition: BaseSpace files serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/Files
+  - term: ObserverSubscription
+    definition: Serializer for the subscribe response.
+    tags:
+    - Object
+    source: openapi/genialis-basespace-api-openapi.yml#/components/schemas/ObserverSubscription
+  - term: PaginatedBasketBreadcrumbList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/PaginatedBasketBreadcrumbList
+  - term: BasketBreadcrumb
+    definition: SampleBasketBreadcrumb serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketBreadcrumb
+  - term: BasketSource
+    definition: Basket source list serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketSource
+  - term: SampleInBasket
+    definition: SampleInBasket serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/SampleInBasket
+  - term: BasketMutation
+    definition: Basket update serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketMutation
+  - term: BasketAddSamplesDeserializer
+    definition: Basket add samples deserializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketAddSamplesDeserializer
+  - term: BasketAddSamples
+    definition: Basket add samples serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketAddSamples
+  - term: Basket
+    definition: Serializer for :class:`SampleInBasket` objects.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/Basket
+  - term: BasketClone
+    definition: Basket clone serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketClone
+  - term: Entity
+    definition: Serializer for Entity with added collection field.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/Entity
+  - term: BasketSampleCount
+    definition: Basket sample count serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketSampleCount
+  - term: PaginatedBasketOrganismList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/PaginatedBasketOrganismList
+  - term: AnnotationVersionEnum
+    definition: '* `v2` - v2'
+    tags:
+    - Enumeration
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/AnnotationVersionEnum
+  - term: BasketOrganism
+    definition: Basket organism list serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketOrganism
+  - term: BasketDataTypes
+    definition: Basket data types serializer.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketDataTypes
+  - term: PaginatedSampleInBasketList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/PaginatedSampleInBasketList
+  - term: PaginatedBasketSourceList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/PaginatedBasketSourceList
+  - term: BasketSubset
+    definition: Basket serializer where a subset of samples is selected.
+    tags:
+    - Object
+    source: openapi/genialis-basket-api-openapi.yml#/components/schemas/BasketSubset
+  - term: PaginatedBillingAccountList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/PaginatedBillingAccountList
+  - term: PaginatedEstimatedCostPerBillingAccountList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/PaginatedEstimatedCostPerBillingAccountList
+  - term: BillingAccountToCollection
+    definition: Serializer for assigning a collection to a billing account.
+    tags:
+    - Object
+    source: openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/BillingAccountToCollection
+  - term: EstimatedCostPerBillingAccount
+    definition: Serializer for cost per day per billing account.
+    tags:
+    - Object
+    source: openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/EstimatedCostPerBillingAccount
+  - term: BillingAccount
+    definition: Billing account serializer.
+    tags:
+    - Object
+    source: openapi/genialis-billingaccount-api-openapi.yml#/components/schemas/BillingAccount
+  - term: BillingStatisticsCost
+    definition: Serializer for the billing statistics by billing account. Plus additional billing costs.
+    tags:
+    - Object
+    source: openapi/genialis-billingstatistics-api-openapi.yml#/components/schemas/BillingStatisticsCost
+  - term: BillingStatisticsCollection
+    definition: Serializer for the billing statistics by collection.
+    tags:
+    - Object
+    source: openapi/genialis-billingstatistics-api-openapi.yml#/components/schemas/BillingStatisticsCollection
+  - term: BackgroundTaskStatusEnum
+    definition: '* `WT` - Waiting * `PR` - Processing * `OK` - Done * `ER` - Error'
+    tags:
+    - Enumeration
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/BackgroundTaskStatusEnum
+  - term: PatchedCollectionSerializerWithPermissions
+    definition: Serializer for Collection objects.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/PatchedCollectionSerializerWithPermissions
+  - term: AnnotationFieldDict
+    definition: Serializer for actions that deal with annotation fields.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/AnnotationFieldDict
+  - term: PredictionFieldDict
+    definition: Serializer for actions that deal with prediction fields.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/PredictionFieldDict
+  - term: PaginatedCollectionSerializerWithPermissionsList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/PaginatedCollectionSerializerWithPermissionsList
+  - term: CollectionSerializerWithPermissions
+    definition: Serializer for Collection objects.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/CollectionSerializerWithPermissions
+  - term: Duplicate
+    definition: Deserializer for duplicate endpoint.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/Duplicate
+  - term: Delete
+    definition: Bulk delete given objects.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/Delete
+  - term: BackgroundTask
+    definition: Serialize the BackgroundTask model.
+    tags:
+    - Object
+    source: openapi/genialis-collection-api-openapi.yml#/components/schemas/BackgroundTask
+  - term: PaginatedCommunityList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-community-api-openapi.yml#/components/schemas/PaginatedCommunityList
+  - term: Community
+    definition: Serializer for :class:`Community` objects.
+    tags:
+    - Object
+    source: openapi/genialis-community-api-openapi.yml#/components/schemas/Community
+  - term: Configuration
+    definition: Serializer for :class:`Configuration` objects.
+    tags:
+    - Object
+    source: openapi/genialis-configuration-api-openapi.yml#/components/schemas/Configuration
+  - term: ActionEnum
+    definition: '* `download` - Download * `tab` - Tab'
+    tags:
+    - Enumeration
+    source: openapi/genialis-configuration-api-openapi.yml#/components/schemas/ActionEnum
+  - term: SearchTableFileColumn
+    definition: Serializer for :class:`SearchTableFileColumn` objects.
+    tags:
+    - Object
+    source: openapi/genialis-configuration-api-openapi.yml#/components/schemas/SearchTableFileColumn
+  - term: PaginatedConfigurationList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-configuration-api-openapi.yml#/components/schemas/PaginatedConfigurationList
+  - term: PaginatedDataSerializerWithPermissionsList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/genialis-data-api-openapi.yml#/components/schemas/PaginatedDataSerializerWithPermissionsList
+  - term: Data
+    definition: Serializer for Data objects.
+    tags:
+    - Object
+    source: openapi/genialis-data-api-openapi.yml#/components/schemas/Data

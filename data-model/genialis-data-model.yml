@@ -2,23 +2,20 @@ generated: '2026-08-21'
 method: derived
 source: openapi/genialis-base-openapi.yaml
 api: Genialis Expressions API
-note: >-
-  Derived from the 205 component schemas and the $ref / RelationshipDict links
-  between them, plus the resource roots the live API index at
-  https://app.genialis.com/api/ returns. Genialis publishes no object reference, so
-  no id-prefix scheme could be searched; ids are plain integers (observed: data id
-  1083792, collection id 3).
+note: 'Derived from the 205 component schemas and the $ref / RelationshipDict links between them, plus
+  the resource roots the live API index at https://app.genialis.com/api/ returns. Genialis publishes no
+  object reference, so no id-prefix scheme could be searched; ids are plain integers (observed: data id
+  1083792, collection id 3).'
 id_scheme:
   type: integer
   prefixed: false
-  evidence: 'GET /api/data?limit=1 -> results[0].id = 1083792; GET /api/collection?limit=1 -> results[0].id = 3'
-core_concept: >-
-  Resolwe's model: a Collection groups Samples (entities); each Sample owns Data
-  objects; each Data object is the output of a Process run; DescriptorSchema defines
-  the shape of the metadata descriptors attached to Collections, Samples and Data;
-  AnnotationField/AnnotationValue carry structured sample metadata; Variant /
-  VariantCall / VariantAnnotation carry the genomic call layer; Prediction* carry
-  model outputs.
+  evidence: GET /api/data?limit=1 -> results[0].id = 1083792; GET /api/collection?limit=1 -> results[0].id
+    = 3
+core_concept: 'Resolwe''s model: a Collection groups Samples (entities); each Sample owns Data objects;
+  each Data object is the output of a Process run; DescriptorSchema defines the shape of the metadata
+  descriptors attached to Collections, Samples and Data; AnnotationField/AnnotationValue carry structured
+  sample metadata; Variant / VariantCall / VariantAnnotation carry the genomic call layer; Prediction*
+  carry model outputs.'
 entities:
 - name: Data
   path: /api/data
@@ -141,7 +138,14 @@ entities:
     type: belongs_to
 - name: Variant
   path: /api/variant
-  fields: [id, species, genome_assembly, chromosome, position, reference, alternative]
+  fields:
+  - id
+  - species
+  - genome_assembly
+  - chromosome
+  - position
+  - reference
+  - alternative
   relationships:
   - to: VariantAnnotation
     type: has_one
@@ -150,14 +154,27 @@ entities:
     type: has_many
 - name: VariantAnnotation
   path: /api/variant_annotations
-  fields: [variant_id, type, clinical_diagnosis, clinical_significance, dbsnp_id, clinvar_id, transcripts]
+  fields:
+  - variant_id
+  - type
+  - clinical_diagnosis
+  - clinical_significance
+  - dbsnp_id
+  - clinvar_id
+  - transcripts
   relationships:
   - to: Variant
     type: belongs_to
     via: variant_id
 - name: VariantCall
   path: /api/variant_calls
-  fields: [quality, genotype_quality, depth, alternative_allele_depth, filter, genotype]
+  fields:
+  - quality
+  - genotype_quality
+  - depth
+  - alternative_allele_depth
+  - filter
+  - genotype
   relationships:
   - to: Sample
     type: belongs_to
@@ -193,7 +210,7 @@ entities:
   relationships:
   - to: BillingStatistics
     type: has_many
-  note: 'Usage estimation at /api/billingaccount/estimated_usage and /api/base/data_usage.'
+  note: Usage estimation at /api/billingaccount/estimated_usage and /api/base/data_usage.
 - name: Basket
   path: /api/basket
   description: Ephemeral working set of samples/data used by the Expressions UI.
@@ -216,9 +233,166 @@ permissions_model:
   - /api/sample/{id}/permissions
   - /api/process/{id}/permissions
   - /api/descriptorschema/{id}/permissions
-  principals: [user, group, public]
+  principals:
+  - user
+  - group
+  - public
 counts:
   entities_documented: 24
   component_schemas: 205
   paths: 169
   operations: 254
+relationships:
+- from: Data
+  to: Process
+  type: belongs_to
+  via: process
+- from: Data
+  to: Collection
+  type: belongs_to
+  via: collection
+- from: Data
+  to: Entity
+  type: belongs_to
+  via: entity
+  note: Entity is the internal name for Sample.
+- from: Data
+  to: DescriptorSchema
+  type: belongs_to
+  via: descriptor_schema
+- from: Data
+  to: User
+  type: belongs_to
+  via: contributor
+- from: Data
+  to: Data
+  type: has_many
+  via: /api/data/{id}/children
+- from: Data
+  to: Data
+  type: belongs_to
+  via: /api/data/{id}/parents
+- from: Sample
+  to: Collection
+  type: belongs_to
+  via: collection
+- from: Sample
+  to: Data
+  type: has_many
+  via: /api/sample/{id}/data (reverse of Data.entity)
+- from: Sample
+  to: AnnotationValue
+  type: has_many
+  via: /api/annotation_value?entity=
+- from: Sample
+  to: User
+  type: belongs_to
+  via: contributor
+- from: Collection
+  to: Sample
+  type: has_many
+  via: Entity.collection
+- from: Collection
+  to: Data
+  type: has_many
+  via: Data.collection
+- from: Collection
+  to: Relation
+  type: has_many
+  via: Relation.collection
+- from: Collection
+  to: DescriptorSchema
+  type: belongs_to
+  via: descriptor_schema
+- from: Relation
+  to: Collection
+  type: belongs_to
+  via: collection
+- from: Relation
+  to: RelationPartition
+  type: has_many
+  via: partitions
+- from: Process
+  to: Data
+  type: has_many
+  via: Data.process
+- from: DescriptorSchema
+  to: Data
+  type: has_many
+- from: DescriptorSchema
+  to: Collection
+  type: has_many
+- from: DescriptorSchema
+  to: Sample
+  type: has_many
+- from: AnnotationField
+  to: AnnotationGroup
+  type: belongs_to
+  via: group
+- from: AnnotationField
+  to: AnnotationValue
+  type: has_many
+- from: AnnotationValue
+  to: AnnotationField
+  type: belongs_to
+  via: field
+- from: AnnotationValue
+  to: Sample
+  type: belongs_to
+  via: entity
+- from: AnnotationPreset
+  to: AnnotationField
+  type: has_many
+- from: PredictionField
+  to: PredictionGroup
+  type: belongs_to
+  via: group
+- from: PredictionValue
+  to: PredictionField
+  type: belongs_to
+- from: PredictionValue
+  to: Sample
+  type: belongs_to
+- from: Variant
+  to: VariantAnnotation
+  type: has_one
+  via: annotation
+- from: Variant
+  to: VariantCall
+  type: has_many
+- from: VariantAnnotation
+  to: Variant
+  type: belongs_to
+  via: variant_id
+- from: VariantCall
+  to: Sample
+  type: belongs_to
+  via: sample
+- from: VariantCall
+  to: Variant
+  type: belongs_to
+  via: variant
+- from: VariantCall
+  to: VariantExperiment
+  type: belongs_to
+  via: experiment
+- from: VariantCall
+  to: Data
+  type: belongs_to
+  via: data
+- from: VariantExperiment
+  to: VariantCall
+  type: has_many
+- from: VariantExperiment
+  to: User
+  type: belongs_to
+  via: contributor
+- from: User
+  to: Group
+  type: has_many
+- from: User
+  to: UserTag
+  type: has_many
+- from: BillingAccount
+  to: BillingStatistics
+  type: has_many

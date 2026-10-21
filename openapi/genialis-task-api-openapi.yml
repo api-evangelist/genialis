@@ -177,20 +177,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BackgroundTaskStatusEnum:
-      enum:
-      - WT
-      - PR
-      - OK
-      - ER
-      type: string
-      description: '* `WT` - Waiting
-
-        * `PR` - Processing
-
-        * `OK` - Done
-
-        * `ER` - Error'
+    ObserverSubscription:
+      type: object
+      description: Serializer for the subscribe response.
+      properties:
+        subscription_id:
+          type: string
+          format: uuid
+      required:
+      - subscription_id
     ObserverSubscribeRequest:
       type: object
       description: Serializer for the subscribe endpoint.
@@ -205,6 +200,45 @@ components:
           type: string
       required:
       - session_id
+    PaginatedBackgroundTaskList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackgroundTask'
+    BackgroundTaskStatusEnum:
+      enum:
+      - WT
+      - PR
+      - OK
+      - ER
+      type: string
+      description: '* `WT` - Waiting
+
+        * `PR` - Processing
+
+        * `OK` - Done
+
+        * `ER` - Error'
     BackgroundTask:
       type: object
       description: Serialize the BackgroundTask model.
@@ -231,40 +265,6 @@ components:
       required:
       - description
       - id
-    PaginatedBackgroundTaskList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BackgroundTask'
-    ObserverSubscription:
-      type: object
-      description: Serializer for the subscribe response.
-      properties:
-        subscription_id:
-          type: string
-          format: uuid
-      required:
-      - subscription_id
   securitySchemes:
     cookieAuth:
       type: apiKey

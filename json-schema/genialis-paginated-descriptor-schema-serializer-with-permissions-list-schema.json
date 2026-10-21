@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-paginated-descriptor-schema-serializer-with-permissions-list-schema.json",
+  "title": "PaginatedDescriptorSchemaSerializerWithPermissionsList",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-descriptorschema-api-openapi.yml#/components/schemas/PaginatedDescriptorSchemaSerializerWithPermissionsList",
+  "type": "object",
+  "required": [
+    "count",
+    "results"
+  ],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "next": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "previous": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DescriptorSchemaSerializerWithPermissions"
+      }
+    }
+  },
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "CurrentUserPermissions": {
+      "type": "object",
+      "description": "Current user permissions serializer.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "$ref": "#/$defs/CurrentUserPermissionsTypeEnum"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PermissionsEnum"
+          }
+        }
+      },
+      "required": [
+        "permissions",
+        "type"
+      ]
+    },
+    "CurrentUserPermissionsTypeEnum": {
+      "enum": [
+        "user",
+        "group",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `user` - user\n* `group` - group\n* `public` - public"
+    },
+    "DescriptorSchemaSerializerWithPermissions": {
+      "type": "object",
+      "description": "Serializer for DescriptorSchema objects.",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "contributor": {
+          "$ref": "#/$defs/Contributor"
+        },
+        "version": {
+          "type": "string",
+          "default": "0.0.0"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "schema": {},
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "current_user_permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CurrentUserPermissions"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contributor",
+        "created",
+        "current_user_permissions",
+        "id",
+        "modified"
+      ]
+    },
+    "PermissionsEnum": {
+      "enum": [
+        "none",
+        "view",
+        "edit",
+        "share",
+        "owner"
+      ],
+      "type": "string",
+      "description": "* `none` - none\n* `view` - view\n* `edit` - edit\n* `share` - share\n* `owner` - owner"
+    }
+  }
+}

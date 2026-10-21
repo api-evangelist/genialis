@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-patched-relation-schema.json",
+  "title": "PatchedRelation",
+  "description": "Serializer for Relation objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-relation-api-openapi.yml#/components/schemas/PatchedRelation",
+  "type": "object",
+  "properties": {
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "descriptor_dirty": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "contributor": {
+      "$ref": "#/$defs/Contributor"
+    },
+    "type": {
+      "type": "string"
+    },
+    "collection": {
+      "$ref": "#/$defs/RelationshipDict"
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "partitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RelationPartition"
+      }
+    },
+    "slug": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unit": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/UnitEnum"
+        },
+        {
+          "$ref": "#/$defs/BlankEnum"
+        },
+        {
+          "$ref": "#/$defs/NullEnum"
+        }
+      ]
+    },
+    "descriptor": {},
+    "descriptor_schema": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RelationshipDict"
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "BlankEnum": {
+      "enum": [
+        ""
+      ]
+    },
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "NullEnum": {
+      "enum": [
+        null
+      ]
+    },
+    "RelationPartition": {
+      "type": "object",
+      "description": "Serializer for RelationPartition objects.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "entity": {
+          "type": "integer"
+        },
+        "position": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "maximum": 32767,
+          "minimum": 0
+        },
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 30
+        }
+      },
+      "required": [
+        "entity",
+        "id"
+      ]
+    },
+    "RelationshipDict": {
+      "type": "object",
+      "description": "Serializer for the DictRelatedField relation.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "UnitEnum": {
+      "enum": [
+        "s",
+        "min",
+        "hr",
+        "d",
+        "wk"
+      ],
+      "type": "string",
+      "description": "* `s` - Second\n* `min` - Minute\n* `hr` - Hour\n* `d` - Day\n* `wk` - Week"
+    }
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/genialis/main/json-schema/genialis-patched-data-serializer-with-permissions-schema.json",
+  "title": "PatchedDataSerializerWithPermissions",
+  "description": "Serializer for Data objects.",
+  "x-generated": "2026-10-20",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/genialis-data-api-openapi.yml#/components/schemas/PatchedDataSerializerWithPermissions",
+  "type": "object",
+  "properties": {
+    "checksum": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "descriptor_dirty": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "duplicated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "finished": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "id": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "process_cores": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "process_error": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "readOnly": true
+    },
+    "process_info": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "readOnly": true
+    },
+    "process_memory": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "process_progress": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "process_rc": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "process_warning": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "readOnly": true
+    },
+    "output": {},
+    "scheduled": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "size": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "started": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "status": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/DataStatus"
+        }
+      ],
+      "readOnly": true
+    },
+    "contributor": {
+      "$ref": "#/$defs/Contributor"
+    },
+    "input": {},
+    "process": {
+      "$ref": "#/$defs/RelationshipDict"
+    },
+    "collection": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RelationshipDict"
+        }
+      ]
+    },
+    "descriptor": {},
+    "descriptor_schema": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RelationshipDict"
+        }
+      ]
+    },
+    "entity": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/RelationshipDict"
+        }
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 255
+      }
+    },
+    "process_resources": {},
+    "current_user_permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CurrentUserPermissions"
+      },
+      "readOnly": true
+    }
+  },
+  "$defs": {
+    "Contributor": {
+      "type": "object",
+      "description": "Serializer for contributor User objects.",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "last_name": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "username": {
+          "type": "string",
+          "description": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+          "pattern": "^[\\w.@+-]+$",
+          "maxLength": 150
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "CurrentUserPermissions": {
+      "type": "object",
+      "description": "Current user permissions serializer.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "$ref": "#/$defs/CurrentUserPermissionsTypeEnum"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 150
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PermissionsEnum"
+          }
+        }
+      },
+      "required": [
+        "permissions",
+        "type"
+      ]
+    },
+    "CurrentUserPermissionsTypeEnum": {
+      "enum": [
+        "user",
+        "group",
+        "public"
+      ],
+      "type": "string",
+      "description": "* `user` - user\n* `group` - group\n* `public` - public"
+    },
+    "DataStatus": {
+      "enum": [
+        "UP",
+        "RE",
+        "WT",
+        "PP",
+        "PR",
+        "OK",
+        "ER",
+        "DR"
+      ],
+      "type": "string",
+      "description": "* `UP` - Uploading\n* `RE` - Resolving\n* `WT` - Waiting\n* `PP` - Preparing\n* `PR` - Processing\n* `OK` - Done\n* `ER` - Error\n* `DR` - Dirty"
+    },
+    "PermissionsEnum": {
+      "enum": [
+        "none",
+        "view",
+        "edit",
+        "share",
+        "owner"
+      ],
+      "type": "string",
+      "description": "* `none` - none\n* `view` - view\n* `edit` - edit\n* `share` - share\n* `owner` - owner"
+    },
+    "RelationshipDict": {
+      "type": "object",
+      "description": "Serializer for the DictRelatedField relation.",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

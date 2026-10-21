@@ -1,14 +1,12 @@
 aid: genialis
 name: Genialis
-description: Genialis is a precision oncology company that builds AI models of cancer biology to find
-  and validate biomarkers for drug developers. Its commercial platform, Genialis Expressions, is a multiomics
-  and clinical data infrastructure for RNA-seq and related assays, and its Genialis Supermodel is a foundation
-  model of cancer biology used for response prediction (krasID, adcID, DDR). The Expressions platform
-  exposes a public Django REST Framework API at app.genialis.com covering data objects, samples, collections,
-  processes, annotations, predictions and variants, published as a live OpenAPI 3.0.3 document, and is
-  consumed programmatically through the open-source ReSDK Python client. Genialis also maintains the open-source
-  Resolwe dataflow engine and Resolwe Bioinformatics pipelines that the platform is built on. Founded
-  in Slovenia with offices in Boston, Houston and Ljubljana.
+description: Genialis is a precision oncology company that builds AI models of cancer biology to find and validate biomarkers for drug developers.
+  Its commercial platform, Genialis Expressions, is a multiomics and clinical data infrastructure for RNA-seq and related assays, and its Genialis
+  Supermodel is a foundation model of cancer biology used for response prediction (krasID, adcID, DDR). The Expressions platform exposes a public
+  Django REST Framework API at app.genialis.com covering data objects, samples, collections, processes, annotations, predictions and variants,
+  published as a live OpenAPI 3.0.3 document, and is consumed programmatically through the open-source ReSDK Python client. Genialis also maintains
+  the open-source Resolwe dataflow engine and Resolwe Bioinformatics pipelines that the platform is built on. Founded in Slovenia with offices
+  in Boston, Houston and Ljubljana.
 deliveryModel:
   model: saas
   open_source: false
@@ -73,640 +71,32 @@ tags_raw:
 - Open Source
 - Machine-Learning
 - Open-Source
-apis:
-- aid: genialis:genialis-about-api
-  name: Genialis About API
-  description: The about API from Genialis — 3 operation(s) for about.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - About
-  tags_raw:
-  - about
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-about-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-health-check-api
-  name: Genialis Health Check API
-  description: The health_check API from Genialis — 1 operation(s) for health_check.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Health Check
-  tags_raw:
-  - health_check
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-health-check-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-rest-auth-api
-  name: Genialis Rest Auth API
-  description: The rest-auth API from Genialis — 6 operation(s) for rest-auth.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - rest-auth
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-rest-auth-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-saml-auth-api
-  name: Genialis Saml Auth API
-  description: The saml-auth API from Genialis — 3 operation(s) for saml-auth.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - saml-auth
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-saml-auth-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-annotation-api
-  name: Genialis Annotation API
-  description: The Annotation API from Genialis — 1 operation(s) for annotation.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Annotation
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-annotation-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-annotation-field-api
-  name: Genialis Annotation Field API
-  description: The Annotation Field API from Genialis — 2 operation(s) for annotation field.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Annotation Field
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-annotation-field-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-annotation-preset-api
-  name: Genialis Annotation Preset API
-  description: The Annotation Preset API from Genialis — 3 operation(s) for annotation preset.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Annotation Preset
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-annotation-preset-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-annotation-value-api
-  name: Genialis Annotation Value API
-  description: The Annotation Value API from Genialis — 2 operation(s) for annotation value.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Annotation Value
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-annotation-value-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-app-state-api
-  name: Genialis App State API
-  description: The App State API from Genialis — 2 operation(s) for app state.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - App State
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-app-state-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-base-api
-  name: Genialis Base API
-  description: The Base API from Genialis — 2 operation(s) for base.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Base
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-base-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-basespace-api
-  name: Genialis Basespace API
-  description: The Basespace API from Genialis — 12 operation(s) for basespace.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Basespace
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-basespace-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-basket-api
-  name: Genialis Basket API
-  description: The Basket API from Genialis — 17 operation(s) for basket.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Basket
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-basket-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-billingaccount-api
-  name: Genialis Billingaccount API
-  description: The Billingaccount API from Genialis — 4 operation(s) for billingaccount.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Billing Account
-  tags_raw:
-  - Billingaccount
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-billingaccount-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-billingstatistics-api
-  name: Genialis Billingstatistics API
-  description: The Billingstatistics API from Genialis — 3 operation(s) for billingstatistics.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Billingstatistics
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-billingstatistics-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-collection-api
-  name: Genialis Collection API
-  description: The Collection API from Genialis — 11 operation(s) for collection.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Collection
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-collection-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-community-api
-  name: Genialis Community API
-  description: The Community API from Genialis — 1 operation(s) for community.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Community
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-community-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-configuration-api
-  name: Genialis Configuration API
-  description: The Configuration API from Genialis — 2 operation(s) for configuration.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Configuration
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-configuration-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-data-api
-  name: Genialis Data API
-  description: The Data API from Genialis — 13 operation(s) for data.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Data
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-data-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-descriptorschema-api
-  name: Genialis Descriptorschema API
-  description: The Descriptorschema API from Genialis — 3 operation(s) for descriptorschema.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Descriptorschema
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-descriptorschema-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-group-api
-  name: Genialis Group API
-  description: The Group API from Genialis — 4 operation(s) for group.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Group
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-group-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-kb-api
-  name: Genialis Kb API
-  description: The Kb API from Genialis — 5 operation(s) for kb.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Kb
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-kb-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-modules-api
-  name: Genialis Modules API
-  description: The Modules API from Genialis — 17 operation(s) for modules.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Modules
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-modules-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-prediction-field-api
-  name: Genialis Prediction Field API
-  description: The Prediction Field API from Genialis — 2 operation(s) for prediction field.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Prediction Field
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-prediction-field-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-prediction-group-api
-  name: Genialis Prediction Group API
-  description: The Prediction Group API from Genialis — 2 operation(s) for prediction group.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Prediction Group
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-prediction-group-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-prediction-preset-api
-  name: Genialis Prediction Preset API
-  description: The Prediction Preset API from Genialis — 3 operation(s) for prediction preset.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Prediction Preset
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-prediction-preset-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-prediction-value-api
-  name: Genialis Prediction Value API
-  description: The Prediction Value API from Genialis — 2 operation(s) for prediction value.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Prediction Value
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-prediction-value-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-process-api
-  name: Genialis Process API
-  description: The Process API from Genialis — 4 operation(s) for process.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Processes
-  tags_raw:
-  - Process
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-process-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-relation-api
-  name: Genialis Relation API
-  description: The Relation API from Genialis — 2 operation(s) for relation.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Relation
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-relation-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-resdk-minimal-supported-version-api
-  name: Genialis Resdk Minimal Supported Version API
-  description: >-
-    The Resdk Minimal Supported Version API from Genialis — 1 operation(s) for resdk minimal supported
-    version.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Resdk Minimal Supported Version
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-resdk-minimal-supported-version-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-sample-api
-  name: Genialis Sample API
-  description: The Sample API from Genialis — 11 operation(s) for sample.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Sample
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-sample-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-search-table-file-columns-api
-  name: Genialis Search Table File Columns API
-  description: >-
-    The Search Table File Columns API from Genialis — 1 operation(s) for search table file columns.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Search Table File Columns
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-search-table-file-columns-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-storage-api
-  name: Genialis Storage API
-  description: The Storage API from Genialis — 1 operation(s) for storage.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Storage
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-storage-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-task-api
-  name: Genialis Task API
-  description: The Task API from Genialis — 4 operation(s) for task.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Task
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-task-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-upload-api
-  name: Genialis Upload API
-  description: The Upload API from Genialis — 2 operation(s) for upload.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Upload
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-upload-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-upload-config-api
-  name: Genialis Upload Config API
-  description: The Upload Config API from Genialis — 1 operation(s) for upload config.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Upload Config
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-upload-config-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-user-api
-  name: Genialis User API
-  description: The User API from Genialis — 2 operation(s) for user.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - User
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-user-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-user-settings-api
-  name: Genialis User Settings API
-  description: The User Settings API from Genialis — 2 operation(s) for user settings.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - User Settings
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-user-settings-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-usertag-api
-  name: Genialis Usertag API
-  description: The Usertag API from Genialis — 2 operation(s) for usertag.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Usertag
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-usertag-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-variant-annotations-api
-  name: Genialis Variant Annotations API
-  description: The Variant Annotations API from Genialis — 1 operation(s) for variant annotations.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Variant Annotations
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-variant-annotations-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-variant-api
-  name: Genialis Variant API
-  description: The Variant API from Genialis — 2 operation(s) for variant.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Variant
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-variant-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-variant-calls-api
-  name: Genialis Variant Calls API
-  description: The Variant Calls API from Genialis — 2 operation(s) for variant calls.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Variant Calls
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-variant-calls-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-variant-experiment-api
-  name: Genialis Variant Experiment API
-  description: The Variant Experiment API from Genialis — 2 operation(s) for variant experiment.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Variant Experiment
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-variant-experiment-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-versions-api
-  name: Genialis Versions API
-  description: The Versions API from Genialis — 1 operation(s) for versions.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Versions
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-versions-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
-- aid: genialis:genialis-access-token-api
-  name: Genialis Access Token API
-  description: The Access Token API from Genialis — 2 operation(s) for access token.
-  humanURL: https://docs.genialis.com/resdk/
-  baseURL: https://app.genialis.com
-  tags:
-  - Access Token
-  properties:
-  - type: OpenAPI
-    url: openapi/genialis-access-token-api-openapi.yml
-  - type: Documentation
-    url: https://docs.genialis.com/resdk/
-  - type: APIReference
-    url: https://app.genialis.com/api/schema
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Deprecation
+  url: lifecycle/genialis-lifecycle.yml
+- type: AgenticAccess
+  url: agentic-access/genialis-agentic-access.yml
+- type: Spectral
+  url: rules/genialis-rules.yml
+- type: JSONLD
+  url: json-ld/genialis-context.jsonld
+- type: Vocabulary
+  url: vocabulary/genialis-vocabulary.yml
+- type: WellKnown
+  url: well-known/genialis-well-known.yml
+- type: Hosts
+  url: hosts/genialis-hosts.yml
+- type: IntegrationEdges
+  url: integrations/genialis-integration-edges.yml
+- type: Vendors
+  url: vendors/genialis-vendors.yml
+- type: Leadership
+  url: https://www.genialis.com/team/
 - url: https://www.genialis.com/feed/
   type: BlogRSS
 - type: CapabilityMap
@@ -752,8 +142,6 @@ common:
   url: conformance/genialis-conformance.yml
 - type: Conventions
   url: conventions/genialis-conventions.yml
-- type: ErrorCatalog
-  url: errors/genialis-problem-types.yml
 - type: Lifecycle
   url: lifecycle/genialis-lifecycle.yml
 - type: ChangeLog
@@ -766,17 +154,923 @@ common:
   url: rate-limits/genialis-rate-limits.yml
 - type: AgentSkill
   url: skills/_index.yml
-- type: LLMsTxt
-  url: llms/genialis-llms.txt
+apis:
+- aid: genialis:genialis-about-api
+  name: Genialis About API
+  description: The about API from Genialis — 3 operation(s) for about.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - About
+  tags_raw:
+  - about
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-about-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-resources-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-re-sdkminimal-supported-version-schema.json
+- aid: genialis:genialis-health-check-api
+  name: Genialis Health Check API
+  description: The health_check API from Genialis — 1 operation(s) for health_check.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Health Check
+  tags_raw:
+  - health_check
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-health-check-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+- aid: genialis:genialis-rest-auth-api
+  name: Genialis Rest Auth API
+  description: The rest-auth API from Genialis — 6 operation(s) for rest-auth.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - rest-auth
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-rest-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-user-details-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-user-details-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-password-reset-confirm-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-api-login-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-password-change-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-password-reset-schema.json
+- aid: genialis:genialis-saml-auth-api
+  name: Genialis Saml Auth API
+  description: The saml-auth API from Genialis — 3 operation(s) for saml-auth.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - saml-auth
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-saml-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-api-login-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-credentials-poll-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-id-generator-schema.json
+- aid: genialis:genialis-annotation-api
+  name: Genialis Annotation API
+  description: The Annotation API from Genialis — 1 operation(s) for annotation.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-annotation-upload-deserializer-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-annotation-upload-schema.json
+- aid: genialis:genialis-annotation-field-api
+  name: Genialis Annotation Field API
+  description: The Annotation Field API from Genialis — 2 operation(s) for annotation field.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Field
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-field-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-annotation-field-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-annotation-field-list-schema.json
+- aid: genialis:genialis-annotation-preset-api
+  name: Genialis Annotation Preset API
+  description: The Annotation Preset API from Genialis — 3 operation(s) for annotation preset.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Preset
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-preset-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-annotation-preset-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/genialis-paginated-annotation-preset-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-annotation-preset-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-annotation-value-api
+  name: Genialis Annotation Value API
+  description: The Annotation Value API from Genialis — 2 operation(s) for annotation value.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Annotation Value
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-annotation-value-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-annotation-value-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-annotation-value-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-annotation-value-list-schema.json
+- aid: genialis:genialis-app-state-api
+  name: Genialis App State API
+  description: The App State API from Genialis — 2 operation(s) for app state.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - App State
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-app-state-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-app-state-schema.json
+- aid: genialis:genialis-base-api
+  name: Genialis Base API
+  description: The Base API from Genialis — 2 operation(s) for base.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Base
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-base-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-user-data-usage-polymorphic-schema.json
+- aid: genialis:genialis-basespace-api
+  name: Genialis Basespace API
+  description: The Basespace API from Genialis — 12 operation(s) for basespace.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Basespace
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-basespace-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-base-space-samples-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-projects-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-files-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-observer-subscribe-request-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-observer-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-url-schema.json
+- aid: genialis:genialis-basket-api
+  name: Genialis Basket API
+  description: The Basket API from Genialis — 17 operation(s) for basket.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Basket
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-basket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-basket-add-samples-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-basket-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-basket-breadcrumb-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-basket-organism-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-sample-in-basket-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-basket-source-list-schema.json
+- aid: genialis:genialis-billingaccount-api
+  name: Genialis Billingaccount API
+  description: The Billingaccount API from Genialis — 4 operation(s) for billingaccount.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Billing Account
+  tags_raw:
+  - Billingaccount
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-billingaccount-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-estimated-cost-per-billing-account-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-billing-account-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-billing-account-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-billing-account-to-collection-schema.json
+- aid: genialis:genialis-billingstatistics-api
+  name: Genialis Billingstatistics API
+  description: The Billingstatistics API from Genialis — 3 operation(s) for billingstatistics.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Billingstatistics
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-billingstatistics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-billing-statistics-cost-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-billing-statistics-collection-schema.json
+- aid: genialis:genialis-collection-api
+  name: Genialis Collection API
+  description: The Collection API from Genialis — 11 operation(s) for collection.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Collection
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-collection-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-collection-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-collection-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-collection-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-background-task-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-community-api
+  name: Genialis Community API
+  description: The Community API from Genialis — 1 operation(s) for community.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Community
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-community-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-community-list-schema.json
+- aid: genialis:genialis-configuration-api
+  name: Genialis Configuration API
+  description: The Configuration API from Genialis — 2 operation(s) for configuration.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-configuration-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-configuration-list-schema.json
+- aid: genialis:genialis-data-api
+  name: Genialis Data API
+  description: The Data API from Genialis — 13 operation(s) for data.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-data-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-data-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-data-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-data-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-background-task-schema.json
+- aid: genialis:genialis-descriptorschema-api
+  name: Genialis Descriptorschema API
+  description: The Descriptorschema API from Genialis — 3 operation(s) for descriptorschema.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Descriptorschema
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-descriptorschema-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-descriptor-schema-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/genialis-paginated-descriptor-schema-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-group-api
+  name: Genialis Group API
+  description: The Group API from Genialis — 4 operation(s) for group.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Group
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-group-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-group-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-group-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-add-or-remove-users-schema.json
+- aid: genialis:genialis-kb-api
+  name: Genialis Kb API
+  description: The Kb API from Genialis — 5 operation(s) for kb.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Kb
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-kb-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-feature-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-mapping-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-feature-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-mapping-list-schema.json
+- aid: genialis:genialis-modules-api
+  name: Genialis Modules API
+  description: The Modules API from Genialis — 17 operation(s) for modules.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Modules
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-modules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-geneset-search-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-differential-expressions-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-expressions-deserializer-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/genialis-paginated-differential-expressions-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/genialis-paginated-geneset-search-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-expression-box-plot-deserializer-schema.json
+- aid: genialis:genialis-prediction-field-api
+  name: Genialis Prediction Field API
+  description: The Prediction Field API from Genialis — 2 operation(s) for prediction field.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Field
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-field-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-prediction-field-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-prediction-field-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-prediction-field-list-schema.json
+- aid: genialis:genialis-prediction-group-api
+  name: Genialis Prediction Group API
+  description: The Prediction Group API from Genialis — 2 operation(s) for prediction group.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Group
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-prediction-group-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-prediction-group-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-prediction-group-schema.json
+- aid: genialis:genialis-prediction-preset-api
+  name: Genialis Prediction Preset API
+  description: The Prediction Preset API from Genialis — 3 operation(s) for prediction preset.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Preset
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-preset-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-prediction-preset-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/genialis-paginated-prediction-preset-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-prediction-preset-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-prediction-value-api
+  name: Genialis Prediction Value API
+  description: The Prediction Value API from Genialis — 2 operation(s) for prediction value.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Prediction Value
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-prediction-value-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-prediction-value-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-prediction-value-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-prediction-value-list-schema.json
+- aid: genialis:genialis-process-api
+  name: Genialis Process API
+  description: The Process API from Genialis — 4 operation(s) for process.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Processes
+  tags_raw:
+  - Process
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-process-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-process-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-process-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-relation-api
+  name: Genialis Relation API
+  description: The Relation API from Genialis — 2 operation(s) for relation.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Relation
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-relation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-relation-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-relation-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-relation-list-schema.json
+- aid: genialis:genialis-resdk-minimal-supported-version-api
+  name: Genialis Resdk Minimal Supported Version API
+  description: >-
+    The Resdk Minimal Supported Version API from Genialis — 1 operation(s) for resdk minimal supported
+    version.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Resdk Minimal Supported Version
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-resdk-minimal-supported-version-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-re-sdkminimal-supported-version-schema.json
+- aid: genialis:genialis-sample-api
+  name: Genialis Sample API
+  description: The Sample API from Genialis — 11 operation(s) for sample.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Sample
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-sample-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-entity-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-entity-serializer-with-permissions-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-permission-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-entity-serializer-with-permissions-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-background-task-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-current-user-permissions-schema.json
+- aid: genialis:genialis-search-table-file-columns-api
+  name: Genialis Search Table File Columns API
+  description: >-
+    The Search Table File Columns API from Genialis — 1 operation(s) for search table file columns.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Search Table File Columns
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-search-table-file-columns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-search-table-file-column-list-schema.json
+- aid: genialis:genialis-storage-api
+  name: Genialis Storage API
+  description: The Storage API from Genialis — 1 operation(s) for storage.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-storage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-storage-schema.json
+- aid: genialis:genialis-task-api
+  name: Genialis Task API
+  description: The Task API from Genialis — 4 operation(s) for task.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Task
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-task-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-background-task-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-background-task-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-observer-subscribe-request-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-observer-subscription-schema.json
+- aid: genialis:genialis-upload-api
+  name: Genialis Upload API
+  description: The Upload API from Genialis — 2 operation(s) for upload.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-upload-credentials-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-upload-config-schema.json
+- aid: genialis:genialis-upload-config-api
+  name: Genialis Upload Config API
+  description: The Upload Config API from Genialis — 1 operation(s) for upload config.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Upload Config
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-upload-config-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-upload-config-schema.json
+- aid: genialis:genialis-user-api
+  name: Genialis User API
+  description: The User API from Genialis — 2 operation(s) for user.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-user-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-user-list-schema.json
+- aid: genialis:genialis-user-settings-api
+  name: Genialis User Settings API
+  description: The User Settings API from Genialis — 2 operation(s) for user settings.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - User Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-user-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-parameter-preset-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-parameter-preset-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-parameter-preset-schema.json
+- aid: genialis:genialis-usertag-api
+  name: Genialis Usertag API
+  description: The Usertag API from Genialis — 2 operation(s) for usertag.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Usertag
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-usertag-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-user-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-user-tag-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-user-tag-list-schema.json
+- aid: genialis:genialis-variant-annotations-api
+  name: Genialis Variant Annotations API
+  description: The Variant Annotations API from Genialis — 1 operation(s) for variant annotations.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-variant-annotation-list-schema.json
+- aid: genialis:genialis-variant-api
+  name: Genialis Variant API
+  description: The Variant API from Genialis — 2 operation(s) for variant.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-variant-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-variant-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-variant-list-schema.json
+- aid: genialis:genialis-variant-calls-api
+  name: Genialis Variant Calls API
+  description: The Variant Calls API from Genialis — 2 operation(s) for variant calls.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-calls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-variant-call-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-variant-call-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-variant-call-list-schema.json
+- aid: genialis:genialis-variant-experiment-api
+  name: Genialis Variant Experiment API
+  description: The Variant Experiment API from Genialis — 2 operation(s) for variant experiment.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Variant Experiment
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-variant-experiment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-variant-experiment-list-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-variant-experiment-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-variant-experiment-schema.json
+- aid: genialis:genialis-versions-api
+  name: Genialis Versions API
+  description: The Versions API from Genialis — 1 operation(s) for versions.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-versions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-versions-schema.json
+- aid: genialis:genialis-access-token-api
+  name: Genialis Access Token API
+  description: The Access Token API from Genialis — 2 operation(s) for access token.
+  humanURL: https://docs.genialis.com/resdk/
+  baseURL: https://app.genialis.com
+  tags:
+  - Access Token
+  properties:
+  - type: OpenAPI
+    url: openapi/genialis-access-token-api-openapi.yml
+  - type: Documentation
+    url: https://docs.genialis.com/resdk/
+  - type: APIReference
+    url: https://app.genialis.com/api/schema
+  - type: JSONSchema
+    url: json-schema/genialis-data-access-token-create-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-data-access-token-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-patched-data-access-token-schema.json
+  - type: JSONSchema
+    url: json-schema/genialis-paginated-data-access-token-list-schema.json
+x-notes: 'No WellKnown pointer is emitted on purpose: no genialis.com host serves any /.well-known document. app.genialis.com answers 200 with
+  an identical 1377-byte SPA shell for every path including a random control, and www/docs return honest 404s. The one real document found (OIDC
+  discovery, saved to well-known/) is served by the provider''s Auth0 tenant, which is hosted-IdP boilerplate rather than a surface Genialis publishes.
+  Likewise no MCPServer pointer (mcp/ holds a derived candidate, deployment mode none), no AgentCard (probe missed on every host), no Idempotency
+  (the API has no idempotency key), and no StatusPage/Deprecation/Security (none published).'
+
 x-enrichment:
-  date: '2026-08-21'
+  date: '2026-10-20'
   status: enriched
-  artifacts_added: 23
-  pass: local-v1
-x-notes: 'No WellKnown pointer is emitted on purpose: no genialis.com host serves any /.well-known document.
-  app.genialis.com answers 200 with an identical 1377-byte SPA shell for every path including a random
-  control, and www/docs return honest 404s. The one real document found (OIDC discovery, saved to well-known/)
-  is served by the provider''s Auth0 tenant, which is hosted-IdP boilerplate rather than a surface Genialis
-  publishes. Likewise no MCPServer pointer (mcp/ holds a derived candidate, deployment mode none), no
-  AgentCard (probe missed on every host), no Idempotency (the API has no idempotency key), and no StatusPage/Deprecation/Security
-  (none published).'
+  artifacts_added: 0
+  pass: local-v5
